@@ -38,7 +38,7 @@ public class DalOrder
     {
         for (int i = 0; i < 100; i++)
         {
-            if (DataSource.arr2[i].ID == newOrderItem.ID)
+            if (DataSource.arr2[i].ID == newOrderItem.ID) 
                 DataSource.arr2[i] = newOrderItem;
         }
     }
