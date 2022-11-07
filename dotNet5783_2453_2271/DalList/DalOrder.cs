@@ -10,21 +10,21 @@ namespace Dal;
 
 public class DalOrder
 {
-    private void addNewOrder(Order newOrderItem)
+    public void addNewOrder(Order newOrderItem)
     {
         
     }
-    private void deleteOrder(Order newProduct)
+    public void deleteOrder(int id)
     {
 
     }
 
-    private Order searchOrder(int id)
+    public Order searchOrder(int id)
     {
         return 
     }
 
-    private void updateOrder(Order newOrderItem)
+    public void updateOrder(Order newOrderItem)
     {
 
     }
