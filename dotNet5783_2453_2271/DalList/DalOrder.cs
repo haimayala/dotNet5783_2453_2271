@@ -16,16 +16,30 @@ public class DalOrder
     }
     public void deleteOrder(int id)
     {
-
+        Order delOrder = new Order();
+        for (int i = 0; i < 100; i++)
+        {
+            if (DataSource.arr2[i].ID == newProduct.ID)
+                DataSource.arr2[i] = delOrder;
+        }
     }
 
     public Order searchOrder(int id)
     {
-        return 
+        for (int i = 0; i < 100; i++)
+        {
+            if (DataSource.arr2[i].ID == id)
+                return DataSource.arr2[i];
+        }
+        return new Order();// to check it
     }
 
     public void updateOrder(Order newOrderItem)
     {
-
+        for (int i = 0; i < 100; i++)
+        {
+            if (DataSource.arr2[i].ID == newOrderItem.ID) 
+                DataSource.arr2[i] = newOrderItem;
+        }
     }
 }
