@@ -10,36 +10,53 @@ namespace Dal;
 
 public class DalOrder
 {
-    public void addNewOrder(Order newOrderItem)
+    public void AddNewOrder(Order newOrder)
     {
-        
-    }
-    public void deleteOrder(int id)
-    {
-        Order delOrder = new Order();
-        for (int i = 0; i < 100; i++)
+        foreach (Order or in DataSource.Orders)
         {
-            if (DataSource.arr2[i].ID == newProduct.ID)
-                DataSource.arr2[i] = delOrder;
+            if (or.ID == newOrder.ID)
+                throw new Exception("This order is already exists");
+
         }
+        DataSource.Orders.Add(newOrder);
+    }
+    public void DeleteOrder(int id)
+    {
+        foreach (Order or in DataSource.Orders)
+        {
+            if (or.ID == id)
+                DataSource.Orders.Remove(or);
+        }
+        throw new Exception("This order is not exsist");
     }
 
-    public Order searchOrder(int id)
+    public Order GetByID(int id)
     {
-        for (int i = 0; i < 100; i++)
+        foreach (Order or in DataSource.Orders)
         {
-            if (DataSource.arr2[i].ID == id)
-                return DataSource.arr2[i];
+            if (or.ID == id)
+                return or;
         }
-        return new Order();// to check it
+        throw new Exception("This order is not exsist");
     }
 
-    public void updateOrder(Order newOrderItem)
+    public void UpdateOrder(Order newOrder)
     {
-        for (int i = 0; i < 100; i++)
+        foreach (Order or in DataSource.Orders)
         {
-            if (DataSource.arr2[i].ID == newOrderItem.ID) 
-                DataSource.arr2[i] = newOrderItem;
+            if (or.ID == newOrder.ID)
+            {
+                DataSource.Orders.Remove(or);
+                DataSource.Orders.Add(newOrder);
+                return;
+            }
+
         }
+        throw new Exception("This order is not exsist");
+    }
+
+    public IEnumerable<Order> GetAll()
+    {
+        return DataSource.Orders;
     }
 }

@@ -17,10 +17,13 @@ public struct OrderItem
     public int Amount { get; set; }
 
     public override string ToString() => $@"
-
-ID={ID},
-Product ID={ProductID}: ,
-    	Price: {Price}
-    	Amount in: {Amount}
+ID ={ID},
+ProductID ={ProductID},
+OrderID={OrderID},
+Price={Price},
+Amount={Amount}
 ";
+
+
+
 }

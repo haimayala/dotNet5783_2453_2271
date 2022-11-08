@@ -11,69 +11,58 @@ namespace Dal;
 
 public class DalOrderItem
 {
-    private void addNewOrderItem(OrderItem newOrderItem)
+    public void AddNewOrderItem(OrderItem newOrderItem)
     {
-        for(int i=0;i<50;i++)
+        foreach (OrderItem o in DataSource.OrderItems)
         {
-            if (DataSource.arr3[i].ID == newOrderItem.ID)
-                throw new Exception ( "this order item is allresdy exsist" );
+            if (o.ID == newOrderItem.ID)
+                throw new Exception("This order item is already exists");
+
         }
-       
+        DataSource.OrderItems.Add(newOrderItem);
     }
 
-    private void deleteOrderItem(OrderItem newOrderItem)
+    public void DeleteOrderItem(int id)
     {
-    
-        for (int i = 0; i < 200; i++)
+
+        foreach (OrderItem o in DataSource.OrderItems)
         {
-            if (DataSource.arr3[i].ID == newOrderItem.ID)
+            if (o.ID == id)
+                DataSource.OrderItems.Remove(o);
+        }
+        throw new Exception("This order item is not exsist");
+    }
+
+    public OrderItem GetByID(int id)
+    {
+        foreach (OrderItem o in DataSource.OrderItems)
+        {
+            if (o.ID == id)
+                return o;
+        }
+        throw new Exception("This order item is not exsist");
+    }
+    public void UpdateOrderItem(OrderItem newOrderItem)
+    {
+        foreach (OrderItem o in DataSource.OrderItems)
+        {
+            if (o.ID == newOrderItem.ID)
             {
+                DataSource.OrderItems.Remove(o);
+                DataSource.OrderItems.Add(newOrderItem);
                 return;
             }
-        }
 
-        throw new Exception("this order item is not exsist");
+        }
+        throw new Exception("This order item is not exsist");
     }
 
-    private OrderItem searchOrderItem(int id)
+    public IEnumerable<OrderItem> GetAll()
     {
-        for(int i=0;i<200;i++)
-        {
-            if (DataSource.arr3[i].ID ==id )
-                return DataSource.arr3[i];
-        }
-        throw new Exception("this order item is not exsist");
+        return DataSource.OrderItems;
     }
-    private void updateOrderItem(OrderItem newOrderItem)
-    {
-        for(int i=0;i<200;i++)
-        {
-            if (DataSource.arr3[i].ID == newOrderItem.ID)
-            {
-                DataSource.arr3[i] = newOrderItem;
-                return;
-            }  
-        }
-        throw new Exception("this order item is not exsist");
-    }
+
 }
 
-//private OrderItem callOrderItem(Product product, Order order)
-//{
-//    for (int i = 0; i < 200; i++)
-//    {
-//        if (DataSource.arr3[i].ID == product.ID)
-//            if (DataSource.arr3[i].ProductID == product.ID)
-//                return DataSource.arr3[i];
-//    }
-   
-    
-//   throw new Exception("this order item is not exsist");
-//}
-
-//private OrderItem[] callOrderItem(int id)
-//{
-
-//}
 
 

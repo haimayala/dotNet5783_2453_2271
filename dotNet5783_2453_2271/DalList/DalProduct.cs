@@ -11,54 +11,55 @@ namespace Dal;
 
 public class DalProduct
 {
-    private void addNewProduct(Product newProduct)
+   public void AddProduct(Product newProduct)
     {
-       
+        foreach (Product p in DataSource.Products)
+        {
+            if (p.ID == newProduct.ID)
+                throw new Exception("This product is already exists");
+
+        }
+           DataSource.Products.Add(newProduct); 
     }
 
-    private void deleteProduct(int id)
+    public void DeleteProduct(int id)
     {
-        for (int i = 0; i < 50; i++)
+        foreach (Product p in DataSource.Products)
         {
-            if (DataSource.arr1[i].ID==id)
+            if (p.ID == id)
+                DataSource.Products.Remove(p);  
+        }
+        throw new Exception("This product is not exsist");
+    }
+
+    public Product GetByID(int id)
+    {
+        foreach (Product p in DataSource.Products)
+        {
+            if (p.ID == id)
+                return p;
+        }
+        throw new Exception("This product is not exsist");
+    }
+
+    public void UpdateProduct(Product newProduct)
+    {
+        foreach (Product p in DataSource.Products)
+        {
+            if (p.ID == newProduct.ID)
             {
-                
+                DataSource.Products.Remove(p);
+                DataSource.Products.Add(newProduct);
                 return;
             }
+               
         }
-
-        throw new Exception("this product is not exsist");
+        throw new Exception("This product is not exsist");
     }
 
-    private Product searchProduct(int id)
+    public IEnumerable<Product> GetAll()
     {
-        for (int i = 0; i < 50; i++)
-        {
-            if (DataSource.arr1[i].ID == id)
-                return DataSource.arr1[i];
-        }
-        throw new Exception("this product is not exsist");
-    }
-
-    private void updateProduct(Product newOrderItem)
-    {
-        for(int i=0;i<50;i++)
-        {
-            if (DataSource.arr1[i].ID == newOrderItem.ID)
-            {
-                DataSource.arr1[i] = newOrderItem;
-                return;
-            }  
-        }
-        throw new Exception("this product is not exsist");
-    }
-
-    private void s_Initialize()
-    {
-        for(int i=0;i<10;i++)
-        {
-
-        }
+        return DataSource.Products; 
     }
 
 }
