@@ -1,40 +1,60 @@
-﻿using System;
+﻿//using System;
+//using System.Reflection;
+using DO;
+using DalList;
 
+namespace Dal;
 
-namespace Targil0
+partial class Program
 {
-    partial class Program
-    {
-        enum Menu
-        {
-            EXIT, CHECKORDER, CHECKORDERITEM, CHECKPRODUCT
-        }
-        enum Options
-        {
-            addToList = 'a', showById = 'b', showByDall = 'c', update = 'd', delete = 'e';
-        }
-        static void Main()
-        {
-            int x;
-            x = System.Console.Read();
+    enum Options { ADD, DELETE, GET, UPPDATE, GETALL };
+    enum Menu {  EXIT, PRODUCT, ORDER, ORDERITEM };
 
+    static void Main()
+    {
+        DalProduct dalproduct = new DalProduct();
+        DalOrder dalOrder = new DalOrder();
+        DalOrderItem dalOrderItem = new DalOrderItem();
+
+        Console.WriteLine(
+            @"shop Menu:
+0- Exit
+1- Product
+2-Order
+3-OrderItem");
+
+        int x = Console.Read();
+
+        while (x != 0)
+        {
             switch (x)
             {
-                case (int)Menu.EXIT:
-                    {
-                        char option = (char)System.Console.Read();
-                        switch (option)
-                        {
-                            case (char)Options.addToList:
+                case 1:
 
-                            default:
-                                break;
-                        }
-                        break;
+                    Console.WriteLine(
+           @"Product options:
+0- Add a new product
+1- Delete a product
+2-Get a product
+3-Uppdate a product
+4-Get all the products");
+                    int y = Console.Read();
+                    switch(y)
+                    {
+                        case 0:
+                            Product p = new Product();
+                            Console.WriteLine("please enter the product name");
+                            p.Name= Console.ReadLine();
+                            Console.WriteLine("please enter the product price");
+                            p.Price = Console.Read();
+                            Console.WriteLine("please enter the product category");
+                            break;
                     }
-                default:
                     break;
+                   
             }
         }
     }
+
 }
+

@@ -11,55 +11,63 @@ namespace Dal;
 
 public class DalProduct
 {
-   public void AddProduct(Product newProduct)
+   public void Add(Product newProduct)
     {
-        foreach (Product p in DataSource.Products)
+       for(int i=0;i<DataSource.Config.NumOfProducts;i++)
         {
-            if (p.ID == newProduct.ID)
+            if (DataSource.Products[i].ID == newProduct.ID)
                 throw new Exception("This product is already exists");
-
         }
-           DataSource.Products.Add(newProduct); 
+        DataSource.Products[DataSource.Config.NumOfProducts] = newProduct;
+        DataSource.Config.NumOfProducts++;
     }
 
-    public void DeleteProduct(int id)
+    public void Delete(int id)
     {
-        foreach (Product p in DataSource.Products)
+        for (int i = 0; i < DataSource.Config.NumOfProducts; i++)
         {
-            if (p.ID == id)
-                DataSource.Products.Remove(p);  
+
+            if (DataSource.Products[i].ID == id)
+            {
+                DataSource.Products[i] = DataSource.Products[DataSource.Config.NumOfProducts - 1];
+                DataSource.Config.NumOfProducts--;
+            }
+                
         }
         throw new Exception("This product is not exsist");
     }
 
     public Product GetByID(int id)
     {
-        foreach (Product p in DataSource.Products)
+       for(int i=0;i<DataSource.Config.NumOfProducts;i++)
         {
-            if (p.ID == id)
-                return p;
+            if (DataSource.Products[i].ID==id)
+                return DataSource.Products[i];
         }
         throw new Exception("This product is not exsist");
     }
 
-    public void UpdateProduct(Product newProduct)
+    public void Uppdate(Product newProduct)
     {
-        foreach (Product p in DataSource.Products)
+        for(int i=0;i<DataSource.Config.NumOfProducts;i++)
         {
-            if (p.ID == newProduct.ID)
+            if (DataSource.Products[i].ID==newProduct.ID)
             {
-                DataSource.Products.Remove(p);
-                DataSource.Products.Add(newProduct);
+                DataSource.Products[i] = newProduct;
                 return;
-            }
-               
+            }    
         }
         throw new Exception("This product is not exsist");
     }
 
     public IEnumerable<Product> GetAll()
     {
-        return DataSource.Products; 
+        Product[] prr = new Product[DataSource.Config.NumOfProducts];  
+        for(int i=0;i< DataSource.Config.NumOfProducts;i++)
+        {
+            prr[i]=DataSource.Products[i];
+        }
+        return prr; 
     }
 
 }

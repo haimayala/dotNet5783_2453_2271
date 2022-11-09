@@ -10,53 +10,60 @@ namespace Dal;
 
 public class DalOrder
 {
-    public void AddNewOrder(Order newOrder)
+    public void Add(Order newOrder)
     {
-        foreach (Order or in DataSource.Orders)
+        for (int i = 0; i < DataSource.Config.NumOfOrders; i++)
         {
-            if (or.ID == newOrder.ID)
+            if (DataSource.Orders[i].ID == newOrder.ID)
                 throw new Exception("This order is already exists");
-
         }
-        DataSource.Orders.Add(newOrder);
+        DataSource.Orders[DataSource.Config.NumOfOrders] = newOrder;
+        DataSource.Config.NumOfOrders++;
     }
-    public void DeleteOrder(int id)
+    public void Delete(int id)
     {
-        foreach (Order or in DataSource.Orders)
+        for (int i = 0; i < DataSource.Config.NumOfOrders; i++)
         {
-            if (or.ID == id)
-                DataSource.Orders.Remove(or);
+
+            if (DataSource.Orders[i].ID == id)
+            {
+                DataSource.Orders[i] = DataSource.Orders[DataSource.Config.NumOfOrders - 1];
+                DataSource.Config.NumOfOrders--;
+            }
         }
         throw new Exception("This order is not exsist");
     }
 
     public Order GetByID(int id)
     {
-        foreach (Order or in DataSource.Orders)
+        for (int i = 0; i < DataSource.Config.NumOfOrders; i++)
         {
-            if (or.ID == id)
-                return or;
+            if (DataSource.Orders[i].ID == id)
+                return DataSource.Orders[i];
         }
         throw new Exception("This order is not exsist");
     }
 
-    public void UpdateOrder(Order newOrder)
+    public void Uppdate(Order newOrder)
     {
-        foreach (Order or in DataSource.Orders)
+        for (int i = 0; i < DataSource.Config.NumOfOrders; i++)
         {
-            if (or.ID == newOrder.ID)
+            if (DataSource.Orders[i].ID == newOrder.ID)
             {
-                DataSource.Orders.Remove(or);
-                DataSource.Orders.Add(newOrder);
+                DataSource.Orders[i] = newOrder;
                 return;
             }
-
         }
         throw new Exception("This order is not exsist");
     }
 
     public IEnumerable<Order> GetAll()
     {
-        return DataSource.Orders;
+        Order[] orr = new Order[DataSource.Config.NumOfOrders];
+        for (int i = 0; i < DataSource.Config.NumOfOrders; i++)
+        {
+            orr[i] = DataSource.Orders[i];
+        }
+        return orr;
     }
 }
