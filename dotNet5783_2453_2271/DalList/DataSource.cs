@@ -1,8 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿
 
 using DO;
 using static DO.Enums;
@@ -40,7 +36,6 @@ static internal class DataSource
         internal static int NextOrderItem { get { return s_nextOrderItemNumber++; } }
     }
 
-    static string[,] NameOfProduct = new string[5, 5];
     private static void s_Initialize()
     {
         createAndInitProduct();
@@ -58,7 +53,7 @@ static internal class DataSource
         for (int i = 0; i < 10; i++)
         {
             Product p = new Product();
-            p.ID = i;
+            p.ID = s_rand.Next(100000,999999);
             p.Category = (Category)s_rand.Next(5);
             if (p.Category.Equals(Enums.Category.Animals))
             {
