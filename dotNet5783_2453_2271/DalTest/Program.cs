@@ -29,7 +29,6 @@ partial class Program
             switch (x)
             {
                 case 1:
-
                     Console.WriteLine(
            @"Product options:
 0- Add a new product
@@ -40,7 +39,7 @@ partial class Program
                     int y = Console.Read();
                     switch(y)
                     {
-                        case 0:
+                        case 1:
                             Product p = new Product();
                             Console.WriteLine("please enter the product name");
                             p.Name= Console.ReadLine();
@@ -48,6 +47,14 @@ partial class Program
                             p.Price = Console.Read();
                             Console.WriteLine("please enter the product category");
                             break;
+                            case 2:
+
+                            int y="ayala";
+
+
+
+                            int x="hello";
+
                     }
                     break;
                    
