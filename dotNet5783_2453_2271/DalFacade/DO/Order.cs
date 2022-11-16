@@ -9,13 +9,11 @@ public struct Order
 {
     public Order()
     {
-        ID = 0;
+        ID=0;
         CustomerName = "";
         CustomerEmail = "";
         CustomerAdress = "";
     }
-
-    // properties
     public int ID { get; set; }
     
     public string CustomerName { get; set; }    

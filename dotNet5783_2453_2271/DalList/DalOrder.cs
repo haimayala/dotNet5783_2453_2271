@@ -9,7 +9,6 @@ public class DalOrder
    
     public int Add(Order newOrder)
     {//the method adds an order to the order's arry 
-
         newOrder.ID = DataSource.nextOrder;
         DataSource._orders[DataSource._numOfOrders] = newOrder;
         DataSource._numOfOrders++;
@@ -39,7 +38,6 @@ public class DalOrder
             if (DataSource._orders[i].ID == id)
                 return DataSource._orders[i];
         }
-        // in case the order not exsist
         throw new Exception("This order is not exsist");
     }
 
@@ -53,7 +51,6 @@ public class DalOrder
                 return;
             }
         }
-        // in case the order is not exsist
         throw new Exception("This order is not exsist");
     }
 

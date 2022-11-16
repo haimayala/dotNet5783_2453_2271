@@ -8,7 +8,6 @@ namespace Dal;
 
 static internal class DataSource
 {
-    // a static ctor that initialize all the arrays
     static DataSource()
     {
         s_Initialize();
@@ -16,7 +15,6 @@ static internal class DataSource
 
     static readonly Random s_rand = new Random();
 
-    // The arrays
     static internal Product[] _products = new Product[50];
     static internal Order[] _orders = new Order[100];
     static internal OrderItem[] _ordersItmes = new OrderItem[200];
@@ -41,7 +39,7 @@ static internal class DataSource
     private static int s_nextOrderItemNumber = s_startOrderItemNumber;
     internal static int nextOrderItem { get { return s_nextOrderItemNumber++; } }
 
-    // a afunction that call tha all initialize functions that initilize the arrays
+
     private static void s_Initialize()
     {
         createAndInitProduct();
@@ -49,11 +47,8 @@ static internal class DataSource
         createAndInitOrderItem();
     }
 
-    //initilize the product arrays
     private static void createAndInitProduct()
     {
-
-        // all the names of the products divided to categorioes
         string[] nameOfAnimals = new string[5] { "dog", "cat", "parrot", "fish", "rabbit" };
         string[] nameOfFoods = new string[5] { "Snacks", "natural food", "Dry food", "vitamins", "GealthyFood" };
         string[] nameOfEquipment = new string[5] { "cage", "strip", "Food facility", "Aquarium", "collar" };
@@ -62,11 +57,9 @@ static internal class DataSource
         for (int i = 0; i < 10; i++)
         {
             Product myProduct = new Product();
-            // random id
             myProduct.ID = s_rand.Next(100000, 999999);
             bool flag = false;
             int counter = 0;
-            // check that this id still not exsist
             while (!flag)
             {
                 for (int j = 0; j < DataSource._numOfProducts; j++)
@@ -79,7 +72,7 @@ static internal class DataSource
                 if (counter == DataSource._numOfProducts)
                     flag = true;
             }
-            // random initilize
+
             myProduct.Category = (Category)s_rand.Next(5);
             if (myProduct.Category.Equals(Enums.Category.Animals))
             {
@@ -117,15 +110,11 @@ static internal class DataSource
             }
 
             _products[_numOfProducts] = myProduct;
-            // size promotion
             _numOfProducts++;
         }
     }
-
-    //initilize the order arrays
     private static void createAndInitOrder()
     {
-        // the customers names for random initilize
         string[] names = new string[6] { "ayala", "noa", "tamar", "shani", "yael", "hadas" };
         for (int i = 0; i < 20; i++)
         {
@@ -167,13 +156,10 @@ static internal class DataSource
                 _orders[i].DeliveryDate = myOrder.OrderDate.AddDays(2);
             if (i <= 0.6 * 20)
                 myOrder.DeliveryDate = myOrder.ShipDate.AddHours(24);
-            _orders[_numOfOrders] = myOrder;
-            // size promotion
-           _numOfOrders++;
+            _orders[DataSource._numOfOrders] = myOrder;
+            DataSource._numOfOrders++;
         }
     }
-
-    //initilize the order item arrays
     private static void createAndInitOrderItem()  
     {
         int numOfOrders =0;
@@ -206,7 +192,6 @@ static internal class DataSource
             }
 
             counter++;
-            // // size promotion
             numOfOrders++;
             
            

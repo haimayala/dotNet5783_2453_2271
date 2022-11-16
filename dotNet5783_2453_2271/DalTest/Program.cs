@@ -1,11 +1,12 @@
 ﻿
 using DO;
 using static DO.Enums;
-//using Dal;
-//using System.Runtime.CompilerServices;
-//using System.Collections.Specialized;
-//using System.Data.Common;
-//using System.Reflection.Metadata.Ecma335Stage0 Final commit
+using Dal;
+using System.Runtime.CompilerServices;
+using System.Collections.Specialized;
+using System.Data.Common;
+using System.Reflection.Metadata.Ecma335;
+
 namespace Dal;
 
 
@@ -13,7 +14,6 @@ namespace Dal;
 
 partial class Program
 {
-    // options
     enum Options { ADD, DELETE, GET, UPPDATE, GETALL ,PRINTALL };
     enum Menu { EXIT, PRODUCT, ORDER, ORDERITEM };
 
@@ -24,7 +24,7 @@ partial class Program
         DalOrder dalOrder = new DalOrder();
         DalOrderItem dalOrderItem = new DalOrderItem();
 
-        // choose a menu
+
         Console.WriteLine(
             @"shop Menu:
 0- Exit
@@ -38,7 +38,6 @@ partial class Program
             {
                 switch (menu)
                 {
-                // options
                     case 1:
 
 
@@ -50,14 +49,15 @@ partial class Program
 3-Uppdate a product
 4-Get all the products
 5- Print all the product list");
-                    int.TryParse(Console.ReadLine(), out int number);
-                        switch (number)
-                        { // add a product
+                        int productOp = int.Parse(Console.ReadLine());
+                        switch (productOp)
+                        {
                             case 0:
                           
                                 Product p = new Product();
-                            Console.WriteLine("please enter a product id:");                          
-                            int.TryParse(Console.ReadLine(), out int id);
+                            Console.WriteLine("please enter a product id:");
+
+                            int id = int.Parse(Console.ReadLine());
                             p.ID = id;
                             Console.WriteLine(@"please enter the product category
 for animal enter - 0
@@ -66,18 +66,18 @@ for equipment enter - 2
 for games enter - 3
 for Cultivation enter -4");
                            
-                            int.TryParse(Console.ReadLine(), out int cat);
-                            p.Category = (Category)cat;
+                                int c = int.Parse(Console.ReadLine());
+                                p.Category = (Category)c;
 
                                 Console.WriteLine("please enter the product name");
                                 p.Name = Console.ReadLine();
                                 Console.WriteLine("please enter the product price");
 
-                            int.TryParse(Console.ReadLine(), out int price);
-                            p.Price = price;
+                                int price = int.Parse(Console.ReadLine());
+                                p.Price = price;
                                 Console.WriteLine("please enter the amount of the product in stock");
-                            int.TryParse(Console.ReadLine(), out int stock);
-                            p.InStock = stock;
+                                int stock = int.Parse(Console.ReadLine());
+                                p.InStock = stock;
                             try
                             {
                                 dalproduct.Add(p);
@@ -89,12 +89,12 @@ for Cultivation enter -4");
                                 break;
 
                             case 1:
-                            // delete a product
-                            Console.WriteLine("please enter the id of the product that you want to delete ");
-                            int.TryParse(Console.ReadLine(), out int pid);
+
+                                Console.WriteLine("please enter the id of the product that you want to delete ");
+                                int iid = int.Parse(Console.ReadLine());
                             try
                             {
-                                dalproduct.Delete(pid);
+                                dalproduct.Delete(iid);
                             }
                             catch (Exception e)
                             {
@@ -103,9 +103,9 @@ for Cultivation enter -4");
                            
                                 break;
                             case 2:
-                            // get a product
-                            Console.WriteLine("please enter the id of the product that you want to get ");
-                            int.TryParse(Console.ReadLine(), out int get);
+
+                                Console.WriteLine("please enter the id of the product that you want to get ");
+                                int get = int.Parse(Console.ReadLine());
                             try
                             {
                                Product pro= dalproduct.GetByID(get);
@@ -119,11 +119,11 @@ for Cultivation enter -4");
                            
                                 break;
                             case 3:
-                            // uppdate a product
-                            Product n = new Product();
+
+                                Product n = new Product();
                             Console.WriteLine("please enter a product id:");
-                            int.TryParse(Console.ReadLine(), out int proId);
-                            n.ID = proId;
+                            int idd = int.Parse(Console.ReadLine());
+                            n.ID = idd;
                             Console.WriteLine(@"please enter the product category
 for animal enter - 0
 for food enter - 1
@@ -131,18 +131,18 @@ for equipment enter - 2
 for games enter - 3
 for Cultivation enter -4");
 
-                            int.TryParse(Console.ReadLine(), out int t);
-                            n.Category = (Category)t;
+                                int tt = int.Parse(Console.ReadLine());
+                                n.Category = (Category)tt;
 
                                 Console.WriteLine("please enter the product name");
                                 n.Name = Console.ReadLine();
                                 Console.WriteLine("please enter the product price");
 
-                            int.TryParse(Console.ReadLine(), out int y);
-                            n.Price = y;
+                                int yy = int.Parse(Console.ReadLine());
+                                n.Price = yy;
                                 Console.WriteLine("please enter the amount of the product in stock");
-                            int.TryParse(Console.ReadLine(), out int num);
-                            n.InStock = num;
+                                int ee = int.Parse(Console.ReadLine());
+                                n.InStock = ee;
                             try
                             {
                                 dalproduct.Uppdate(n);
@@ -155,11 +155,9 @@ for Cultivation enter -4");
                          
                                 break;
                             case 4:
-                            // get all products
-                            Product[] arr = dalproduct.GetAll();                            
+                                Product[] arr = dalproduct.GetAll();                            
                                 break;
                         case 5:
-                            // print all products
                             Product[] pArr=dalproduct.GetAll();
                             for (int i = 0; i < pArr.Length; i++)
                             {
@@ -179,8 +177,8 @@ for Cultivation enter -4");
 3-Uppdate a order
 4-Get all the order
 5- Print all the order list");
-                    int.TryParse(Console.ReadLine(), out int orOp);
-                    switch (orOp)
+                        int orderOp = int.Parse(Console.ReadLine());
+                        switch (orderOp)
                         {
                             case 0:
 
@@ -207,7 +205,7 @@ for Cultivation enter -4");
                             case 1:
 
                                 Console.WriteLine("please enter the id of the order that you want to delete ");
-                            int.TryParse(Console.ReadLine(), out int d);
+                                int d = int.Parse(Console.ReadLine());
 
                             try
                             {
@@ -224,7 +222,7 @@ for Cultivation enter -4");
                             case 2:
 
                                 Console.WriteLine("please enter the id of the order that you want to get ");
-                            int.TryParse(Console.ReadLine(), out int g);
+                                int g = int.Parse(Console.ReadLine());
                             try
                             {
                                Order ord= dalOrder.GetByID(g);
@@ -241,8 +239,8 @@ for Cultivation enter -4");
 
                                 Order orUpp = new Order();
                             Console.WriteLine("please enter your order id");
-                            int.TryParse(Console.ReadLine(), out int orderid);
-                            orUpp.ID=orderid;
+                            int orderid = int.Parse(Console.ReadLine());
+                           orUpp.ID=orderid;
                             Console.WriteLine("please enter your name");
                                 orUpp.CustomerName = Console.ReadLine();
                                 Console.WriteLine("please enter your email");
@@ -283,23 +281,23 @@ for Cultivation enter -4");
 3-Uppdate a order item
 4-Get all the order item
 5-Print al the order item list");
-                    int.TryParse(Console.ReadLine(), out int orderItemOp);
-                    switch (orderItemOp)
+                        int orderItemOp = int.Parse(Console.ReadLine());
+                        switch (orderItemOp)
                         {
                             case 0:
                                 OrderItem orit = new OrderItem();
                                 Console.WriteLine("please enter the order id");
-                            int.TryParse(Console.ReadLine(), out int orid);
-                            orit.OrderID = orid;
+                                int orid = int.Parse(Console.ReadLine());
+                                orit.OrderID = orid;
                                 Console.WriteLine("please enter the product id");
-                            int.TryParse(Console.ReadLine(), out int pid);
-                            orit.ProductID = pid;
+                                int pid = int.Parse(Console.ReadLine());
+                                orit.ProductID = pid;
                                 Console.WriteLine("please enter the order item price");
-                            int.TryParse(Console.ReadLine(), out int pr);
-                            orit.Price = pr;
+                                int pr = int.Parse(Console.ReadLine());
+                                orit.Price = pr;
                                 Console.WriteLine("please enter the order item amount");
-                            int.TryParse(Console.ReadLine(), out int am);
-                            orit.Amount = am;
+                                int am = int.Parse(Console.ReadLine());
+                                orit.Amount = am;
                             try
                             {
                                 dalOrderItem.Add(orit);
@@ -313,7 +311,7 @@ for Cultivation enter -4");
                                 break;
                             case 1:
                                 Console.WriteLine("please enter the id of the order item you want to delete");
-                            int.TryParse(Console.ReadLine(), out int oritid);
+                                int oritid = int.Parse(Console.ReadLine());
                             try
                             {
                                 dalOrderItem.Delete(oritid);
@@ -327,7 +325,7 @@ for Cultivation enter -4");
                                 break;
                             case 2:
                                 Console.WriteLine("please enter the id of the order item that you want to get ");
-                            int.TryParse(Console.ReadLine(), out int g);
+                                int g = int.Parse(Console.ReadLine());
                             try
                             {
                                 OrderItem orrit=dalOrderItem.GetByID(g);
@@ -344,17 +342,17 @@ for Cultivation enter -4");
                             case 3:
                                 OrderItem orUpp = new OrderItem();
                                 Console.WriteLine("please enter the order item id");
-                            int.TryParse(Console.ReadLine(), out int orrid);
-                            orUpp.ID = orrid;
+                                int orrid = int.Parse(Console.ReadLine());
+                                orUpp.ID = orrid;
                                 Console.WriteLine("please enter the product id");
-                            int.TryParse(Console.ReadLine(), out int ppid);
-                            orUpp.ProductID = ppid;
+                                int ppid = int.Parse(Console.ReadLine());
+                                orUpp.ProductID = ppid;
                                 Console.WriteLine("please enter the order item price");
-                            int.TryParse(Console.ReadLine(), out int ppr);
-                            orUpp.Price = ppr;
+                                int ppr = int.Parse(Console.ReadLine());
+                                orUpp.Price = ppr;
                                 Console.WriteLine("please enter the order item amount");
-                            int.TryParse(Console.ReadLine(), out int amm);
-                            orUpp.Amount = amm;
+                                int amm = int.Parse(Console.ReadLine());
+                                orUpp.Amount = amm;
                             try
                             {
                                 dalOrderItem.Uppdate(orUpp);
@@ -385,8 +383,7 @@ for Cultivation enter -4");
 1- Product
 2-Order
 3-OrderItem");
-            int.TryParse(Console.ReadLine(), out menu);
-
+                menu = int.Parse(Console.ReadLine());
             }
               
     }

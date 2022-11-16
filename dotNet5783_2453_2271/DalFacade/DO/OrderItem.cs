@@ -5,7 +5,6 @@ namespace DO;
 
 public struct OrderItem
 {
-    //properties
     public int ID { get; set; }
     public int ProductID { get; set; }
     public int OrderID { get; set; }
