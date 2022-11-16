@@ -1,9 +1,4 @@
-﻿//using DO;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿
 
 using DO;
 
@@ -11,26 +6,29 @@ namespace Dal;
 
 public class DalProduct
 {
-   public void Add(Product newProduct)
+   public int Add(Product newProduct)
     {
-       for(int i=0;i<DataSource.Config.NumOfProducts;i++)
+        
+       for (int i=0;i<DataSource._numOfProducts;i++)
         {
-            if (DataSource.Products[i].ID == newProduct.ID)
+            if (DataSource._products[i].ID == newProduct.ID)
                 throw new Exception("This product is already exists");
         }
-        DataSource.Products[DataSource.Config.NumOfProducts] = newProduct;
-        DataSource.Config.NumOfProducts++;
+        DataSource._products[DataSource._numOfProducts] = newProduct;
+        DataSource._numOfProducts++;
+        return newProduct.ID;
     }
 
     public void Delete(int id)
     {
-        for (int i = 0; i < DataSource.Config.NumOfProducts; i++)
+        for (int i = 0; i < DataSource._numOfProducts; i++)
         {
 
-            if (DataSource.Products[i].ID == id)
+            if (DataSource._products[i].ID == id)
             {
-                DataSource.Products[i] = DataSource.Products[DataSource.Config.NumOfProducts - 1];
-                DataSource.Config.NumOfProducts--;
+                DataSource._products[i] = DataSource._products[DataSource._numOfProducts - 1];
+                DataSource._numOfProducts--;
+                return;
             }
                 
         }
@@ -39,33 +37,34 @@ public class DalProduct
 
     public Product GetByID(int id)
     {
-       for(int i=0;i<DataSource.Config.NumOfProducts;i++)
+       for(int i=0;i<DataSource._numOfProducts; i++)
         {
-            if (DataSource.Products[i].ID==id)
-                return DataSource.Products[i];
+            if (DataSource._products[i].ID==id)
+                return DataSource._products[i];
         }
         throw new Exception("This product is not exsist");
     }
 
     public void Uppdate(Product newProduct)
     {
-        for(int i=0;i<DataSource.Config.NumOfProducts;i++)
+        for(int i=0;i<DataSource._numOfProducts;i++)
         {
-            if (DataSource.Products[i].ID==newProduct.ID)
+            if (DataSource._products[i].ID==newProduct.ID)
             {
-                DataSource.Products[i] = newProduct;
+                DataSource._products[i] = newProduct;
                 return;
             }    
         }
         throw new Exception("This product is not exsist");
     }
 
-    public IEnumerable<Product> GetAll()
+    public Product[] GetAll()
     {
-        Product[] prr = new Product[DataSource.Config.NumOfProducts];  
-        for(int i=0;i< DataSource.Config.NumOfProducts;i++)
+        int size=DataSource._numOfProducts;
+        Product[] prr = new Product[DataSource._numOfProducts];  
+        for(int i=0;i< DataSource._numOfProducts; i++)
         {
-            prr[i]=DataSource.Products[i];
+            prr[i]=DataSource._products[i];
         }
         return prr; 
     }

@@ -1,9 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-
+﻿
 using System.Xml.Linq;
 
 namespace DO;
@@ -17,13 +12,11 @@ public struct OrderItem
     public int Amount { get; set; }
 
     public override string ToString() => $@"
-ID ={ID},
-ProductID ={ProductID},
-OrderID={OrderID},
-Price={Price},
-Amount={Amount}
+ID:  {ID},
+ProductID:  {ProductID},
+OrderID:  {OrderID},
+Price:  {Price},
+Amount:  {Amount}
 ";
-
-
 
 }

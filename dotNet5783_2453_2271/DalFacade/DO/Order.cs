@@ -1,16 +1,19 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿
 
 using DalFacade;
+using System.Diagnostics;
 
 namespace DO;
 
 public struct Order
 {
-
+    public Order()
+    {
+        ID=0;
+        CustomerName = "";
+        CustomerEmail = "";
+        CustomerAdress = "";
+    }
     public int ID { get; set; }
     
     public string CustomerName { get; set; }    
@@ -22,5 +25,15 @@ public struct Order
     public DateTime OrderDate { get; set; } =DateTime.MinValue;
     public DateTime ShipDate { get; set; } =DateTime.MinValue;  
    
-    public DateTime DeliveryDate { get; set; } =DateTime.MinValue;  
+    public DateTime DeliveryDate { get; set; } =DateTime.MinValue;
+
+    public override string ToString() => $@"
+ID:  {ID},
+CustomerName:  {CustomerName},
+CustomerEmail:  {CustomerEmail},
+CustomerAdress:  {CustomerAdress},
+OrderDate:  {OrderDate},
+ShipDate:  {ShipDate},
+DeliveryDate:  {DeliveryDate},
+";
 }

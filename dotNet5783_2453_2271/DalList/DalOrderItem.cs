@@ -1,9 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-
+﻿
 using DO;
 using System.Drawing;
 
@@ -11,27 +6,25 @@ namespace Dal;
 
 public class DalOrderItem
 {
-    public void Add(OrderItem newOrderItem)
+    public int Add(OrderItem newOrderItem)
     {
-        for (int i = 0; i < DataSource.Config.NumOfOrderItems; i++)
-        {
-            if (DataSource.OrdersItmes[i].ID == newOrderItem.ID)
-                throw new Exception("This order item is already exists");
-        }
-        DataSource.OrdersItmes[DataSource.Config.NumOfOrderItems] = newOrderItem;
-        DataSource.Config.NumOfOrderItems++;
+        newOrderItem.ID = DataSource.nextOrderItem/*+ DataSource._numOfOrderItems*/;
+        DataSource._ordersItmes[DataSource._numOfOrderItems] = newOrderItem;
+        DataSource._numOfOrderItems++;
+        return newOrderItem.ID;
     }
 
     public void Delete(int id)
     {
 
-        for (int i = 0; i < DataSource.Config.NumOfOrderItems; i++)
+        for (int i = 0; i < DataSource._numOfOrderItems; i++)
         {
 
-            if (DataSource.OrdersItmes[i].ID == id)
+            if (DataSource._ordersItmes[i].ID == id)
             {
-                DataSource.OrdersItmes[i] = DataSource.OrdersItmes[DataSource.Config.NumOfOrderItems - 1];
-                DataSource.Config.NumOfOrderItems--;
+                DataSource._ordersItmes[i] = DataSource._ordersItmes[DataSource._numOfOrderItems - 1];
+                DataSource._numOfOrderItems--;
+                return;
             }
         }
         throw new Exception("This order item is not exsist");
@@ -39,45 +32,62 @@ public class DalOrderItem
 
     public OrderItem GetByID(int id)
     {
-        for (int i = 0; i < DataSource.Config.NumOfOrderItems; i++)
+        for (int i = 0; i < DataSource._numOfOrderItems; i++)
         {
-            if (DataSource.OrdersItmes[i].ID == id)
-                return DataSource.OrdersItmes[i];
+            if (DataSource._ordersItmes[i].ID == id)
+                return DataSource._ordersItmes[i];
         }
       
         throw new Exception("This order item is not exsist");
     }
     public void Uppdate(OrderItem newOrderItem)
     {
-        for (int i = 0; i < DataSource.Config.NumOfOrderItems; i++)
+        for (int i = 0; i < DataSource._numOfOrderItems; i++)
         {
-            if (DataSource.OrdersItmes[i].ID == newOrderItem.ID)
+            if (DataSource._ordersItmes[i].ID == newOrderItem.ID)
             {
-                DataSource.OrdersItmes[i] = newOrderItem;
+                DataSource._ordersItmes[i] = newOrderItem;
                 return;
             }
         }
         throw new Exception("This order item is not exsist");
     }
 
-    public IEnumerable<OrderItem> GetAll()
+    public OrderItem[] GetAll()
     {
-        OrderItem[] odr = new OrderItem[DataSource.Config.NumOfOrderItems];
-        for (int i = 0; i < DataSource.Config.NumOfOrderItems; i++)
+        OrderItem[] odr = new OrderItem[DataSource._numOfOrderItems];
+        for (int i = 0; i < DataSource._numOfOrderItems; i++)
         {
-            odr[i] = DataSource.OrdersItmes[i];
+            odr[i] = DataSource._ordersItmes[i];
         }
         return odr;
     }
 
     public OrderItem GetByProductAndOrder(int p, int or)
     {
-        foreach (OrderItem o in DataSource.OrderItems)
+        foreach (OrderItem o in DataSource._ordersItmes)
         {
             if (o.ProductID == p && o.OrderID == or)
                 return o;
         }
         throw new Exception("This order item is not exsist");
+    }
+
+    public OrderItem[] GetByOrderId(int id)
+    {
+        int counter = 0;
+        for(int i=0;i<DataSource._ordersItmes.Length;i++)
+        {
+            if (DataSource._ordersItmes[i].OrderID == id) ;
+            counter++;
+        }
+        OrderItem[] odr = new OrderItem[counter];
+        for (int i = 0; i < DataSource._ordersItmes.Length; i++)
+        {
+            if (DataSource._ordersItmes[i].OrderID == id) ;
+            odr[i] = DataSource._ordersItmes[i];
+        }
+        return odr;
     }
 
 }
