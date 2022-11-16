@@ -1,6 +1,7 @@
 ﻿
 
 using DO;
+using System.Collections.Specialized;
 using static DO.Enums;
 
 namespace Dal;
@@ -14,27 +15,30 @@ static internal class DataSource
 
     static readonly Random s_rand = new Random();
 
-    static internal Product[] Products = new Product[50];
-    static internal Order[] Orders = new Order[100];
-    static internal OrderItem[] OrdersItmes = new OrderItem[200];
+    static internal Product[] _products = new Product[50];
+    static internal Order[] _orders = new Order[100];
+    static internal OrderItem[] _ordersItmes = new OrderItem[200];
 
-    internal static class Config
-    {
-        //counterד for the arrays
-        static internal int NumOfProducts = 0;
-        static internal int NumOfOrders = 0;
-        static internal int NumOfOrderItems = 0;
-        // run number fo order class
-        internal const int s_startOrderNumber = 1000;
-        private static int s_nextOrderNumber = s_startOrderNumber;
-        internal static int NextOrder { get { return s_nextOrderNumber++; } }
+    //counterד for the arrays
 
-        // run number for orderitem class
+    static internal int _numOfOrders = 0;
+    static internal int _numOfOrderItems = 0;
+    static internal int _numOfProducts = 0;
 
-        internal const int s_startOrderItemNumber = 1000;
-        private static int s_nextOrderItemNumber = s_startOrderItemNumber;
-        internal static int NextOrderItem { get { return s_nextOrderItemNumber++; } }
-    }
+
+
+    // run number for order class
+
+    internal const int s_startOrderNumber = 1000;
+    private static int s_nextOrderNumber = s_startOrderNumber;
+    internal static int nextOrder { get { return s_nextOrderNumber++; } }
+
+    // run number for orderitem class
+
+    internal const int s_startOrderItemNumber = 1000;
+    private static int s_nextOrderItemNumber = s_startOrderItemNumber;
+    internal static int nextOrderItem { get { return s_nextOrderItemNumber++; } }
+
 
     private static void s_Initialize()
     {
@@ -52,72 +56,148 @@ static internal class DataSource
         string[] nameOfCultivation = new string[4] { "shampoo", "fur brush", "perfume", "mouth cleaning" };
         for (int i = 0; i < 10; i++)
         {
-            Product p = new Product();
-            p.ID = s_rand.Next(100000,999999);
-            p.Category = (Category)s_rand.Next(5);
-            if (p.Category.Equals(Enums.Category.Animals))
+            Product myProduct = new Product();
+            myProduct.ID = s_rand.Next(100000, 999999);
+            bool flag = false;
+            int counter = 0;
+            while (!flag)
             {
-                p.Name = nameOfAnimals[s_rand.Next(5)];
-                p.Price = s_rand.Next(1000, 3000);
-                p.InStock = s_rand.Next(15, 30);
+                for (int j = 0; j < DataSource._numOfProducts; j++)
+                {
+                    if (_products[j].ID == myProduct.ID)
+                        myProduct.ID = s_rand.Next(100000, 999999);
+                    else
+                        counter++;
+                }
+                if (counter == DataSource._numOfProducts)
+                    flag = true;
             }
 
-            if (p.Category.Equals(Enums.Category.Food))
+            myProduct.Category = (Category)s_rand.Next(5);
+            if (myProduct.Category.Equals(Enums.Category.Animals))
             {
-                p.Name = nameOfFoods[s_rand.Next(5)];
-                p.Price = s_rand.Next(150, 250);
-                p.InStock = s_rand.Next(70, 100);
+                myProduct.Name = nameOfAnimals[s_rand.Next(5)];
+                myProduct.Price = s_rand.Next(1000, 3000);
+                myProduct.InStock = s_rand.Next(15, 30);
             }
 
-            if (p.Category.Equals(Enums.Category.Equipment))
+            if (myProduct.Category.Equals(Enums.Category.Food))
             {
-                p.Name = nameOfEquipment[s_rand.Next(5)];
-                p.Price = s_rand.Next(100, 200);
-                p.InStock = s_rand.Next(50);
+                myProduct.Name = nameOfFoods[s_rand.Next(5)];
+                myProduct.Price = s_rand.Next(150, 250);
+                myProduct.InStock = s_rand.Next(70, 100);
             }
 
-            if (p.Category.Equals(Enums.Category.Games))
+            if (myProduct.Category.Equals(Enums.Category.Equipment))
             {
-                p.Name = nameOfGames[s_rand.Next(5)];
-                p.Price = s_rand.Next(30, 70);
-                p.InStock = s_rand.Next(35);
+                myProduct.Name = nameOfEquipment[s_rand.Next(5)];
+                myProduct.Price = s_rand.Next(100, 200);
+                myProduct.InStock = s_rand.Next(50);
             }
 
-            if (p.Category.Equals(Enums.Category.Cultivation))
+            if (myProduct.Category.Equals(Enums.Category.Games))
             {
-                p.Name = nameOfCultivation[s_rand.Next(4)];
-                p.Price = s_rand.Next(50, 150);
-                p.InStock = s_rand.Next(90);
+                myProduct.Name = nameOfGames[s_rand.Next(5)];
+                myProduct.Price = s_rand.Next(30, 70);
+                myProduct.InStock = s_rand.Next(35);
             }
 
-            Products[DataSource.Config.NumOfProducts] = p;
-            DataSource.Config.NumOfProducts++;
+            if (myProduct.Category.Equals(Enums.Category.Cultivation))
+            {
+                myProduct.Name = nameOfCultivation[s_rand.Next(4)];
+                myProduct.Price = s_rand.Next(50, 150);
+                myProduct.InStock = s_rand.Next(90);
+            }
+
+            _products[_numOfProducts] = myProduct;
+            _numOfProducts++;
         }
     }
     private static void createAndInitOrder()
     {
-      
-       for(int i=0;i<20;i++)
+        string[] names = new string[6] { "ayala", "noa", "tamar", "shani", "yael", "hadas" };
+        for (int i = 0; i < 20; i++)
         {
-            Order or = new Order();
-           or.ID = i;
-            Orders[DataSource.Config.NumOfOrders] = or;
-            DataSource.Config.NumOfOrders++;
+            Order myOrder = new Order();
+            myOrder.ID = DataSource.nextOrder;
+            myOrder.CustomerName = names[s_rand.Next(6)];
+            if (myOrder.CustomerName == "ayala")
+            {
+                myOrder.CustomerAdress = "elad";
+                myOrder.CustomerEmail = "ayala@gmail.com";
+            }
+            if (myOrder.CustomerName == "noa")
+            {
+                myOrder.CustomerAdress = "ramat gan";
+                myOrder.CustomerEmail = "noa@gmail.com";
+            }
+            if (myOrder.CustomerName == "tamar")
+            {
+                myOrder.CustomerAdress = "natanya";
+                myOrder.CustomerEmail = "tamar@gmail.com";
+            }
+            if (myOrder.CustomerName == "shani")
+            {
+                myOrder.CustomerAdress = "petah tikva";
+                myOrder.CustomerEmail = "shani@gmail.com";
+            }
+            if (myOrder.CustomerName == "yael")
+            {
+                myOrder.CustomerAdress = "givataim";
+                myOrder.CustomerEmail = "yael@gmail.com";
+            }
+            if (myOrder.CustomerName == "hadas")
+            {
+                myOrder.CustomerAdress = "naharia";
+                myOrder.CustomerEmail = "hadas@gmail.com";
+            }
+            myOrder.OrderDate = DateTime.Now;
+            if (i <= 0.8 * 20)
+                _orders[i].DeliveryDate = myOrder.OrderDate.AddDays(2);
+            if (i <= 0.6 * 20)
+                myOrder.DeliveryDate = myOrder.ShipDate.AddHours(24);
+            _orders[DataSource._numOfOrders] = myOrder;
+            DataSource._numOfOrders++;
         }
     }
-    private static void createAndInitOrderItem()
+    private static void createAndInitOrderItem()  
     {
-        for (int i = 0; i < 40; i++)
+        int numOfOrders =0;
+        int counter = 0;
+        int stopCounter = 0;
+
+        for(int i=0;i<40;i++)
         {
-            OrderItem o = new OrderItem();
-            o.ID = i;
-            o.Price = s_rand.Next(100, 500);
-            o.Amount = s_rand.Next(5);
-           OrdersItmes[DataSource.Config.NumOfOrderItems] = o;
-            DataSource.Config.NumOfOrderItems++;
+            
+            if (counter == 20)
+                counter = 0;
+            int numOfProducts = s_rand.Next(1, 4);
+            int amount = s_rand.Next(20, 35);
+            for (int j = 0; j < numOfProducts; j++)
+            {
+                if (stopCounter >= 40)
+                    break;
+                stopCounter++;
+                Product p = _products[s_rand.Next(9)];
+                _ordersItmes[_numOfOrderItems] = new OrderItem
+                {
+                    Amount = amount,
+                    Price = p.Price * amount,
+                    ID = nextOrderItem,
+                    OrderID = _orders[counter].ID,
+                    ProductID = p.ID,
+
+                }; ;
+                _numOfOrderItems++;
+            }
+
+            counter++;
+            numOfOrders++;
+            
+           
+           
         }
     }
-
 }
 
 
