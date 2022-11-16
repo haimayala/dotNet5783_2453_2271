@@ -39,6 +39,7 @@ public class DalOrderItem
             if (DataSource._ordersItmes[i].ID == id)
                 return DataSource._ordersItmes[i];
         }
+        // in case the order item not exist
         throw new Exception("This order item is not exsist");
     }
 
@@ -52,6 +53,7 @@ public class DalOrderItem
                 return;
             }
         }
+        // in case the order item not exist
         throw new Exception("This order item is not exsist");
     }
 
@@ -72,6 +74,7 @@ public class DalOrderItem
             if (o.ProductID == p && o.OrderID == or)
                 return o;
         }
+        // in case the order item not exist
         throw new Exception("This order item is not exsist");
     }
 
@@ -79,12 +82,13 @@ public class DalOrderItem
     {//The method returns an array of all the items of the order with the received ID
 
         int counter = 0;
+        // count the total size
         for (int i = 0; i < DataSource._ordersItmes.Length; i++)
         {
             if (DataSource._ordersItmes[i].OrderID == id)
                 counter++;
         }
-
+        // copy all the order items to a new array
         OrderItem[] odr = new OrderItem[counter];
         for (int i = 0; i < DataSource._ordersItmes.Length; i++)
         {

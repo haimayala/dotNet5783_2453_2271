@@ -43,6 +43,7 @@ public class DalProduct
             if (DataSource._products[i].ID == id)
                 return DataSource._products[i];
         }
+        // in case the product not exist
         throw new Exception("This product is not exsist");
     }
 
@@ -56,6 +57,7 @@ public class DalProduct
                 return;
             }
         }
+        // in case the order item not exist
         throw new Exception("This product is not exsist");
     }
 

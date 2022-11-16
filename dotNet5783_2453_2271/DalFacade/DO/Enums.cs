@@ -8,6 +8,7 @@ namespace DO;
 
 public struct Enums
 {
+    // categories of the products
     public enum Category { Animals , Food , Equipment, Games, Cultivation };
     
 }
