@@ -15,15 +15,15 @@ static internal class DataSource
 
     static readonly Random s_rand = new Random();
 
-    static internal Product[] _products = new Product[50];
-    static internal Order[] _orders = new Order[100];
-    static internal OrderItem[] _ordersItmes = new OrderItem[200];
+    static internal List<Product> s_products = new List<Product>();
+    static internal List<Order> s_orders = new List<Order>();
+    static internal List<OrderItem> s_orderItems = new List<OrderItem>();    
 
-    //counterד for the arrays
+    ////counterד for the arrays
 
-    static internal int _numOfOrders = 0;
-    static internal int _numOfOrderItems = 0;
-    static internal int _numOfProducts = 0;
+    //static internal int _numOfOrders = 0;
+    //static internal int _numOfOrderItems = 0;
+    //static internal int _numOfProducts = 0;
 
 
 
@@ -62,14 +62,14 @@ static internal class DataSource
             int counter = 0;
             while (!flag)
             {
-                for (int j = 0; j < DataSource._numOfProducts; j++)
+                for (int j = 0; j < s_products.Count; j++)
                 {
-                    if (_products[j].ID == myProduct.ID)
+                    if (s_products[j].ID == myProduct.ID)
                         myProduct.ID = s_rand.Next(100000, 999999);
                     else
                         counter++;
                 }
-                if (counter == DataSource._numOfProducts)
+                if (counter == s_products.Count)
                     flag = true;
             }
 
@@ -109,8 +109,7 @@ static internal class DataSource
                 myProduct.InStock = s_rand.Next(90);
             }
 
-            _products[_numOfProducts] = myProduct;
-            _numOfProducts++;
+            s_products.Add(myProduct);
         }
     }
     private static void createAndInitOrder()
@@ -153,11 +152,11 @@ static internal class DataSource
             }
             myOrder.OrderDate = DateTime.Now;
             if (i <= 0.8 * 20)
-                _orders[i].DeliveryDate = myOrder.OrderDate.AddDays(2);
+                myOrder.DeliveryDate = myOrder.OrderDate.AddDays(2);
             if (i <= 0.6 * 20)
                 myOrder.DeliveryDate = myOrder.ShipDate.AddHours(24);
-            _orders[DataSource._numOfOrders] = myOrder;
-            DataSource._numOfOrders++;
+            s_orders.Add(myOrder);
+            
         }
     }
     private static void createAndInitOrderItem()  
@@ -178,24 +177,20 @@ static internal class DataSource
                 if (stopCounter >= 40)
                     break;
                 stopCounter++;
-                Product p = _products[s_rand.Next(9)];
-                _ordersItmes[_numOfOrderItems] = new OrderItem
+                Product p = s_products[s_rand.Next(9)];
+                OrderItem myOrderItem = new OrderItem
                 {
                     Amount = amount,
                     Price = p.Price * amount,
                     ID = nextOrderItem,
-                    OrderID = _orders[counter].ID,
+                    OrderID = s_orders[counter].ID,
                     ProductID = p.ID,
-
-                }; ;
-                _numOfOrderItems++;
+                };
+                s_orderItems.Add(myOrderItem);  
             }
 
             counter++;
             numOfOrders++;
-            
-           
-           
         }
     }
 }

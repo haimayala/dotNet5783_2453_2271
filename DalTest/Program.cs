@@ -2,10 +2,7 @@
 using DO;
 using static DO.Enums;
 using Dal;
-using System.Runtime.CompilerServices;
-using System.Collections.Specialized;
-using System.Data.Common;
-using System.Reflection.Metadata.Ecma335;
+using DalApi;
 
 namespace Dal;
 
@@ -20,9 +17,7 @@ partial class Program
   
     static void Main()
     {
-        DalProduct dalproduct = new DalProduct();
-        DalOrder dalOrder = new DalOrder();
-        DalOrderItem dalOrderItem = new DalOrderItem();
+        IDal dal = new DalList();
 
 
         Console.WriteLine(
@@ -39,7 +34,14 @@ partial class Program
                 switch (menu)
                 {
                     case 1:
-
+                    for(int i=0;i<10;i++)
+                    {
+                        for(int j=1;j<10;j++)
+                        {
+                            for(int k=0;k<5;k++)
+                                Console.WriteLine("shop products:"+"   "+"list of all the products:"+"   ");
+                        }
+                    }
 
                         Console.WriteLine(
                             @"shop Menu:
@@ -80,7 +82,7 @@ for Cultivation enter -4");
                                 p.InStock = stock;
                             try
                             {
-                                dalproduct.Add(p);
+                               dal.Product.Add(p);
                             }
                             catch(Exception e)
                             {
@@ -94,7 +96,7 @@ for Cultivation enter -4");
                                 int iid = int.Parse(Console.ReadLine());
                             try
                             {
-                                dalproduct.Delete(iid);
+                                dal.Product.Delete(iid);
                             }
                             catch (Exception e)
                             {
@@ -108,7 +110,7 @@ for Cultivation enter -4");
                                 int get = int.Parse(Console.ReadLine());
                             try
                             {
-                               Product pro= dalproduct.GetByID(get);
+                               Product pro= dal.Product.GetByID(get);
                                 Console.WriteLine(pro);
                             }
                             catch (Exception e)
@@ -145,7 +147,7 @@ for Cultivation enter -4");
                                 n.InStock = ee;
                             try
                             {
-                                dalproduct.Uppdate(n);
+                                dal.Product.Uppdate(n);
                             }
                             catch (Exception e)
                             {
@@ -155,13 +157,13 @@ for Cultivation enter -4");
                          
                                 break;
                             case 4:
-                                Product[] arr = dalproduct.GetAll();                            
+                            IEnumerable<Product> arr = dal.Product.GetAll();                            
                                 break;
                         case 5:
-                            Product[] pArr=dalproduct.GetAll();
-                            for (int i = 0; i < pArr.Length; i++)
+                            IEnumerable<Product> pArr = dal.Product.GetAll();
+                            foreach (Product pro in pArr)
                             {
-                                Console.WriteLine(pArr[i]);
+                                Console.WriteLine(pro);
                             }
                             break;
 
@@ -192,7 +194,7 @@ for Cultivation enter -4");
                                 or.OrderDate = DateTime.Now;
                             try
                             {
-                                dalOrder.Add(or);
+                                dal.order.Add(or);
                             }
 
                             catch(Exception e)
@@ -209,7 +211,7 @@ for Cultivation enter -4");
 
                             try
                             {
-                                dalOrder.Delete(d);
+                                dal.order.Delete(d);
                             }
 
                             catch (Exception e)
@@ -225,7 +227,7 @@ for Cultivation enter -4");
                                 int g = int.Parse(Console.ReadLine());
                             try
                             {
-                               Order ord= dalOrder.GetByID(g);
+                               Order ord= dal.order.GetByID(g);
                                 Console.WriteLine(ord);
                             }
 
@@ -250,7 +252,7 @@ for Cultivation enter -4");
                                 orUpp.OrderDate = DateTime.Now;
                             try
                             {
-                                dalOrder.Uppdate(orUpp);
+                                dal.order.Uppdate(orUpp);
                             }
 
                             catch (Exception e)
@@ -260,14 +262,14 @@ for Cultivation enter -4");
                                 
                                 break;
                             case 4:
-                            Order[] arr = dalOrder.GetAll();
+                            IEnumerable<Order> arr = dal.order.GetAll();
                             break;
 
                         case 5:
-                            Order[] Oarr = dalOrder.GetAll();
-                            for (int i = 0; i < Oarr.Length; i++)
+                            IEnumerable<Order> Oarr = dal.order.GetAll();
+                           foreach(Order o in Oarr)
                             {
-                                Console.WriteLine(Oarr[i]);
+                                Console.WriteLine(o);
                             }
                             break;
                     }
@@ -300,7 +302,7 @@ for Cultivation enter -4");
                                 orit.Amount = am;
                             try
                             {
-                                dalOrderItem.Add(orit);
+                                dal.orderItem.Add(orit);
                             }
 
                             catch (Exception e)
@@ -314,7 +316,7 @@ for Cultivation enter -4");
                                 int oritid = int.Parse(Console.ReadLine());
                             try
                             {
-                                dalOrderItem.Delete(oritid);
+                                dal.orderItem.Delete(oritid);
                             }
 
                             catch (Exception e)
@@ -328,7 +330,7 @@ for Cultivation enter -4");
                                 int g = int.Parse(Console.ReadLine());
                             try
                             {
-                                OrderItem orrit=dalOrderItem.GetByID(g);
+                                OrderItem orrit= dal.orderItem.GetByID(g);
                                 Console.WriteLine(orrit);
                             }
 
@@ -355,7 +357,7 @@ for Cultivation enter -4");
                                 orUpp.Amount = amm;
                             try
                             {
-                                dalOrderItem.Uppdate(orUpp);
+                                dal.orderItem.Uppdate(orUpp);
                             }
 
                             catch (Exception e)
@@ -365,13 +367,13 @@ for Cultivation enter -4");
                             
                                 break;
                             case 4:
-                            OrderItem[] arr = dalOrderItem.GetAll();                            
+                            IEnumerable<OrderItem> arr = dal.orderItem.GetAll();                            
                             break;
                         case 5:
-                            OrderItem[] orarr = dalOrderItem.GetAll();
-                            for (int i = 0; i < orarr.Length; i++)
+                            IEnumerable<OrderItem> orarr = dal.orderItem.GetAll();
+                            foreach (OrderItem item in orarr) 
                             {
-                                Console.WriteLine(orarr[i]);
+                                Console.WriteLine(item);
                             }
                             break;
                     }
