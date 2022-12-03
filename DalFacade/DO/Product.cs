@@ -1,7 +1,4 @@
-﻿
-
-using DalFacade;
-
+﻿using DalFacade;
 namespace DO;
 
 
@@ -14,14 +11,20 @@ public struct Product
     public double Price { get; set; }
     public Enum Category { get; set; }
     public int InStock { get; set; }
- 
-    public override string ToString() => $@"
-Product ID:  {ID},
-Name:   {Name}, 
-category:   {Category}
-Price:   {Price},   	
-Amount in stock:  {InStock}   	
-";
+
+
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+
+    //    public override string ToString() => $@"
+    //Product ID:  {ID},
+    //Name:   {Name}, 
+    //category:   {Category}
+    //Price:   {Price},   	
+    //Amount in stock:  {InStock}   	
+    //";
 
 }
 

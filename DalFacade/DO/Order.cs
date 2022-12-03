@@ -27,13 +27,18 @@ public struct Order
    
     public DateTime DeliveryDate { get; set; } =DateTime.MinValue;
 
-    public override string ToString() => $@"
-ID:  {ID},
-CustomerName:  {CustomerName},
-CustomerEmail:  {CustomerEmail},
-CustomerAdress:  {CustomerAdress},
-OrderDate:  {OrderDate},
-ShipDate:  {ShipDate},
-DeliveryDate:  {DeliveryDate},
-";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+
+    //public override string ToString() => $@"
+    //ID:  {ID},
+    //CustomerName:  {CustomerName},
+    //CustomerEmail:  {CustomerEmail},
+    //CustomerAdress:  {CustomerAdress},
+    //OrderDate:  {OrderDate},
+    //ShipDate:  {ShipDate},
+    //DeliveryDate:  {DeliveryDate},
+    //";
 }

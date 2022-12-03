@@ -1,9 +1,8 @@
 ﻿
 using DO;
 using static DO.Enums;
-using Dal;
-using DalApi;
 
+using DalApi;
 namespace Dal;
 
 
