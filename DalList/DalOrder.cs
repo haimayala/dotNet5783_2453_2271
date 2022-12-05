@@ -28,7 +28,8 @@ internal class DalOrder :IOrder
 
     public Order GetByID(int id)
     {//Finds a order by ID
-        for (int i = 0; i < DataSource.s_orders.Count; i++)
+        Console.WriteLine(DataSource.s_orders.Count());
+        for (int i = 0; i < DataSource.s_orders.Count(); i++)
         {
             if (DataSource.s_orders[i].ID == id)
                 return DataSource.s_orders[i];

@@ -154,7 +154,7 @@ static internal class DataSource
             if (i <= 0.8 * 20)
                 myOrder.DeliveryDate = myOrder.OrderDate.AddDays(2);
             if (i <= 0.6 * 20)
-                myOrder.DeliveryDate = myOrder.ShipDate.AddHours(24);
+                myOrder.ShipDate = myOrder.ShipDate.AddHours(24);
             s_orders.Add(myOrder);
             
         }

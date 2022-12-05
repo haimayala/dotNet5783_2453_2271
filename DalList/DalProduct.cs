@@ -6,11 +6,10 @@ internal class DalProduct :IProduct
 {
     public int Add(Product newProduct)
     {//the method adds a product to the products arry
-
         for (int i = 0; i < DataSource.s_products.Count; i++)
         {//checks if the product's id already exists
             if (DataSource.s_products[i].ID == newProduct.ID)
-                throw new Exception("This product is already exists");
+                throw new DalAllredyExsis("This product is allredy exists");
         }
         DataSource.s_products.Add(newProduct);
         return newProduct.ID;
@@ -28,17 +27,19 @@ internal class DalProduct :IProduct
             }
         }
         //If the product is not found
-        throw new Exception("This product is not exsist");
+        throw new DalDoesNotExsist("This product is not exsist");
     }
 
     public Product GetByID(int id)
     {//Finds a product by ID
+        
         for (int i = 0; i < DataSource.s_products.Count; i++)
         {
             if (DataSource.s_products[i].ID == id)
                 return DataSource.s_products[i];
         }
-        throw new Exception("This product is not exsist");
+        
+        throw new DalDoesNotExsist("This product is not exsist");
     }
 
     public void Uppdate(Product newProduct)
@@ -51,7 +52,7 @@ internal class DalProduct :IProduct
                 return;
             }
         }
-        throw new Exception("This product is not exsist");
+        throw new DalDoesNotExsist("This product is not exsist");
     }
 
     public IEnumerable<Product> GetAll()

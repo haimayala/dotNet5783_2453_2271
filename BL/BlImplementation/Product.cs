@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using System.Collections.Specialized;
+using System.Data;
 
 namespace BlImplementation;
 
@@ -42,16 +43,22 @@ internal class Product : IProduct
             // return the BO product
             return product;
         }
-        throw new Exception("negative id");
+        else
+        {
+            throw new BlUnCorrectID("uncorrect id");
+        }
+        
     }
 
     // A function that gets a product id and shopping cart, the function show the buyer the product details
     public BO.ProductItem GetProductDetails(int productId/*, BO.Cart cart*/)
     {
-        if(productId>0)
+        if (productId > 0)
         {
             // get the product from the data layer
-            DO.Product product=dal.Product.GetByID(productId);
+
+            DO.Product product = dal.Product.GetByID(productId);
+
             BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,
@@ -60,14 +67,18 @@ internal class Product : IProduct
                 Price = (int)product.Price,
             };
             if (product.InStock > 0)
-                productItem. Availability = true;
+                productItem.Availability = true;
             else
                 productItem.Availability = false;
             // !!!לבדוק!!!
-            productItem.AmountInCart=product.InStock;
+            productItem.AmountInCart = product.InStock;
             return productItem;
         }
-        throw new NotImplementedException();
+        else
+        {
+            throw new BlUnCorrectID("uncorrect id");
+        }
+
     }
 
 
@@ -90,6 +101,10 @@ internal class Product : IProduct
             // add the DO product
             dal.Product.Add(prod);
         }
+        else
+        {
+            throw new BlUnCorrectID("uncorrect details");
+        }
     }
 
     /* A function that deletes a product according to a product id 
@@ -103,6 +118,10 @@ internal class Product : IProduct
        if( CheckExsist(orders ,ProductId)==true)
         {
             dal.Product.Delete(ProductId);
+        }
+        else
+        {
+            throw new BlNotExsist("product not exsist");
         }
     }
 
@@ -125,6 +144,10 @@ internal class Product : IProduct
             }; 
             //uppdate the DO product
             dal.Product.Uppdate(prod);
+        }
+        else
+        {
+            throw new BlUnCorrectID("uncorrect details");
         }
     }
 
