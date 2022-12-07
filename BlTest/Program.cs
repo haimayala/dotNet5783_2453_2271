@@ -3,6 +3,7 @@ using BlApi;
 using BO;
 using static BO.Enums;
 using System.Security.Cryptography;
+using System.Transactions;
 
 namespace BlTest;
 internal class Program
@@ -29,8 +30,8 @@ internal class Program
 
 
         cart.CustonerAddres = "elad";
-        cart.CustonerAddres = "ayala";
-        cart.CustomerEmail ="ala@";
+        cart.CustonerAddres = "ayala ";
+        cart.CustomerEmail ="ayala@gmail.com";
         cart.TotalPrice = 0;
         cart.Items = s;
 
@@ -59,24 +60,46 @@ internal class Program
                     switch (option2)
                     {
                         case 0:
-                            IEnumerable<ProductForList?> productForLists = bl.Product.GetListedProducts();
-                            foreach (var item in productForLists)
+                            try
                             {
-                                Console.WriteLine(item);
+                                IEnumerable<ProductForList?> productForLists = bl.Product.GetListedProducts();
+                                foreach (var item in productForLists)
+                                {
+                                    Console.WriteLine(item);
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
                             }
                             break;
                         case 1:
                             Console.WriteLine("Please enter the product id you want to get");
                             int pId = int.Parse(Console.ReadLine());
-                            BO.Product product = bl.Product.GetProductById(pId);
-                            Console.WriteLine(product);
+                            try
+                            {
+                                BO.Product product = bl.Product.GetProductById(pId);
+                                Console.WriteLine(product);
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                           
                             break;
                         case 2:
                             Console.WriteLine("Please enter the product id you want to get the details");
                             pId = int.Parse(Console.ReadLine());
-                            BO.ProductItem productItem = bl.Product.GetProductDetails(pId);
-                            Console.WriteLine(productItem);
-                            break;
+                            try
+                            {
+                                BO.ProductItem productItem = bl.Product.GetProductDetails(pId);
+                                Console.WriteLine(productItem);                               
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                             break;
                         case 3:
                             BO.Product product1 = new BO.Product();
                             Console.WriteLine("Please enter the product id for adding:");
@@ -95,13 +118,28 @@ for Cultivation enter -4");
                             product1.InStock = int.Parse(Console.ReadLine());
                             Console.WriteLine("Please enter the product price:");
                             product1.Price = int.Parse(Console.ReadLine());
-                            bl.Product.Add(product1);
-                            Console.WriteLine(product1);
+                            try
+                            {
+                                bl.Product.Add(product1);
+                                Console.WriteLine(product1);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                          
                             break;
                         case 4:
                             Console.WriteLine("Please enter the product id you want to delete:");
                             pId = int.Parse(Console.ReadLine());
-                            bl.Product.Delete(pId);
+                            try
+                            {
+                                bl.Product.Delete(pId);
+                            }
+                           catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
                             break;
                         case 5:
                             BO.Product product2 = new BO.Product();
@@ -121,13 +159,21 @@ for Cultivation enter -4");
                             product2.InStock = int.Parse(Console.ReadLine());
                             Console.WriteLine("Please enter the product price for uppdating:");
                             product2.Price = int.Parse(Console.ReadLine());
-                            bl.Product.Uppdate(product2);
+                            try
+                            {
+                                bl.Product.Uppdate(product2);
+                            }
+                           catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
                             break;
 
                     }
 
                     break;
                 case 2:
+                    BO.Order order=new BO.Order();
                     Console.WriteLine(
           @"shop Menu:
 0- Get orders for list
@@ -139,35 +185,73 @@ for Cultivation enter -4");
                     switch (option2)
                     {
                         case 0:
-                            IEnumerable<OrderForList> orders = (IEnumerable<OrderForList>)bl.Order.GetLitedOrders();
-                            foreach (var item in orders)
+                            try
                             {
-                                Console.WriteLine(item);
+                                IEnumerable<OrderForList> orders = (IEnumerable<OrderForList>)bl.Order.GetLitedOrders();
+                                foreach (var item in orders)
+                                {
+                                    Console.WriteLine(item);
+                                }
+                            }
+                           catch (Exception e)
+                            {
+                                Console.WriteLine(e);
                             }
                             break;
                         case 1:
                             Console.WriteLine("Please enter the order id you want to get");
                             int oId = int.Parse(Console.ReadLine());
-                            BO.Order order = bl.Order.GetOrderDetails(oId);
-                            Console.WriteLine(order);
+                            try
+                            {
+                                 order = bl.Order.GetOrderDetails(oId);
+                                Console.WriteLine(order);
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                           
                             break;
                         case 2:
                             Console.WriteLine("Please enter the order id you want to update order shipping");
                             oId = int.Parse(Console.ReadLine());
-                            order = bl.Order.UppdateShipDate(oId);
-                            Console.WriteLine(order);
+                            try
+                            {
+                                order = bl.Order.UppdateShipDate(oId);
+                                Console.WriteLine(order);
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                           
                             break;
                         case 3:
                             Console.WriteLine("Please enter the order id you want to update order delivering");
                             oId = int.Parse(Console.ReadLine());
-                            order = bl.Order.UppdateDeliveryDate(oId);
-                            Console.WriteLine(order);
+                            try
+                            {
+                                order = bl.Order.UppdateDeliveryDate(oId);
+                                Console.WriteLine(order);
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                            
                             break;
                         case 4:
                             Console.WriteLine("Please enter the order id that you want to fet the tracking");
                             oId = int.Parse(Console.ReadLine());
-                            BO.OrderTracking orderTracking = bl.Order.OrderTracking(oId);
-                            Console.WriteLine(orderTracking);
+                            try
+                            {
+                                BO.OrderTracking orderTracking = bl.Order.OrderTracking(oId);
+                                Console.WriteLine(orderTracking);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
                             break;
                     }
                     break;
@@ -190,8 +274,16 @@ for Cultivation enter -4");
                             cart.CustonerAddres = Console.ReadLine();
                             Console.WriteLine("Please enter the product id you want to add");
                             int cId = int.Parse(Console.ReadLine());
-                           cart = bl.Cart.Add(cart,cId);
-                            Console.WriteLine(cart);
+                            try
+                            {
+                                cart = bl.Cart.Add(cart, cId);
+                                Console.WriteLine(cart);
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                          
                             break;
                         case 1:
                             Console.WriteLine("Please enter your name:");
@@ -204,8 +296,16 @@ for Cultivation enter -4");
                             cId = int.Parse(Console.ReadLine());
                             Console.WriteLine("Please enter the new amount");
                             int amount = int.Parse(Console.ReadLine());
-                            cart = bl.Cart.Uppdate(cart,cId, amount);
-                            Console.WriteLine(cart);
+                            try
+                            {
+                                cart = bl.Cart.Uppdate(cart, cId, amount);
+                                Console.WriteLine(cart);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+
                             break;
                         case 2:
                             
@@ -215,8 +315,16 @@ for Cultivation enter -4");
                            string email = Console.ReadLine();
                             Console.WriteLine("Please enter your addres:");
                             string addres = Console.ReadLine();
-                            bl.Cart.OrderConfirmation(cart, name, email, addres);
-                            Console.WriteLine(cart);
+                            try
+                            {
+                                bl.Cart.OrderConfirmation(cart, name, email, addres);
+                                Console.WriteLine(cart);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+
                             break;
                     }
                     break;

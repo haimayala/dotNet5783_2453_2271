@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using BlApi;
-using BO;
-using DalApi;
-using DO;
-using MailChimp.Net.Models;
-
-
 namespace BlImplementation;
 
 internal class Cart : ICart
@@ -22,82 +9,100 @@ internal class Cart : ICart
     // A function that gets a cart and product id and add the match product to the cart 
     public BO.Cart Add(BO.Cart cart, int ProductID)
     {
-
-        DO.Product product = dal.Product.GetByID(ProductID);
-
-        BO.OrderItem? orderItem = cart.Items?.FirstOrDefault(item => item?.ProductId == ProductID);
-        if (orderItem != null)
+        try
         {
-            if (product.InStock > 0)
-            {
-                orderItem.Amount += 1;
-                orderItem.TotalPrice = product.Price;
-            }
-        }
-        else
-        {
+            DO.Product product = dal.Product.GetByID(ProductID);
 
-            if (product.InStock > 0)
+            BO.OrderItem? orderItem = cart.Items?.FirstOrDefault(item => item?.ProductId == ProductID);
+            if (orderItem != null)
             {
-                BO.OrderItem newOrderItem = new BO.OrderItem()
+                if (product.InStock > 0)
                 {
-                    
-                    ProductName = product.Name,
-                    Price = (int)product.Price,
-                    Amount = 1,
-                    TotalPrice = product.Price,
-                    ProductId = product.ID
-                };
-                cart.Items = cart.Items.Append(newOrderItem);
+                    orderItem.Amount += 1;
+                    orderItem.TotalPrice = product.Price;
+                }
+                
+            }
+            else
+            {
+
+                if (product.InStock > 0)
+                {
+                    BO.OrderItem newOrderItem = new BO.OrderItem()
+                    {
+
+                        ProductName = product.Name,
+                        Price = (int)product.Price,
+                        Amount = 1,
+                        TotalPrice = product.Price,
+                        ProductId = product.ID
+                    };
+                    cart.Items = cart.Items.Append(newOrderItem);
+                }
+
             }
 
+
+            cart.TotalPrice += product.Price;
+            return cart;
         }
-
-
-        cart.TotalPrice += product.Price;
-        return cart;
+        catch(DO.DalDoesNotExsist de)
+        {
+            throw new DO.DalDoesNotExsist(" product not exsist");
+        }
+        
     }
-   /* A function that gets a cart, product id and  new amount for uppdating
-      and uppdate the amount od te match product inr the cart
-      and return the updated cart*/
+    /* A function that gets a cart, product id and  new amount for uppdating
+       and uppdate the amount od te match product inr the cart
+       and return the updated cart*/
     public BO.Cart Uppdate(BO.Cart cart, int ProductId, int NewAmount)
     {
         // get the product from tha data layer for checking the amount in stock
-        DO.Product product = dal.Product.GetByID(ProductId);
-        // find the product in the cart
-
-
-        foreach (var item in cart.Items)
+        try
         {
-            if (item.ProductId == ProductId)
-            {
-                // In the case of increasing the quantity
-                if (item.Amount < NewAmount)
-                {
-                    if (product.InStock >= NewAmount - item.Amount)
-                    {
-                        product.InStock -= NewAmount - item.Amount;
-                        item.Amount += NewAmount;
-                        cart.TotalPrice += (NewAmount - item.Amount) * product.Price;
-                    }
+            DO.Product product = dal.Product.GetByID(ProductId);
+            // find the product in the cart
 
-                }
-                // In the case of reducing the quantity
-                else if (item.Amount > NewAmount)
+
+            foreach (var item in cart.Items)
+            {
+                if (item.ProductId == ProductId)
                 {
-                    product.InStock += item.Amount - NewAmount;
-                    item.Amount -= NewAmount;
-                    cart.TotalPrice -= (item.Amount - NewAmount) * product.Price;
-                }
-                //In case of deletion of the product
-                else if (NewAmount == 0)
-                {
-                    cart.TotalPrice -= item.Price;
-                    dal.orderItem.Delete(item.Id);
+                    // In the case of increasing the quantity
+                    if (item.Amount < NewAmount)
+                    {
+                        if (product.InStock >= NewAmount - item.Amount)
+                        {
+                            product.InStock -= NewAmount - item.Amount;
+                            item.Amount += NewAmount;
+                            cart.TotalPrice += (NewAmount - item.Amount) * product.Price;
+                        }
+
+                    }
+                    // In the case of reducing the quantity
+                    else if (item.Amount > NewAmount)
+                    {
+                        product.InStock += item.Amount - NewAmount;
+                        item.Amount -= NewAmount;
+                        cart.TotalPrice -= (item.Amount - NewAmount) * product.Price;
+                    }
+                    //In case of deletion of the product
+                    else if (NewAmount == 0)
+                    {
+                        cart.TotalPrice -= item.Price;
+                        dal.orderItem.Delete(item.Id);
+                    }
                 }
             }
+            return cart;
         }
-        return cart;
+        catch (DO.DalDoesNotExsist de)
+        {
+            throw new DO.DalDoesNotExsist("product not exsist");
+        }
+
+
+
     }
 
     //A function that places the order that is in the customer's shopping cart
@@ -106,6 +111,7 @@ internal class Cart : ICart
         //Data integrity check
         if (CusName != "" && CusEmail != "" && CusAddres != "" && CheckData(cart) == true)
         {
+            
             DO.Order doOrder = new DO.Order()
             {
                 CustomerName = CusName,
@@ -115,27 +121,39 @@ internal class Cart : ICart
                 ShipDate = DateTime.MinValue,
                 DeliveryDate = DateTime.MinValue,
             };
-
-            int OrderNumber = dal.order.Add(doOrder);          
-            foreach (var item in cart.Items)
+            try
             {
-                DO.OrderItem DoOrderItem = new DO.OrderItem()
+                int OrderNumber = dal.order.Add(doOrder);
+                foreach (var item in cart.Items)
                 {
-                    ID = item.Id,
-                    ProductID = item.ProductId,
-                    OrderID = OrderNumber,
-                    Price = item.Price,
-                    Amount = item.Amount,
-                };
-              
-                dal.orderItem.Add(DoOrderItem);
-                if (item.ProductId != 0 && item.ProductId != 1)
-                {
-                    DO.Product DoProduct = dal.Product.GetByID(item.ProductId);                  
-                    DoProduct.InStock -= DoOrderItem.Amount;
+                    DO.OrderItem DoOrderItem = new DO.OrderItem()
+                    {
+                        ID = item.Id,
+                        ProductID = item.ProductId,
+                        OrderID = OrderNumber,
+                        Price = item.Price,
+                        Amount = item.Amount,
+                    };
+
+                    dal.orderItem.Add(DoOrderItem);
+                    if (item.ProductId != 0 && item.ProductId != 1)
+                    {
+                        DO.Product updateProduct =dal.Product.GetByID(item.ProductId);
+                        updateProduct.InStock -= item.Amount;
+                        dal.Product.Uppdate(updateProduct);
+                    }
+
                 }
-                   
             }
+            catch (DO.DalDoesNotExsist de)
+            {
+                throw new DO.DalDoesNotExsist("order item not exsist");
+            }
+           
+        }
+        else
+        {
+            throw new  BO.BlUnCorrectID("unncorect details");
         }
     }
 

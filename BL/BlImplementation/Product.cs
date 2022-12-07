@@ -1,6 +1,6 @@
 ﻿using BlApi;
 using BO;
-using System.Collections.Specialized;
+
 using System.Data;
 
 namespace BlImplementation;
@@ -26,26 +26,34 @@ internal class Product : IProduct
    // A function that shows the product details to the manager based on a product code
     public BO.Product GetProductById(int productId )
     {
+       
         if (productId > 0)
         {
-            // Get the product from the data layer
-            DO.Product prod = dal.Product.GetByID(productId);
-            // Constructing an object of type BO פרםגובא
-            BO.Product product = new BO.Product()
+            //try to get the product from the data layer
+            try
             {
-                //Copy the respective fields
-                ID = prod.ID,
-                Name = prod.Name,
-                InStock = prod.InStock,
-                Category = (Enums.Category)prod.Category,
-                Price = prod.Price
-            };
-            // return the BO product
-            return product;
+                DO.Product prod = dal.Product.GetByID(productId);
+                BO.Product product = new BO.Product()
+                {
+                    //Copy the respective fields
+                    ID = prod.ID,
+                    Name = prod.Name,
+                    InStock = prod.InStock,
+                    Category = (Enums.Category)prod.Category,
+                    Price = prod.Price
+                };
+                return product;
+            }
+            catch (DO.DalDoesNotExsist de)
+            {
+                throw new DO.DalDoesNotExsist(" this product not exsist");
+            }
+            // Constructing an object of type BO
+           
         }
         else
         {
-            throw new BlUnCorrectID("uncorrect id");
+            throw new BO.BlUnCorrectID("uncorrect id");
         }
         
     }
@@ -53,31 +61,39 @@ internal class Product : IProduct
     // A function that gets a product id and shopping cart, the function show the buyer the product details
     public BO.ProductItem GetProductDetails(int productId/*, BO.Cart cart*/)
     {
-        if (productId > 0)
+        try
         {
-            // get the product from the data layer
-
-            DO.Product product = dal.Product.GetByID(productId);
-
-            BO.ProductItem productItem = new BO.ProductItem()
+            if (productId > 0)
             {
-                ID = product.ID,
-                Name = product.Name,
-                Category = (Enums.Category)product.Category,
-                Price = (int)product.Price,
-            };
-            if (product.InStock > 0)
-                productItem.Availability = true;
+                // get the product from the data layer
+
+                DO.Product product = dal.Product.GetByID(productId);
+
+                BO.ProductItem productItem = new BO.ProductItem()
+                {
+                    ID = product.ID,
+                    Name = product.Name,
+                    Category = (Enums.Category)product.Category,
+                    Price = (int)product.Price,
+                };
+                if (product.InStock > 0)
+                    productItem.Availability = true;
+                else
+                    productItem.Availability = false;
+
+                productItem.AmountInCart = product.InStock;
+                return productItem;
+            }
             else
-                productItem.Availability = false;
-            // !!!לבדוק!!!
-            productItem.AmountInCart = product.InStock;
-            return productItem;
+            {
+                throw new BO.BlUnCorrectID("uncorrect id");
+            }
         }
-        else
+        catch (DO.DalDoesNotExsist de)
         {
-            throw new BlUnCorrectID("uncorrect id");
+            throw new DO.DalDoesNotExsist("product not exsist");
         }
+       
 
     }
 
@@ -97,9 +113,17 @@ internal class Product : IProduct
                 InStock = product.InStock,
                 Category = product.Category,
                 ID = product.ID
-            }; 
+            };
             // add the DO product
-            dal.Product.Add(prod);
+            try
+            {
+                dal.Product.Add(prod);
+            }
+            catch(DO.DalAllredyExsis de)
+            {
+                throw new DO.DalAllredyExsis("cannnot add, product allredy exsit");
+            }
+            
         }
         else
         {
@@ -117,7 +141,14 @@ internal class Product : IProduct
         // check if the product not exsist in any order
        if( CheckExsist(orders ,ProductId)==true)
         {
-            dal.Product.Delete(ProductId);
+            try
+            {
+                dal.Product.Delete(ProductId);
+            }
+           catch(DO.DalDoesNotExsist de)
+            {
+                throw new DO.DalDoesNotExsist("cannot delete,product not exist");
+            }
         }
         else
         {
@@ -141,9 +172,17 @@ internal class Product : IProduct
                 InStock = product.InStock,
                 ID = product.ID,
                 Category = product.Category,
-            }; 
+            };
             //uppdate the DO product
-            dal.Product.Uppdate(prod);
+            try
+            {
+                dal.Product.Uppdate(prod);
+            }
+            catch (DO.DalDoesNotExsist de)
+            {
+                throw new DO.DalDoesNotExsist("cannot uppdate, product not exsist");
+            }
+            
         }
         else
         {

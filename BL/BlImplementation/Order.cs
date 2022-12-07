@@ -22,9 +22,8 @@ internal class Order : IOrder
                    CustomerName = item.CustomerName,
                    Status = GetStatus(item),
                    ProductAmount = orderItems.Count(),
-                   TotalPrice = orderItems.Sum(items => items.Amount * items.Price)
+                   TotalPrice =orderItems.Sum(items =>/* items.Amount **/ items.Price)
                };
-        throw new NotImplementedException();
     }
 
     /*A function that gets a order id and in case of correct input
@@ -34,23 +33,30 @@ internal class Order : IOrder
     {
         if (OrderId > 0)
         {
-            DO.Order order = dal.order.GetByID(OrderId);
-            IEnumerable<DO.OrderItem> items = dal.orderItem.GetByOrderId(OrderId);
-            Console.WriteLine(items.Count());
-            return new BO.Order
+            try
             {
-                ID = order.ID,
-                CustomerName = order.CustomerName,
-                CustomerEmail = order.CustomerEmail,
-                CustonerAddres = order.CustomerAdress,
-                Status = GetStatus(order),
-                OrderDate = order.OrderDate,
-                ShipDate = order.ShipDate,
-                DeliveryDate = order.DeliveryDate,
-                PayMentDate = DateTime.MinValue,
-                Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
-                TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
-            };
+                DO.Order order = dal.order.GetByID(OrderId);
+                IEnumerable<DO.OrderItem> items = dal.orderItem.GetByOrderId(OrderId);
+                Console.WriteLine(items.Count());
+                return new BO.Order
+                {
+                    ID = order.ID,
+                    CustomerName = order.CustomerName,
+                    CustomerEmail = order.CustomerEmail,
+                    CustonerAddres = order.CustomerAdress,
+                    Status = GetStatus(order),
+                    OrderDate = order.OrderDate,
+                    ShipDate = order.ShipDate,
+                    DeliveryDate = order.DeliveryDate,
+                    PayMentDate = DateTime.MinValue,
+                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
+                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
+                };
+            }
+           catch (DO.DalDoesNotExsist de)
+            {
+                throw new DO.DalDoesNotExsist("cannot get, order not exsist");
+            }
         }
         else
             throw new BlUnCorrectID("unncorrect id");
@@ -60,29 +66,39 @@ internal class Order : IOrder
     an update will be made to the customer that the order has been sent*/
     public BO.Order UppdateShipDate(int OrderId)
     {
-        //try...
-        DO.Order order = dal.order.GetByID(OrderId);
-        if(order.ShipDate<DateTime.Now)
+        try
         {
-            order.ShipDate = DateTime.Now;
-            IEnumerable<DO.OrderItem> items = dal.orderItem.GetByOrderId(OrderId);
-            return new BO.Order
+            DO.Order order = dal.order.GetByID(OrderId);
+            if (order.ShipDate < DateTime.Now)
             {
-                ID = order.ID,
-                CustomerName = order.CustomerName,
-                CustomerEmail = order.CustomerEmail,
-                CustonerAddres = order.CustomerAdress,
-                Status = BO.Enums.OrderStatus.Shipped,
-                OrderDate = order.OrderDate,
-                ShipDate = order.ShipDate,
-                DeliveryDate = order.DeliveryDate,
-                PayMentDate = DateTime.MinValue,
-                Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
-                TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
-            };
+                order.ShipDate = DateTime.Now;
+                IEnumerable<DO.OrderItem> items = dal.orderItem.GetByOrderId(OrderId);
+                return new BO.Order
+                {
+                    ID = order.ID,
+                    CustomerName = order.CustomerName,
+                    CustomerEmail = order.CustomerEmail,
+                    CustonerAddres = order.CustomerAdress,
+                    Status = BO.Enums.OrderStatus.Shipped,
+                    OrderDate = order.OrderDate,
+                    ShipDate = order.ShipDate,
+                    DeliveryDate = order.DeliveryDate,
+                    PayMentDate = DateTime.MinValue,
+                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
+                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
+                };
+            }
+            else
+            {
+                throw new Exception("order allredy shipped");
+            }
+        }
+       catch (DO.DalDoesNotExsist de)
+        {
+            throw new DO.DalDoesNotExsist("cannot5 uppdate, order not exsist");
         }
         
-        throw new NotImplementedException();
+      
     }
 
     /* A function that gets a order id and in case of correct input 
@@ -93,45 +109,63 @@ internal class Order : IOrder
         if (order.DeliveryDate<DateTime.Now)
         {
             order.DeliveryDate = DateTime.Now;
-            IEnumerable<DO.OrderItem> items = dal.orderItem.GetByOrderId(OrderId);
-            return new BO.Order
+            try
             {
-                ID = order.ID,
-                CustomerName = order.CustomerName,
-                CustomerEmail = order.CustomerEmail,
-                CustonerAddres = order.CustomerAdress,
-                Status = BO.Enums.OrderStatus.Delivered,
-                OrderDate = order.OrderDate,
-                ShipDate = order.ShipDate,
-                DeliveryDate = order.DeliveryDate,
-                PayMentDate = DateTime.MinValue,
-                Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
-                TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
-            };
+                IEnumerable<DO.OrderItem> items = dal.orderItem.GetByOrderId(OrderId);
+                return new BO.Order
+                {
+                    ID = order.ID,
+                    CustomerName = order.CustomerName,
+                    CustomerEmail = order.CustomerEmail,
+                    CustonerAddres = order.CustomerAdress,
+                    Status = BO.Enums.OrderStatus.Delivered,
+                    OrderDate = order.OrderDate,
+                    ShipDate = order.ShipDate,
+                    DeliveryDate = order.DeliveryDate,
+                    PayMentDate = DateTime.MinValue,
+                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
+                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
+                };
+            }
+            catch (DO.DalDoesNotExsist de)
+            {
+                throw new DO.DalDoesNotExsist("Cannot update, order not exist");
+            }
+           
         }
-
-            throw new NotImplementedException();
+        else
+        {
+            throw new Exception("order allredy deliverd");
+        }
+            
     }
 
     public OrderTracking OrderTracking(int OrderId)
     {
-        DO.Order order = dal.order.GetByID(OrderId);
-        return new BO.OrderTracking()
+        try
         {
-            Id = order.ID,
-            Status = GetStatus(order),
-            Trecking = new List<Tuple<DateTime, string>>() { new Tuple<DateTime, string>(order.OrderDate, "The order has been created"),
+            DO.Order order = dal.order.GetByID(OrderId);
+            return new BO.OrderTracking()
+            {
+                Id = order.ID,
+                Status = GetStatus(order),
+                Trecking = new List<Tuple<DateTime, string>>() { new Tuple<DateTime, string>(order.OrderDate, "The order has been created"),
                 new Tuple<DateTime, string>(order.ShipDate, "The order has been sent"),
                 new Tuple<DateTime, string>(order.DeliveryDate, "The order has been delivered") }
-        };
+            };
+        }
+        catch (DO.DalDoesNotExsist de)
+        {
+            throw new DO.DalDoesNotExsist("Cannot update, order not exist");
+        }
     }
 
     //A help functon that return the order status
     private BO.Enums.OrderStatus GetStatus(DO.Order order)
     {
-        if (order.DeliveryDate != null)
+        if (order.DeliveryDate < DateTime.Now && order.ShipDate < DateTime.Now)
             return OrderStatus.Delivered;
-        else if (order.ShipDate != null)
+        else if (order.ShipDate < DateTime.Now)
             return OrderStatus.Shipped;
         else
             return OrderStatus.Ordered;

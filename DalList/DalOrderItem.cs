@@ -4,52 +4,60 @@ using DalApi;
 
 internal class DalOrderItem : IOrderItem
 {
+
+    // A function that gets a new orderItem and in case its allredy not exsist add the orderItem to the orderItem list
     public int Add(OrderItem newOrderItem)
-    {//the method adds an orderItem to the orderItem's arry 
-        newOrderItem.ID = DataSource.nextOrderItem;
-        DataSource.s_orderItems.Add(newOrderItem);
-        return newOrderItem.ID;
-    }
-
-    public void Delete(int id)
-    {//The method deletes the orderItem with the received ID
-
-        for (int i = 0; i < DataSource.s_orderItems.Count; i++)
-        {//Goes through the array
-
-            if (DataSource.s_orderItems[i].ID == id)
-            {
-                DataSource.s_orderItems.Remove(DataSource.s_orderItems[i]);
-                return;
-            }
-        }
-        //If the orderItem is not found
-        throw new Exception("This order item is not exsist");
-    }
-
-    public OrderItem GetByID(int id)
-    {//Finds a orderItem by ID
-        for (int i = 0; i < DataSource.s_orderItems.Count; i++)
+    {
+        // check if the ordder item is allredy exsist in the oreritem list
+        if (DataSource.s_orderItems.Exists(x => x.ID == newOrderItem.ID))
+            throw new DalAllredyExsis("order item allredy exsist");
+        else
         {
-            if (DataSource.s_orderItems[i].ID == id)
-                return DataSource.s_orderItems[i];
+           //still not exsist
+            newOrderItem.ID = DataSource.nextOrderItem;
+            DataSource.s_orderItems.Add(newOrderItem);
+            return newOrderItem.ID;
         }
-        throw new Exception("This order item is not exsist");
+       
     }
 
+    // A function that gets a orderItem id and delete the match orderItem from the orderItem list
+    public void Delete(int id)
+    {
+        // check if the order otemexist in the list
+        if (!DataSource.s_orderItems.Exists(x => x.ID == id))
+            throw new DalDoesNotExsist("orderItem not exsist");
+        else
+        {
+            DataSource.s_products.Remove(DataSource.s_products.Find(x => x.ID == id));
+        }
+    }
+
+    // A function that gets a orderItem id and return the match orderItem
+    public OrderItem GetByID(int id)
+    {
+        // check if the orer itm exsist in the list
+        if (!DataSource.s_orderItems.Exists(x => x.ID == id))
+            throw new DalDoesNotExsist("orderItem notexsist");
+        else
+        {
+            return DataSource.s_orderItems.Find(x => x.ID == id);
+        }
+    }
+
+    // A function that gets a new orderItem and update the match orderItem in the orderItem list
     public void Uppdate(OrderItem newOrderItem)
     {//Updates a orderItem according to the ID
-        for (int i = 0; i < DataSource.s_orderItems.Count; i++)
+        if (!DataSource.s_orderItems.Exists(x => x.ID == newOrderItem.ID))
+            throw new DalDoesNotExsist("odetItem not exsist");
+        else
         {
-            if (DataSource.s_orderItems[i].ID == newOrderItem.ID)
-            {
-                DataSource.s_orderItems.Add( newOrderItem);
-                return;
-            }
+            DataSource.s_orderItems.Remove(DataSource.s_orderItems.Find(x=>x.ID==newOrderItem.ID));
+            DataSource.s_orderItems.Add(newOrderItem);
         }
-        throw new Exception("This order item is not exsist");
     }
 
+    // A function that return all the orderItem list
     public IEnumerable<OrderItem> GetAll()
     {//Returns an array containing all orderItems
         List<OrderItem> list = new List<OrderItem>();

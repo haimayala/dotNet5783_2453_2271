@@ -4,57 +4,50 @@ namespace Dal;
 
 internal class DalProduct :IProduct
 {
+    // A function that gets a new product and in case its allredy not exsist add the product to the product list
     public int Add(Product newProduct)
     {//the method adds a product to the products arry
-        for (int i = 0; i < DataSource.s_products.Count; i++)
-        {//checks if the product's id already exists
-            if (DataSource.s_products[i].ID == newProduct.ID)
-                throw new DalAllredyExsis("This product is allredy exists");
+       if(DataSource.s_products.Exists(x=>x.ID==newProduct.ID))
+            throw new DO.DalDoesNotExsist("product allredy exsist");
+       else
+        {
+            DataSource.s_products.Add(newProduct);
+            return newProduct.ID;
         }
-        DataSource.s_products.Add(newProduct);
-        return newProduct.ID;
+            
     }
 
+    // A function that gets a product id and delete the match product from the product list
     public void Delete(int id)
     {//The method deletes the product with the received ID
-        for (int i = 0; i < DataSource.s_products.Count; i++)
-        {//Goes through the array
-
-            if (DataSource.s_products[i].ID == id)
-            {
-                DataSource.s_products.Remove(DataSource.s_products[i]);             
-                return;
-            }
-        }
-        //If the product is not found
-        throw new DalDoesNotExsist("This product is not exsist");
+        if (!DataSource.s_products.Exists(x => x.ID == id))
+            throw new DO.DalDoesNotExsist("product not exsist");
+        else
+            DataSource.s_products.Remove(DataSource.s_products.Find(x => x.ID == id));
     }
 
+    // A function that gets a product id and return the match product
     public Product GetByID(int id)
-    {//Finds a product by ID
-        
-        for (int i = 0; i < DataSource.s_products.Count; i++)
-        {
-            if (DataSource.s_products[i].ID == id)
-                return DataSource.s_products[i];
-        }
-        
-        throw new DalDoesNotExsist("This product is not exsist");
+    {
+        if (!DataSource.s_products.Exists(x => x.ID == id))
+            throw new DO.DalDoesNotExsist("product not exsist");
+        else
+            return DataSource.s_products.Find(x => x.ID == id);
     }
-
+    
+    // A function that gets a new product and update the match product in the product list
     public void Uppdate(Product newProduct)
     {//Updates a product according to the ID
-        for (int i = 0; i < DataSource.s_products.Count; i++)
+        if (!DataSource.s_products.Exists(x => x.ID == newProduct.ID))
+            throw new DO.DalDoesNotExsist("product not exsist");
+        else
         {
-            if (DataSource.s_products[i].ID == newProduct.ID)
-            {
-                DataSource.s_products.Add(newProduct);
-                return;
-            }
+            DataSource.s_products.Remove(DataSource.s_products.Find(x=>x.ID==newProduct.ID));
+            DataSource.s_products.Add(newProduct);
         }
-        throw new DalDoesNotExsist("This product is not exsist");
     }
 
+    // A function that return all the product list
     public IEnumerable<Product> GetAll()
     {//Returns an array containing all products
 

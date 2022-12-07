@@ -32,17 +32,17 @@ partial class Program
             {
                 switch (menu)
                 {
-                    case 1:
-                    for(int i=0;i<10;i++)
+                case 1:
+                    for (int i = 0; i < 10; i++)
                     {
-                        for(int j=1;j<10;j++)
+                        for (int j = 1; j < 10; j++)
                         {
-                            for(int k=0;k<5;k++)
-                                Console.WriteLine("shop products:"+"   "+"list of all the products:"+"   ");
+                            for (int k = 0; k < 5; k++)
+                                Console.WriteLine("shop products:" + "   " + "list of all the products:" + "   ");
                         }
                     }
 
-                        Console.WriteLine(
+                    Console.WriteLine(
                             @"shop Menu:
 0- Add a new product
 1- Delete a product
