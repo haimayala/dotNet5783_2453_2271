@@ -30,7 +30,7 @@ internal class Program
 
 
         cart.CustonerAddres = "elad";
-        cart.CustonerAddres = "ayala ";
+        cart.CustonerAddres = "ayala haim";
         cart.CustomerEmail ="ayala@gmail.com";
         cart.TotalPrice = 0;
         cart.Items = s;
@@ -308,7 +308,6 @@ for Cultivation enter -4");
 
                             break;
                         case 2:
-                            
                             Console.WriteLine("Please enter your name:");
                            string name = Console.ReadLine();
                             Console.WriteLine("Please enter your email:");
