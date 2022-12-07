@@ -14,6 +14,7 @@ internal class DalOrder :IOrder
         else
         {
             newOrder.ID = DataSource.nextOrder;
+
             DataSource.s_orders.Add(newOrder);
             return newOrder.ID;
 
