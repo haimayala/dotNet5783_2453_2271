@@ -17,16 +17,7 @@ internal class Program
 
 
         List<OrderItem>s = new List<OrderItem>();   
-        for(int i=0;i<2;i++)
-        {
-            BO.OrderItem o = new()
-            {
-                ProductId = i,
-                Price = i,
-                TotalPrice = 0,
-            };
-            s.Add(o);
-        }
+       
 
 
         cart.CustonerAddres = "elad";

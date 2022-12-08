@@ -15,3 +15,9 @@ public class BlNotExsist : Exception
     public BlNotExsist(string? massage) : base(massage) { }
 }
 
+public class BlUncorrectDetails :Exception
+{
+	public BlUncorrectDetails(string? massage) : base(massage) { }
+	
+}
+

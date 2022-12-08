@@ -1,5 +1,8 @@
 ﻿
 using BlApi;
+using BO;
+using MailChimp.Net.Interfaces;
+
 namespace BlImplementation;
 
 internal class Cart : ICart
@@ -13,7 +16,7 @@ internal class Cart : ICart
         {
             DO.Product product = dal.Product.GetByID(ProductID);
 
-            BO.OrderItem? orderItem = cart.Items?.FirstOrDefault(item => item?.ProductId == ProductID);
+            BO.OrderItem orderItem = cart.Items.FirstOrDefault(item => item.ProductId == ProductID);
             if (orderItem != null)
             {
                 if (product.InStock > 0)
@@ -30,16 +33,15 @@ internal class Cart : ICart
                 {
                     BO.OrderItem newOrderItem = new BO.OrderItem()
                     {
-
+                        //Id = orderItem.Id,
                         ProductName = product.Name,
                         Price = (int)product.Price,
                         Amount = 1,
                         TotalPrice = product.Price,
                         ProductId = product.ID
                     };
-                    cart.Items = cart.Items.Append(newOrderItem);
+                    cart.Items.Add(newOrderItem);
                 }
-
             }
 
 
@@ -76,21 +78,27 @@ internal class Cart : ICart
                             product.InStock -= NewAmount - item.Amount;
                             item.Amount += NewAmount;
                             cart.TotalPrice += (NewAmount - item.Amount) * product.Price;
+                            return cart;
                         }
+                        else
+                            throw new BlNotEnoughInStock("Cannot add, Not enough in stock ");
 
                     }
                     // In the case of reducing the quantity
-                    else if (item.Amount > NewAmount)
+                    else if (item.Amount > NewAmount && NewAmount!=0)
                     {
                         product.InStock += item.Amount - NewAmount;
                         item.Amount -= NewAmount;
                         cart.TotalPrice -= (item.Amount - NewAmount) * product.Price;
+                        return cart;
                     }
                     //In case of deletion of the product
                     else if (NewAmount == 0)
                     {
                         cart.TotalPrice -= item.Price;
-                        dal.orderItem.Delete(item.Id);
+                        cart.Items.Remove(item);
+                        return cart;
+                        //dal.orderItem.Delete(item.Id);
                     }
                 }
             }
@@ -136,12 +144,11 @@ internal class Cart : ICart
                     };
 
                     dal.orderItem.Add(DoOrderItem);
-                    if (item.ProductId != 0 && item.ProductId != 1)
-                    {
-                        DO.Product updateProduct =dal.Product.GetByID(item.ProductId);
-                        updateProduct.InStock -= item.Amount;
-                        dal.Product.Uppdate(updateProduct);
-                    }
+
+                    DO.Product updateProduct = dal.Product.GetByID(item.ProductId);
+                    updateProduct.InStock -= item.Amount;
+                    dal.Product.Uppdate(updateProduct);
+
 
                 }
             }
@@ -153,7 +160,7 @@ internal class Cart : ICart
         }
         else
         {
-            throw new  BO.BlUnCorrectID("unncorect details");
+            throw new  BO.BlUncorrectDetails("unncorect details");
         }
     }
 
@@ -162,13 +169,11 @@ internal class Cart : ICart
     {
         foreach (var item in cart.Items)
         {
-            if (item.ProductId != 0 && item.ProductId != 1)
-            {
-                DO.Product doProduct = dal.Product.GetByID(item.ProductId);
-                if (doProduct.InStock < item.Amount || item.Amount < 0)
-                    return false;
 
-            }                          
+            DO.Product doProduct = dal.Product.GetByID(item.ProductId);
+            if (doProduct.InStock < item.Amount || item.Amount < 0)
+                return false;
+
         }
         return true;
     }
