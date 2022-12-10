@@ -17,7 +17,6 @@ internal class Program
 
 
         List<OrderItem>s = new List<OrderItem>();   
-       
 
 
         cart.CustonerAddres = "elad";
@@ -255,14 +254,7 @@ for Cultivation enter -4");
                     option2 = int.Parse(Console.ReadLine());
                     switch (option2)
                     {
-                        case 0:
-                           
-                            Console.WriteLine("Please enter your name:");
-                            cart.CustomerName = Console.ReadLine();
-                            Console.WriteLine("Please enter your email:");
-                            cart.CustomerEmail = Console.ReadLine();
-                            Console.WriteLine("Please enter your addres:");
-                            cart.CustonerAddres = Console.ReadLine();
+                        case 0:                          
                             Console.WriteLine("Please enter the product id you want to add");
                             int cId = int.Parse(Console.ReadLine());
                             try
@@ -276,13 +268,7 @@ for Cultivation enter -4");
                             }
                           
                             break;
-                        case 1:
-                            Console.WriteLine("Please enter your name:");
-                            cart.CustomerName = Console.ReadLine();
-                            Console.WriteLine("Please enter your email:");
-                            cart.CustomerEmail = Console.ReadLine();
-                            Console.WriteLine("Please enter your addres:");
-                            cart.CustonerAddres = Console.ReadLine();
+                        case 1:                         
                             Console.WriteLine("Please enter the product id you want to update the amount");
                             cId = int.Parse(Console.ReadLine());
                             Console.WriteLine("Please enter the new amount");
@@ -300,14 +286,14 @@ for Cultivation enter -4");
                             break;
                         case 2:
                             Console.WriteLine("Please enter your name:");
-                           string name = Console.ReadLine();
+                           cart.CustomerName = Console.ReadLine();
                             Console.WriteLine("Please enter your email:");
-                           string email = Console.ReadLine();
+                          cart.CustomerEmail = Console.ReadLine();
                             Console.WriteLine("Please enter your addres:");
-                            string addres = Console.ReadLine();
+                            cart.CustonerAddres = Console.ReadLine();
                             try
                             {
-                                bl.Cart.OrderConfirmation(cart, name, email, addres);
+                                bl.Cart.OrderConfirmation(cart);
                                 Console.WriteLine(cart);
                             }
                             catch (Exception e)

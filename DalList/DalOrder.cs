@@ -10,7 +10,7 @@ internal class DalOrder :IOrder
     {//the method adds an order to the order's arry 
         newOrder.ID = DataSource.nextOrder;
         if (DataSource.s_orders.Exists(x => x.ID == newOrder.ID))
-            throw new DalAllredyExsis("orer allredy exsist");
+            throw new DalAllredyExsisExeption("orer allredy exsist");
         else
         {
             newOrder.ID = DataSource.nextOrder;
@@ -26,7 +26,7 @@ internal class DalOrder :IOrder
     public void Delete(int id)
     {//The method deletes the order with the received ID
         if (DataSource.s_orders.Exists(x => x.ID == id))
-            throw new DalAllredyExsis("orer allredy exsist");
+            throw new DalAllredyExsisExeption("orer allredy exsist");
         else
         {
             DataSource.s_orders.Remove(DataSource.s_orders.Find(x => x.ID == id));           
@@ -37,7 +37,7 @@ internal class DalOrder :IOrder
     public Order GetByID(int id)
     {//Finds a order by ID
         if (!DataSource.s_orders.Exists(x => x.ID == id))
-            throw new DalDoesNotExsist("order not exist");
+            throw new DalDoesNotExsistExeption("order not exist");
         else
         {
             return DataSource.s_orders.Find(x => x.ID == id);
@@ -47,7 +47,7 @@ internal class DalOrder :IOrder
     public void Uppdate(Order newOrder)
     {//Updates a order according to the ID
         if (!DataSource.s_orders.Exists(x => x.ID == newOrder.ID))
-            throw new DalDoesNotExsist("order not exsist");
+            throw new DalDoesNotExsistExeption("order not exsist");
         else
         {
             DataSource.s_orders.Remove(DataSource.s_orders.Find(x => x.ID == newOrder.ID));

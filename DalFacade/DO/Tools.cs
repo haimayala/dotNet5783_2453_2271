@@ -14,15 +14,7 @@ public static class Tools
         string str = "";
         foreach (PropertyInfo item in  t.GetType().GetProperties())           
         {
-            str += "\n" + item.Name + " :";
-           if(item.GetValue(t, null) is IEnumerable<Object>)
-            {
-                IEnumerable<Object> list = (IEnumerable<Object>)item.GetValue(obj:t, null);
-                string s= string.Join(" ", list);
-                str += s;
-            }
-            else
-                str += item.GetValue(t, null);
+            str += item.Name + ":" + item.GetValue(t, null) + "\n";
         }
         return str+"\n";
     }

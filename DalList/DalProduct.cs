@@ -8,7 +8,7 @@ internal class DalProduct :IProduct
     public int Add(Product newProduct)
     {//the method adds a product to the products arry
        if(DataSource.s_products.Exists(x=>x.ID==newProduct.ID))
-            throw new DO.DalDoesNotExsist("product allredy exsist");
+            throw new DO.DalDoesNotExsistExeption("product allredy exsist");
        else
         {
             DataSource.s_products.Add(newProduct);
@@ -21,7 +21,7 @@ internal class DalProduct :IProduct
     public void Delete(int id)
     {//The method deletes the product with the received ID
         if (!DataSource.s_products.Exists(x => x.ID == id))
-            throw new DO.DalDoesNotExsist("product not exsist");
+            throw new DO.DalDoesNotExsistExeption("product not exsist");
         else
             DataSource.s_products.Remove(DataSource.s_products.Find(x => x.ID == id));
     }
@@ -30,7 +30,7 @@ internal class DalProduct :IProduct
     public Product GetByID(int id)
     {
         if (!DataSource.s_products.Exists(x => x.ID == id))
-            throw new DO.DalDoesNotExsist("product not exsist");
+            throw new DO.DalDoesNotExsistExeption("product not exsist");
         else
             return DataSource.s_products.Find(x => x.ID == id);
     }
@@ -39,7 +39,7 @@ internal class DalProduct :IProduct
     public void Uppdate(Product newProduct)
     {//Updates a product according to the ID
         if (!DataSource.s_products.Exists(x => x.ID == newProduct.ID))
-            throw new DO.DalDoesNotExsist("product not exsist");
+            throw new DO.DalDoesNotExsistExeption("product not exsist");
         else
         {
             DataSource.s_products.Remove(DataSource.s_products.Find(x=>x.ID==newProduct.ID));

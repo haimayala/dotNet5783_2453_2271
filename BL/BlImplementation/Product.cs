@@ -44,16 +44,16 @@ internal class Product : IProduct
                 };
                 return product;
             }
-            catch (DO.DalDoesNotExsist de)
+            catch (DO.DalDoesNotExsistExeption de)
             {
-                throw new DO.DalDoesNotExsist(" this product not exsist");
+                throw new DO.DalDoesNotExsistExeption(" this product not exsist");
             }
             // Constructing an object of type BO
            
         }
         else
         {
-            throw new BO.BlUnCorrectID("uncorrect id");
+            throw new BO.BlUnCorrectIDExeption("uncorrect id");
         }
         
     }
@@ -86,12 +86,12 @@ internal class Product : IProduct
             }
             else
             {
-                throw new BO.BlUnCorrectID("uncorrect id");
+                throw new BO.BlUnCorrectIDExeption("uncorrect id");
             }
         }
-        catch (DO.DalDoesNotExsist de)
+        catch (DO.DalDoesNotExsistExeption de)
         {
-            throw new DO.DalDoesNotExsist("product not exsist");
+            throw new DO.DalDoesNotExsistExeption("product not exsist");
         }
        
 
@@ -119,15 +119,15 @@ internal class Product : IProduct
             {
                 dal.Product.Add(prod);
             }
-            catch(DO.DalAllredyExsis de)
+            catch(DO.DalAllredyExsisExeption de)
             {
-                throw new DO.DalAllredyExsis("cannnot add, product allredy exsit");
+                throw new DO.DalAllredyExsisExeption("cannnot add, product allredy exsit");
             }
             
         }
         else
         {
-            throw new BlUnCorrectID("uncorrect details");
+            throw new BlUnCorrectIDExeption("uncorrect details");
         }
     }
 
@@ -145,14 +145,14 @@ internal class Product : IProduct
             {
                 dal.Product.Delete(ProductId);
             }
-           catch(DO.DalDoesNotExsist de)
+           catch(DO.DalDoesNotExsistExeption de)
             {
-                throw new DO.DalDoesNotExsist("cannot delete,product not exist");
+                throw new DO.DalDoesNotExsistExeption("cannot delete,product not exist");
             }
         }
         else
         {
-            throw new BlNotExsist("product not exsist");
+            throw new BlNotExsistExeption("product not exsist");
         }
     }
 
@@ -178,15 +178,15 @@ internal class Product : IProduct
             {
                 dal.Product.Uppdate(prod);
             }
-            catch (DO.DalDoesNotExsist de)
+            catch (DO.DalDoesNotExsistExeption de)
             {
-                throw new DO.DalDoesNotExsist("cannot uppdate, product not exsist");
+                throw new DO.DalDoesNotExsistExeption("cannot uppdate, product not exsist");
             }
             
         }
         else
         {
-            throw new BlUnCorrectID("uncorrect details");
+            throw new BlUnCorrectIDExeption("uncorrect details");
         }
     }
 

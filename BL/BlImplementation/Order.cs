@@ -53,13 +53,13 @@ internal class Order : IOrder
                     TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
                 };
             }
-           catch (DO.DalDoesNotExsist de)
+           catch (DO.DalDoesNotExsistExeption de)
             {
-                throw new DO.DalDoesNotExsist("cannot get, order not exsist");
+                throw new DO.DalDoesNotExsistExeption("cannot get, order not exsist");
             }
         }
         else
-            throw new BlUnCorrectID("unncorrect id");
+            throw new BlUnCorrectIDExeption("unncorrect id");
     }
 
     /* A function that gets a order id and in case of correct input 
@@ -93,9 +93,9 @@ internal class Order : IOrder
                 throw new Exception("order allredy shipped");
             }
         }
-       catch (DO.DalDoesNotExsist de)
+       catch (DO.DalDoesNotExsistExeption de)
         {
-            throw new DO.DalDoesNotExsist("cannot5 uppdate, order not exsist");
+            throw new DO.DalDoesNotExsistExeption("cannot5 uppdate, order not exsist");
         }
         
       
@@ -127,9 +127,9 @@ internal class Order : IOrder
                     TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
                 };
             }
-            catch (DO.DalDoesNotExsist de)
+            catch (DO.DalDoesNotExsistExeption de)
             {
-                throw new DO.DalDoesNotExsist("Cannot update, order not exist");
+                throw new DO.DalDoesNotExsistExeption("Cannot update, order not exist");
             }
            
         }
@@ -154,9 +154,9 @@ internal class Order : IOrder
                 new Tuple<DateTime, string>(order.DeliveryDate, "The order has been delivered") }
             };
         }
-        catch (DO.DalDoesNotExsist de)
+        catch (DO.DalDoesNotExsistExeption de)
         {
-            throw new DO.DalDoesNotExsist("Cannot update, order not exist");
+            throw new DO.DalDoesNotExsistExeption("Cannot update, order not exist");
         }
     }
 

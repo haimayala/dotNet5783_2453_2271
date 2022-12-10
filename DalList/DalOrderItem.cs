@@ -10,7 +10,7 @@ internal class DalOrderItem : IOrderItem
     {
         // check if the ordder item is allredy exsist in the oreritem list
         if (DataSource.s_orderItems.Exists(x => x.ID == newOrderItem.ID))
-            throw new DalAllredyExsis("order item allredy exsist");
+            throw new DalAllredyExsisExeption("order item allredy exsist");
         else
         {
            //still not exsist
@@ -26,7 +26,7 @@ internal class DalOrderItem : IOrderItem
     {
         // check if the order otemexist in the list
         if (!DataSource.s_orderItems.Exists(x => x.ID == id))
-            throw new DalDoesNotExsist("orderItem not exsist");
+            throw new DalDoesNotExsistExeption("orderItem not exsist");
         else
         {
             DataSource.s_products.Remove(DataSource.s_products.Find(x => x.ID == id));
@@ -38,7 +38,7 @@ internal class DalOrderItem : IOrderItem
     {
         // check if the orer itm exsist in the list
         if (!DataSource.s_orderItems.Exists(x => x.ID == id))
-            throw new DalDoesNotExsist("orderItem notexsist");
+            throw new DalDoesNotExsistExeption("orderItem notexsist");
         else
         {
             return DataSource.s_orderItems.Find(x => x.ID == id);
@@ -49,7 +49,7 @@ internal class DalOrderItem : IOrderItem
     public void Uppdate(OrderItem newOrderItem)
     {//Updates a orderItem according to the ID
         if (!DataSource.s_orderItems.Exists(x => x.ID == newOrderItem.ID))
-            throw new DalDoesNotExsist("odetItem not exsist");
+            throw new DalDoesNotExsistExeption("odetItem not exsist");
         else
         {
             DataSource.s_orderItems.Remove(DataSource.s_orderItems.Find(x=>x.ID==newOrderItem.ID));

@@ -48,9 +48,9 @@ internal class Cart : ICart
             cart.TotalPrice += product.Price;
             return cart;
         }
-        catch(DO.DalDoesNotExsist de)
+        catch(DO.DalDoesNotExsistExeption de)
         {
-            throw new DO.DalDoesNotExsist(" product not exsist");
+            throw new DO.DalDoesNotExsistExeption(" product not exsist");
         }
         
     }
@@ -81,7 +81,7 @@ internal class Cart : ICart
                             return cart;
                         }
                         else
-                            throw new BlNotEnoughInStock("Cannot add, Not enough in stock ");
+                            throw new BlNotEnoughInStockExeption("Cannot add, Not enough in stock ");
 
                     }
                     // In the case of reducing the quantity
@@ -104,9 +104,9 @@ internal class Cart : ICart
             }
             return cart;
         }
-        catch (DO.DalDoesNotExsist de)
+        catch (DO.DalDoesNotExsistExeption de)
         {
-            throw new DO.DalDoesNotExsist("product not exsist");
+            throw new DO.DalDoesNotExsistExeption("product not exsist");
         }
 
 
@@ -114,17 +114,26 @@ internal class Cart : ICart
     }
 
     //A function that places the order that is in the customer's shopping cart
-    public void OrderConfirmation(BO.Cart cart, string CusName, string CusEmail, string CusAddres)
+    public void OrderConfirmation(BO.Cart cart)
     {
-        //Data integrity check
-        if (CusName != "" && CusEmail != "" && CusAddres != "" && CheckData(cart) == true)
-        {
-            
-            DO.Order doOrder = new DO.Order()
+       // check if the customer email is correct
+        string s = cart.CustomerEmail;
+        if (!s.Contains('@') || s.IndexOf('@') ==0|| s.IndexOf('@') == s.Length)
+            throw new BlUncorrectEmailExeption("uncorrect email");
+        // check if the customer name is correct
+        if (cart.CustomerName == "")
+            throw new BlUncorrectName("uncorrect name");
+        // check if the customer addres is correct
+        if (cart.CustonerAddres == "")
+            throw new BlUncorrectAddres("uncorrect addres");
+        if (!CheckData(cart))
+            throw new BlUncorrectDetailsExeption("uncorrecr details");
+        //make a order entity
+        DO.Order doOrder = new DO.Order()
             {
-                CustomerName = CusName,
-                CustomerAdress = CusAddres,
-                CustomerEmail = CusEmail,
+                CustomerName = cart.CustomerName,
+                CustomerAdress = cart.CustomerEmail,
+                CustomerEmail =cart.CustonerAddres,
                 OrderDate = DateTime.Now,
                 ShipDate = DateTime.MinValue,
                 DeliveryDate = DateTime.MinValue,
@@ -152,16 +161,12 @@ internal class Cart : ICart
 
                 }
             }
-            catch (DO.DalDoesNotExsist de)
+            catch (DO.DalDoesNotExsistExeption de)
             {
-                throw new DO.DalDoesNotExsist("order item not exsist");
+                throw new DO.DalDoesNotExsistExeption("order item not exsist");
             }
-           
-        }
-        else
-        {
-            throw new  BO.BlUncorrectDetails("unncorect details");
-        }
+        
+       
     }
 
     // A help functioin that ckeck that all the data cart are correct

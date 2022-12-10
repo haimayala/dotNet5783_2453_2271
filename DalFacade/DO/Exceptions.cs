@@ -2,15 +2,15 @@
 
 namespace DO;
 
-public class DalDoesNotExsist :Exception
+public class DalDoesNotExsistExeption : Exception
 {
-	public DalDoesNotExsist(string? msg): base(msg) { }
+	public DalDoesNotExsistExeption(string? msg): base(msg) { }
 	
 }
 
-public class DalAllredyExsis : Exception
+public class DalAllredyExsisExeption : Exception
 {
-    public DalAllredyExsis(string? msg) : base(msg) { }
+    public DalAllredyExsisExeption(string? msg) : base(msg) { }
 
 }
 

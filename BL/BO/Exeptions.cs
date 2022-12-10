@@ -1,23 +1,40 @@
 ﻿
 namespace BO;
-public class BlUnCorrectID : Exception
+public class BlUnCorrectIDExeption : Exception
 {
-	public BlUnCorrectID(string?message) : base(message) { }
+	public BlUnCorrectIDExeption(string?message) : base(message) { }
 }
 
-public class BlNotEnoughInStock :Exception
+public class BlNotEnoughInStockExeption : Exception
 {
-	public BlNotEnoughInStock(string? massage) : base(massage) { }
+	public BlNotEnoughInStockExeption(string? massage) : base(massage) { }
 }
 
-public class BlNotExsist : Exception
+public class BlNotExsistExeption : Exception
 {
-    public BlNotExsist(string? massage) : base(massage) { }
+    public BlNotExsistExeption(string? massage) : base(massage) { }
 }
 
-public class BlUncorrectDetails :Exception
+public class BlUncorrectDetailsExeption : Exception
 {
-	public BlUncorrectDetails(string? massage) : base(massage) { }
+	public BlUncorrectDetailsExeption(string? massage) : base(massage) { }
 	
+}
+
+public class BlUncorrectEmailExeption : Exception
+{
+    public BlUncorrectEmailExeption(string? massage) : base(massage) { }
+
+}
+
+public class BlUncorrectName : Exception
+{
+    public BlUncorrectName(string? massage) : base(massage) { }
+
+}
+public class BlUncorrectAddres : Exception
+{
+    public BlUncorrectAddres(string? massage) : base(massage) { }
+
 }
 

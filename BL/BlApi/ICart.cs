@@ -18,5 +18,5 @@ public interface ICart
     /*
      Avoid function thet confirms the order, Checks order integrity and product quantities
     and confirms or throws an exception accordingly*/     
-    public void OrderConfirmation (Cart cart, string CusName,string CusEmail,string CusAddres);   
+    public void OrderConfirmation (Cart cart);   
 }
