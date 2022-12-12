@@ -16,29 +16,20 @@ public struct Order
     }
     public int ID { get; set; }
     
-    public string CustomerName { get; set; }    
+    public string? CustomerName { get; set; }    
     
-    public string CustomerEmail { get; set; }   
+    public string? CustomerEmail { get; set; }   
     
-    public string CustomerAdress { get; set; }  
+    public string? CustomerAdress { get; set; }  
    
-    public DateTime OrderDate { get; set; } =DateTime.MinValue;
-    public DateTime ShipDate { get; set; } =DateTime.MinValue;  
+    public DateTime? OrderDate { get; set; } =null;
+    public DateTime? ShipDate { get; set; } =null;  
    
-    public DateTime DeliveryDate { get; set; } =DateTime.MinValue;
+    public DateTime? DeliveryDate { get; set; } =null;
 
     public override string ToString()
     {
         return this.ToStringProperty();
     }
 
-    //public override string ToString() => $@"
-    //ID:  {ID},
-    //CustomerName:  {CustomerName},
-    //CustomerEmail:  {CustomerEmail},
-    //CustomerAdress:  {CustomerAdress},
-    //OrderDate:  {OrderDate},
-    //ShipDate:  {ShipDate},
-    //DeliveryDate:  {DeliveryDate},
-    //";
 }

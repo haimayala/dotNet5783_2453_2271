@@ -15,12 +15,5 @@ public struct OrderItem
         return this.ToStringProperty();
     }
 
-    //    public override string ToString() => $@"
-    //ID:  {ID},
-    //ProductID:  {ProductID},
-    //OrderID:  {OrderID},
-    //Price:  {Price},
-    //Amount:  {Amount}
-    //";
-
+   
 }

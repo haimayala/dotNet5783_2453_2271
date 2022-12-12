@@ -10,7 +10,7 @@ internal class Product : IProduct
     DalApi.IDal dal = new Dal.DalList();
 
     // A function that shows the manager a list of products
-    public IEnumerable<BO.ProductForList?> GetListedProducts()
+    public IEnumerable<BO.ProductForList?>? GetListedProducts()
     {
         // get the list of products from the data layer
         return from DO.Product? doProduct in dal.Product.GetAll()

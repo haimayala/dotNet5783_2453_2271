@@ -15,17 +15,9 @@ static internal class DataSource
 
     static readonly Random s_rand = new Random();
 
-    static internal List<Product> s_products = new List<Product>();
-    static internal List<Order> s_orders = new List<Order>();
-    static internal List<OrderItem> s_orderItems = new List<OrderItem>();    
-
-    ////counterד for the arrays
-
-    //static internal int _numOfOrders = 0;
-    //static internal int _numOfOrderItems = 0;
-    //static internal int _numOfProducts = 0;
-
-
+    static internal List<Product?> s_products = new List<Product?>();
+    static internal List<Order?> s_orders = new List<Order?>();
+    static internal List<OrderItem?> s_orderItems = new List<OrderItem?>();    
 
     // run number for order class
 
@@ -64,7 +56,7 @@ static internal class DataSource
             {
                 for (int j = 0; j < s_products.Count; j++)
                 {
-                    if (s_products[j].ID == myProduct.ID)
+                    if (s_products[j]?.ID == myProduct.ID)
                         myProduct.ID = s_rand.Next(100000, 999999);
                     else
                         counter++;
@@ -152,9 +144,9 @@ static internal class DataSource
             }
             myOrder.OrderDate = DateTime.Now;
             if (i <= 0.8 * 20)
-                myOrder.DeliveryDate = myOrder.OrderDate.AddDays(2);
+                myOrder.DeliveryDate = myOrder.OrderDate?.AddDays(2);
             if (i <= 0.6 * 20)
-                myOrder.ShipDate = myOrder.ShipDate.AddHours(24);
+                myOrder.ShipDate = myOrder.ShipDate?.AddHours(24);
             s_orders.Add(myOrder);
             
         }
@@ -177,14 +169,15 @@ static internal class DataSource
                 if (stopCounter >= 40)
                     break;
                 stopCounter++;
-                Product p = s_products[s_rand.Next(9)];
+                
+                Product? p = s_products[s_rand.Next(9)];
                 OrderItem myOrderItem = new OrderItem
                 {
                     Amount = amount,
-                    Price = p.Price * amount,
+                    Price = (double)p?.Price! * amount,
                     ID = nextOrderItem,
-                    OrderID = s_orders[counter].ID,
-                    ProductID = p.ID,
+                    OrderID = (int)s_orders[counter]?.ID!,
+                    ProductID =(int) p?.ID!,
                 };
                 s_orderItems.Add(myOrderItem);  
             }

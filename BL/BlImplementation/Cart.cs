@@ -1,7 +1,7 @@
 ﻿
 using BlApi;
 using BO;
-using MailChimp.Net.Interfaces;
+
 
 namespace BlImplementation;
 

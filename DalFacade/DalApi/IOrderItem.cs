@@ -10,5 +10,5 @@ namespace DalApi;
 public interface IOrderItem : ICrud <OrderItem>
 {
     public OrderItem GetByProductAndOrder(int p, int or);
-    public IEnumerable<OrderItem> GetByOrderId(int id);
+    public IEnumerable<OrderItem?> GetByOrderId(int id);
 }
