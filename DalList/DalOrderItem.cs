@@ -70,15 +70,19 @@ internal class DalOrderItem : IOrderItem
     public IEnumerable<OrderItem?> GetByOrderId(int id)
     {//The method returns an array of all the items of the order with the received ID
 
-        List<OrderItem?> list= new List<OrderItem?>();
-        for (int i = 0; i < DataSource.s_orderItems.Count; i++)
-        {
-            if (DataSource.s_orderItems[i]?.OrderID == id)
-            {
-                list.Add(DataSource.s_orderItems[i]);
-            }
-        }
-        return list;
+
+
+        return DataSource.s_orderItems.ToList().Where(item=>item?.OrderID==id).Select(item=>item);  
+            
+        //List<OrderItem?> list= new List<OrderItem?>();
+        //for (int i = 0; i < DataSource.s_orderItems.Count; i++)
+        //{
+        //    if (DataSource.s_orderItems[i]?.OrderID == id)
+        //    {
+        //        list.Add(DataSource.s_orderItems[i]);
+        //    }
+        //}
+        //return list;
         
     }
 

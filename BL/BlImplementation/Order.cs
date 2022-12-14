@@ -12,17 +12,17 @@ internal class Order : IOrder
     ////  A function that show all the orders to the manager
     public IEnumerable<OrderForList?> GetLitedOrders()
     {
-        IEnumerable<DO.Order> orders = dal.order.GetAll();
-        IEnumerable<DO.OrderItem> items = dal.orderItem.GetAll();
+        IEnumerable<DO.Order?> orders = dal.order.GetAll();
+        IEnumerable<DO.OrderItem?> items = dal.orderItem.GetAll();
         return from DO.Order item in orders
-               let orderItems = items.Where(items => items.OrderID == item.ID)
+               let orderItems = items.Where(items => items?.OrderID == item.ID)
                select new BO.OrderForList()
                {
                    ID = item.ID,
                    CustomerName = item.CustomerName,
                    Status = GetStatus(item),
                    ProductAmount = orderItems.Count(),
-                   TotalPrice =orderItems.Sum(items =>/* items.Amount **/ items.Price)
+                   TotalPrice =orderItems.Sum(items => (int)items?.Amount! * (int)items?.Price!)
                };
     }
 
@@ -36,7 +36,7 @@ internal class Order : IOrder
             try
             {
                 DO.Order order = dal.order.GetByID(OrderId);
-                IEnumerable<DO.OrderItem?>? items = dal.orderItem.GetByOrderId(OrderId);
+                IEnumerable<DO.OrderItem?> items = dal.orderItem.GetByOrderId(OrderId);
                 Console.WriteLine(items.Count());
                 return new BO.Order
                 {
@@ -48,8 +48,8 @@ internal class Order : IOrder
                     OrderDate = order.OrderDate,
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
-                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
-                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
+                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x?.OrderID == order.ID)),
+                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x?.OrderID == order.ID)).Sum(x => x.TotalPrice)
                 };
             }
            catch (DO.DalDoesNotExsistExeption de)
@@ -71,7 +71,7 @@ internal class Order : IOrder
             if (order.ShipDate < DateTime.Now)
             {
                 order.ShipDate = DateTime.Now;
-                IEnumerable<DO.OrderItem?>? items = dal.orderItem.GetByOrderId(OrderId);
+                IEnumerable<DO.OrderItem?> items = dal.orderItem.GetByOrderId(OrderId);
                 return new BO.Order
                 {
                     ID = order.ID,
@@ -82,8 +82,8 @@ internal class Order : IOrder
                     OrderDate = order.OrderDate,
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
-                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
-                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
+                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x?.OrderID == order.ID)),
+                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x?.OrderID == order.ID)).Sum(x => x.TotalPrice)
                 };
             }
             else
@@ -109,7 +109,7 @@ internal class Order : IOrder
             order.DeliveryDate = DateTime.Now;
             try
             {
-                IEnumerable<DO.OrderItem?>? items = dal.orderItem.GetByOrderId(OrderId);
+                IEnumerable<DO.OrderItem?> items = dal.orderItem.GetByOrderId(OrderId);
                 return new BO.Order
                 {
                     ID = order.ID,
@@ -120,8 +120,8 @@ internal class Order : IOrder
                     OrderDate = order.OrderDate,
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
-                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)),
-                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x.OrderID == order.ID)).Sum(x => x.TotalPrice)
+                    Items = GetOrderItems(dal.orderItem.GetAll().Where(x => x?.OrderID == order.ID)),
+                    TotalPrice = GetOrderItems(dal.orderItem.GetAll().Where(x => x?.OrderID == order.ID)).Sum(x => x.TotalPrice)
                 };
             }
             catch (DO.DalDoesNotExsistExeption de)
@@ -146,9 +146,9 @@ internal class Order : IOrder
             {
                 Id = order.ID,
                 Status = GetStatus(order),
-               Trecking= new List<Tuple<DateTime, string>>() { new Tuple<DateTime, string>(order.OrderDate,"order date" ),
-              new Tuple<DateTime, string>(order.ShipDate,"ship date" ),
-              new Tuple<DateTime, string>(order.DeliveryDate,"delivery date" )
+               Trecking= new List<Tuple<DateTime?, string>>() { new Tuple<DateTime?, string>(order.OrderDate,"order date" ),
+              new Tuple<DateTime?, string>(order.ShipDate,"ship date" ),
+              new Tuple<DateTime?, string>(order.DeliveryDate,"delivery date" )
                }
             };
         }
@@ -170,7 +170,7 @@ internal class Order : IOrder
     }
 
     //A helpfuntion that return the match BO orderr items to the DO order items
-    private IEnumerable<BO.OrderItem> GetOrderItems(IEnumerable<DO.OrderItem> itemList)
+    private IEnumerable<BO.OrderItem?> GetOrderItems(IEnumerable<DO.OrderItem?> itemList)
     {
         return from DO.OrderItem items in itemList
                select new BO.OrderItem()

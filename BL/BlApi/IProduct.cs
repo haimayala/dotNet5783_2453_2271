@@ -7,7 +7,7 @@ public interface IProduct
 { 
 
     // A function that shows the manager a list of products
-   public IEnumerable<BO.ProductForList?> GetListedProducts();
+   public IEnumerable<BO.ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? func=null);
 
     //A function that shows the product details to the manager based on a product code
     public BO.Product GetProductById(int productId);

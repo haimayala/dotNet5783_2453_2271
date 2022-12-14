@@ -1,10 +1,12 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -20,9 +22,17 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IBl bl = new BlImplementation.Bl();
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void Press_here_Click(object sender, RoutedEventArgs e)
+        {
+            ShowProductsButton_Click(sender, e);
+        }
+
+        private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new Window1().Show();
     }
 }

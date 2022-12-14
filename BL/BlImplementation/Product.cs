@@ -10,23 +10,24 @@ internal class Product : IProduct
     DalApi.IDal dal = new Dal.DalList();
 
     // A function that shows the manager a list of products
-    public IEnumerable<BO.ProductForList?>? GetListedProducts()
+    public IEnumerable<ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? func )
     {
         // get the list of products from the data layer
-        return from DO.Product? doProduct in dal.Product.GetAll()
+        IEnumerable<BO.ProductForList?> list= from DO.Product? doProduct in dal.Product.GetAll()
                select new BO.ProductForList
                {
-                   Id = (int)(doProduct?.ID),
+                   Id = (int)(doProduct?.ID)!,
                    Name = doProduct?.Name,
-                   category = (Enums.Category)(doProduct?.Category),
-                   Price = (int)(doProduct?.Price)
+                   category = (Enums.Category)(doProduct?.Category)!,
+                   Price = (int)(doProduct?.Price)!
                };
+        return func is null ? list : list.Where(func);
     }
 
-   // A function that shows the product details to the manager based on a product code
-    public BO.Product GetProductById(int productId )
+    // A function that shows the product details to the manager based on a product code
+    public BO.Product GetProductById(int productId)
     {
-       
+
         if (productId > 0)
         {
             //try to get the product from the data layer
@@ -39,7 +40,7 @@ internal class Product : IProduct
                     ID = prod.ID,
                     Name = prod.Name,
                     InStock = prod.InStock,
-                    Category = (Enums.Category)prod.Category,
+                    Category = (Enums.Category)prod.Category!,
                     Price = prod.Price
                 };
                 return product;
@@ -49,13 +50,13 @@ internal class Product : IProduct
                 throw new DO.DalDoesNotExsistExeption(" this product not exsist");
             }
             // Constructing an object of type BO
-           
+
         }
         else
         {
             throw new BO.BlUnCorrectIDExeption("uncorrect id");
         }
-        
+
     }
 
     // A function that gets a product id and shopping cart, the function show the buyer the product details
@@ -73,7 +74,7 @@ internal class Product : IProduct
                 {
                     ID = product.ID,
                     Name = product.Name,
-                    Category = (Enums.Category)product.Category,
+                    Category = (Enums.Category)product.Category!,
                     Price = (int)product.Price,
                 };
                 if (product.InStock > 0)
@@ -93,7 +94,7 @@ internal class Product : IProduct
         {
             throw new DO.DalDoesNotExsistExeption("product not exsist");
         }
-       
+
 
     }
 
@@ -102,7 +103,7 @@ internal class Product : IProduct
     public void Add(BO.Product product)//Copy the respective fields
     {
         // Checks that all data is correct
-        if (product.ID>0 && product.Name!="" && product.InStock>0)
+        if (product.ID > 0 && product.Name != "" && product.InStock > 0)
         {
             // Creating an product that belongs to the data layer 
             DO.Product prod = new DO.Product()
@@ -111,7 +112,7 @@ internal class Product : IProduct
                 Price = product.Price,
                 Name = product.Name,
                 InStock = product.InStock,
-                Category = product.Category,
+                Category = (DO.Enums.Category?)product.Category,
                 ID = product.ID
             };
             // add the DO product
@@ -119,11 +120,11 @@ internal class Product : IProduct
             {
                 dal.Product.Add(prod);
             }
-            catch(DO.DalAllredyExsisExeption de)
+            catch (DO.DalAllredyExsisExeption de)
             {
                 throw new DO.DalAllredyExsisExeption("cannnot add, product allredy exsit");
             }
-            
+
         }
         else
         {
@@ -139,13 +140,13 @@ internal class Product : IProduct
         // get all the orders from the data layer
         IEnumerable<DO.Order> orders = (IEnumerable<DO.Order>)dal.order.GetAll();
         // check if the product not exsist in any order
-       if( CheckExsist(orders ,ProductId)==true)
+        if (CheckExsist(orders, ProductId) == true)
         {
             try
             {
                 dal.Product.Delete(ProductId);
             }
-           catch(DO.DalDoesNotExsistExeption de)
+            catch (DO.DalDoesNotExsistExeption de)
             {
                 throw new DO.DalDoesNotExsistExeption("cannot delete,product not exist");
             }
@@ -162,8 +163,8 @@ internal class Product : IProduct
     public void Uppdate(BO.Product product)
     {
         // Checks that all data is correct
-        if (product.ID>0 && product.Name!= "" && product.InStock>0 && product.Price>0)
-        { 
+        if (product.ID > 0 && product.Name != "" && product.InStock > 0 && product.Price > 0)
+        {
             //Copy the respective fields
             DO.Product prod = new DO.Product
             {
@@ -171,7 +172,7 @@ internal class Product : IProduct
                 Name = product.Name,
                 InStock = product.InStock,
                 ID = product.ID,
-                Category = product.Category,
+                Category = (DO.Enums.Category?)product.Category,
             };
             //uppdate the DO product
             try
@@ -182,7 +183,7 @@ internal class Product : IProduct
             {
                 throw new DO.DalDoesNotExsistExeption("cannot uppdate, product not exsist");
             }
-            
+
         }
         else
         {
@@ -190,9 +191,9 @@ internal class Product : IProduct
         }
     }
 
-   
+
     // a help function for checking that the product not exsist in any order for delee
-    private bool CheckExsist(IEnumerable<DO.Order> orders , int productId)
+    private bool CheckExsist(IEnumerable<DO.Order> orders, int productId)
     {
         foreach (DO.Order order in orders)
         {
@@ -208,4 +209,3 @@ internal class Product : IProduct
 
     
 }
-

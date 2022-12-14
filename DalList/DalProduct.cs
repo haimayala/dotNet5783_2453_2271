@@ -10,7 +10,7 @@ internal class DalProduct :IProduct
     public int Add(Product newProduct)
     {//the method adds a product to the products arry
        if(DataSource.s_products.Exists(x=>x?.ID==newProduct.ID))
-            throw new DO.DalDoesNotExsistExeption("product allredy exsist");
+            throw new DalDoesNotExsistExeption("product allredy exsist");
        else
         {
             DataSource.s_products.Add(newProduct);

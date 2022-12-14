@@ -17,11 +17,13 @@ public class Enums
     //All the categories of the products in the store
     public enum Category
     {
+       
         Animals,
         Food,
         Equipment,
         Games,
         Cultivation,
+        None,
     }
 
 }
