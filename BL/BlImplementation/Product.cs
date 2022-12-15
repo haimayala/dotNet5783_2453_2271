@@ -120,15 +120,19 @@ internal class Product : IProduct
             {
                 dal.Product.Add(prod);
             }
-            catch (DO.DalAllredyExsisExeption de)
+            catch (DO.DalAllredyExsisExeption)
             {
                 throw new DO.DalAllredyExsisExeption("cannnot add, product allredy exsit");
             }
 
         }
-        else
+        else if(product.ID <=0)
         {
             throw new BlUnCorrectIDExeption("uncorrect details");
+        }
+        else if(product.Name=="")
+        {
+            throw new BlUncorrectName("uncorrect details");
         }
     }
 
@@ -187,7 +191,7 @@ internal class Product : IProduct
         }
         else
         {
-            throw new BlUnCorrectIDExeption("uncorrect details");
+            throw new BlUncorrectDetailsExeption("uncorrect details");
         }
     }
 

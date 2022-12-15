@@ -7,7 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnPres" Content="Wellcome" HorizontalAlignment="Left" Margin="228,104,0,0" VerticalAlignment="Top" Background="#FF2CEADB" Click="Press_here_Click"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF248487" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid>
+            
+
+
+        </Grid>
+        <Button x:Name="btnPres" Content="Wellcome" HorizontalAlignment="Left" Margin="594,331,0,0" VerticalAlignment="Top" Click="Press_here_Click" Height="63" Width="173" BorderBrush="#FF707070" Background="#FF2AEED1"/>
+
 
     </Grid>
+
 </Window>

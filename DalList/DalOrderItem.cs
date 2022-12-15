@@ -86,6 +86,11 @@ internal class DalOrderItem : IOrderItem
         
     }
 
+    public OrderItem GetItem(Func<OrderItem?, bool>? func)
+    {
+        return DataSource.s_orderItems.FirstOrDefault(item => func(item)) ?? throw new DalDoesNotExsistExeption("order item not exist");
+    }
+
 }
 
 

@@ -31,11 +31,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <Button Content="Add new Product"  Margin="0,196,32,264" HorizontalAlignment="Right"  Padding="5" Width="228" Grid.Column="1" Click="Button_Click" RenderTransformOrigin="0.508,1.291"/>
+            <Button x:Name="btnAddProduct" Content="Add new Product"  Margin="0,545,32,20" HorizontalAlignment="Right"  Padding="5" Width="168" Grid.Column="1" Click="Button_Click" RenderTransformOrigin="0.508,1.291" Background="#FFF17070"/>
 
 
 
-            <ComboBox x:Name="CategorySelector" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" Margin="168,96,32,470" />
+            <ComboBox x:Name="CategorySelector" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" Margin="261,47,32,539" BorderBrush="#FFF18787" >
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FF2BD726" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
             <Label x:Name="Products" Content="Products" HorizontalAlignment="Left"  Grid.Column="0"    Margin="10,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.218,-5.841"/>
         </Grid>
     </Grid>

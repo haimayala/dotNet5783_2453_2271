@@ -18,7 +18,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="2022-12-06 %281%29.png" />
+    <None Remove="cc7-1024x685.jpg" />
+    <None Remove="IMG-20221202-WA0032.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="2022-12-06 (1).png" />
+    <Resource Include="cc7-1024x685.jpg" />
+    <Resource Include="IMG-20221202-WA0032.jpg" />
   </ItemGroup>
 
 </Project>

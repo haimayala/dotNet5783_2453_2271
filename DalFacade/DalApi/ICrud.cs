@@ -16,5 +16,5 @@ public interface ICrud<T> where T : struct
     public void Uppdate(T obj);
     public IEnumerable <T?> GetAll(Func<T?, bool>? func=null);
 
-    //public T GetItem(Func<T?, bool>? func);
+    public T GetItem(Func<T?, bool>? func);
 }

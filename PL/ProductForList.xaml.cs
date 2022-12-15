@@ -28,9 +28,6 @@ namespace PL
             InitializeComponent();
             ProductListView.ItemsSource = bl.Product.GetListedProducts();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-
-
-
         }
 
         
@@ -46,16 +43,18 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ShowProductsButton_Click(sender, e);
+            new Product().ShowDialog();
+            ProductListView.ItemsSource = bl.Product.GetListedProducts().OrderBy(item=>item.Id);
         }
-        private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new Product().Show();
+       
 
         private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
             int id = ((ProductForList)ProductListView.SelectedItem).Id;
             new Product(id).ShowDialog();
-            ShowProductsButton_Click(sender, e);
+            ProductListView.ItemsSource=bl.Product.GetListedProducts().OrderBy(item => item.Id); 
+
            
         }
     }
