@@ -6,19 +6,40 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Product" Height="450" Width="800">
-    
+
     <Grid>
-        <Label x:Name="IDAddLabel" Content="ID:" HorizontalAlignment="Left" Margin="56,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.003,0.51"/>
-        <Label x:Name="CategortyAddLabel" Content="Categorty:" HorizontalAlignment="Left" Margin="51,79,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="NameAddLabel" Content="Name:" HorizontalAlignment="Left" Margin="53,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.098,0.574"/>
-        <Label x:Name="PriceAddLabel" Content="Price:" HorizontalAlignment="Left" Margin="56,131,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="InStockAddLabel" Content="In Stock:" HorizontalAlignment="Left" Margin="56,157,0,0" VerticalAlignment="Top"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/tttdog.png"/>
+        </Grid.Background>
+        <Label x:Name="IDAddLabel" Content="ID:" HorizontalAlignment="Left" Margin="56,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.003,0.51" FontWeight="Bold" FontFamily="Aharoni"/>
+        <Label x:Name="CategortyAddLabel" Content="Categorty:" HorizontalAlignment="Left" Margin="51,79,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Segoe UI Black"/>
+        <Label x:Name="NameAddLabel" Content="Name:" HorizontalAlignment="Left" Margin="53,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.098,0.574" FontWeight="Bold" FontFamily="Segoe UI Black"/>
+        <Label x:Name="PriceAddLabel" Content="Price:" HorizontalAlignment="Left" Margin="56,131,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Segoe UI Black"/>
+        <Label x:Name="InStockAddLabel" Content="In Stock:" HorizontalAlignment="Left" Margin="56,157,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontWeight="Bold">
+            <Label.Background>
+                <ImageBrush/>
+            </Label.Background>
+        </Label>
         <TextBox x:Name="IDTextBoxAdd" HorizontalAlignment="Left" Margin="128,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="CategoryAdd" HorizontalAlignment="Left" Margin="128,86,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="NameTextBoxAdd" HorizontalAlignment="Left" Margin="128,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="PriceTextBoxAdd" HorizontalAlignment="Left" Margin="128,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="InStockTextBoxAdd" HorizontalAlignment="Left" Margin="128,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnAddOrUpdate" Content=" " HorizontalAlignment="Left" Margin="85,244,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click" Height="41" Width="55"/>
+        <Button x:Name="btnAddOrUpdate" Content=" " HorizontalAlignment="Left" Margin="41,387,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click" Height="25" Width="72" Background="White" FontWeight="Bold" FontSize="16"/>
+        <Image HorizontalAlignment="Left" Height="52" Margin="716,348,0,0" VerticalAlignment="Top" Width="65" Source="/logo.png"/>
+       
+        <TextBlock HorizontalAlignment="Left" Margin="664,400,0,0" TextWrapping="Wrap" Text="petshop@gmail.com" VerticalAlignment="Top" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="359.513"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
+
 
 
     </Grid>

@@ -8,17 +8,34 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF248487" Offset="1"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="/tdog.png"/>
         </Grid.Background>
         <Grid>
-            
+
+
+
+            <Image HorizontalAlignment="Left" Height="35" Margin="31,362,0,0" VerticalAlignment="Top" Width="118" Source="/logo.png"/>
+
+
+            <TextBlock HorizontalAlignment="Left" Margin="90,383,0,0" TextWrapping="Wrap" Text="petshop@gmail.com" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Image HorizontalAlignment="Left" Height="30" Margin="526,38,0,0" VerticalAlignment="Top" Width="48"/>
+            <Image HorizontalAlignment="Left" Height="52" Margin="273,16,0,0" VerticalAlignment="Top" Width="61" Source="/logo.png" RenderTransformOrigin="-3.713,0.501"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="357,68,0,0" VerticalAlignment="Top" Width="100"/>
+            <TextBlock HorizontalAlignment="Left" Margin="374,52,0,0" TextWrapping="Wrap" Text="~Ramat Gan~" VerticalAlignment="Top" FontSize="20" FontFamily="Monotype Corsiva" FontWeight="Bold" RenderTransformOrigin="0.566,3.145"/>
+            <TextBlock HorizontalAlignment="Left" Margin="353,16,0,0" TextWrapping="Wrap" Text="PET SHOP" VerticalAlignment="Top" FontSize="36" FontFamily="Bodoni MT" FontWeight="Bold" Height="38" Width="168"/>
+            <TextBlock HorizontalAlignment="Left" Margin="90,367,0,0" TextWrapping="Wrap" Text="א'-ה': 08:00-20:00" VerticalAlignment="Top" FontWeight="Bold"/>
+           
 
 
         </Grid>
-        <Button x:Name="btnPres" Content="Wellcome" HorizontalAlignment="Left" Margin="594,331,0,0" VerticalAlignment="Top" Click="Press_here_Click" Height="63" Width="173" BorderBrush="#FF707070" Background="#FF2AEED1"/>
+        <Button x:Name="btnPres" Content="Admin" Margin="584,349,33,19" Click="Press_here_Click" BorderBrush="#FF3A64D7" FontWeight="Bold" FontFamily="Bookman Old Style" FontSize="22" Cursor="">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFBCE6F7" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
 
     </Grid>

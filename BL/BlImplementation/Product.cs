@@ -103,7 +103,7 @@ internal class Product : IProduct
     public void Add(BO.Product product)//Copy the respective fields
     {
         // Checks that all data is correct
-        if (product.ID > 0 && product.Name != "" && product.InStock > 0)
+        if (product.ID > 0 && product.Name != "" && product.InStock > 0 && product.Price>=0)
         {
             // Creating an product that belongs to the data layer 
             DO.Product prod = new DO.Product()
@@ -128,11 +128,19 @@ internal class Product : IProduct
         }
         else if(product.ID <=0)
         {
-            throw new BlUnCorrectIDExeption("uncorrect details");
+            throw new BlUnCorrectIDExeption("uncorrect id, please enter a correct id");
         }
         else if(product.Name=="")
         {
-            throw new BlUncorrectName("uncorrect details");
+            throw new BlUncorrectName("uncorrect name, please enter a correct name");
+        }
+        else if (product.InStock <0)
+        {
+            throw new BlNotEnoughInStockExeption("uncorrect in stock, please enter a correct number");
+        }
+        else if (product.Price <= 0)
+        {
+            throw new BlUncorrectPrice("uncorrect in Price, please enter a correct Price");
         }
     }
 
@@ -189,9 +197,21 @@ internal class Product : IProduct
             }
 
         }
-        else
+        else if (product.ID <= 0)
         {
-            throw new BlUncorrectDetailsExeption("uncorrect details");
+            throw new BlUnCorrectIDExeption("uncorrect id, please enter a correct id");
+        }
+        else if (product.Name == "")
+        {
+            throw new BlUncorrectName("uncorrect name, please enter a correct name");
+        }
+        else if (product.InStock < 0)
+        {
+            throw new BlNotEnoughInStockExeption("uncorrect in stock, please enter a correct number");
+        }
+        else if (product.Price <= 0)
+        {
+            throw new BlUncorrectPrice("uncorrect in Price, please enter a correct Price");
         }
     }
 

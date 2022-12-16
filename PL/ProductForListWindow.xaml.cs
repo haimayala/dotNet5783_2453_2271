@@ -20,10 +20,10 @@ namespace PL
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class ProductForListWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
-        public Window1()
+        public ProductForListWindow()
         {
             InitializeComponent();
             ProductListView.ItemsSource = bl.Product.GetListedProducts();

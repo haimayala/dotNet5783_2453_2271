@@ -18,9 +18,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="2022-12-06 %281%29.png" />
     <None Remove="cc7-1024x685.jpg" />
-    <None Remove="IMG-20221202-WA0032.jpg" />
+    <None Remove="logo.png" />
+    <None Remove="sdog.png" />
+    <None Remove="tdog.png" />
+    <None Remove="trylogo.png" />
+    <None Remove="tttdog.png" />
+    <None Remove="הורדה.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,9 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="2022-12-06 (1).png" />
-    <Resource Include="cc7-1024x685.jpg" />
-    <Resource Include="IMG-20221202-WA0032.jpg" />
+    <Resource Include="logo.png" />
+    <Resource Include="tdog.png" />
+    <Resource Include="trylogo.png" />
+    <Resource Include="tttdog.png" />
+    <Resource Include="הורדה.png" />
   </ItemGroup>
 
 </Project>

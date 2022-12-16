@@ -34,6 +34,8 @@ namespace PL
         }
         public Product(int id)
         {
+
+          
             InitializeComponent();
             CategoryAdd.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
             CategoryAdd.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
@@ -48,11 +50,12 @@ namespace PL
             Regex regex = new("[0-9]+");
 
         }
-        private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new Window1().ShowDialog();
+        //private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().ShowDialog();
         private void btnAddOrUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (btnAddOrUpdate.Content == "Add")
             {
+
 
                 BO.Product product = new BO.Product()
                 {
@@ -61,27 +64,16 @@ namespace PL
                     Category = (BO.Enums.Category)CategoryAdd.SelectedItem,
                     Price = int.Parse(PriceTextBoxAdd.Text),
                     InStock = int.Parse(InStockTextBoxAdd.Text),
-                };
-                if (product.ID <= 0)
-                    MessageBox.Show("Please enter a correct id", "Add a new Product");
-                if (product.Name == "")
-                    MessageBox.Show("Please enter a product name", "Add a new Product");
-                if (product.Category == Category.None)
-                    MessageBox.Show("Please enter a product category", "Add a new Product");
-                if (product.Price <= 0)
-                    MessageBox.Show("Uncorrect price, please enter a correct number", "Add a new Product");
-                if (product.InStock <= 0)
-                    MessageBox.Show("Uncorrect number, please enter a correct number for in stock", "Add a new Product");
+                };             
 
                 try
                 {
                     bl.Product.Add(product);
-                    Close();
-                    
+                    Close();                   
                 }
-               catch(BO.BlUncorrectDetailsExeption)
+               catch (Exception ed)
                 {
-                   
+                    MessageBox.Show(ed.Message);
                 }
                
             }
@@ -97,28 +89,19 @@ namespace PL
                     Price = int.Parse(PriceTextBoxAdd.Text),
                     InStock = int.Parse(InStockTextBoxAdd.Text),
                 };
-                if (product.ID <= 0)
-                    MessageBox.Show("Please enter a correct id", "Add a new Product");
-                if (product.Name == "")
-                    MessageBox.Show("Please enter a product name", "Add a new Product");
-                if (product.Category == Category.None)
-                    MessageBox.Show("Please enter a product category", "Add a new Product");
-                if (product.Price <= 0)
-                    MessageBox.Show("Uncorrect price, please enter a correct number", "Add a new Product");
-                if (product.InStock < 0)
-                    MessageBox.Show("Uncorrect number, please enter a correct number for in stock", "Add a new Product");
                 try
                 {
                     bl.Product.Uppdate(product);
+                    Close();
                 }
-                catch(BO.BlUncorrectDetailsExeption)
+                catch (Exception ed)
                 {
-
+                    MessageBox.Show(ed.Message);
                 }
      
             }
 
-            Close();
+            
         }
     }
 }

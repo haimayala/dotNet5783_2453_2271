@@ -37,4 +37,9 @@ public class BlUncorrectAddres : Exception
     public BlUncorrectAddres(string? massage) : base(massage) { }
 
 }
+public class BlUncorrectPrice : Exception
+{
+    public BlUncorrectPrice(string? massage) : base(massage) { }
+
+}
 

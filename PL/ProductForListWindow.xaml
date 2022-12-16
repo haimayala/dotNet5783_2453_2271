@@ -1,0 +1,59 @@
+﻿<Window x:Class="PL.ProductForListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ProductForList" Height="640" Width="800">
+
+    <Grid>
+        <Grid Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="500*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Name="ProductListView" MouseDoubleClick="ProductListView_MouseDoubleClick" FontWeight="Bold" FontFamily="Arial" FontSize="14">
+
+                <ListView.View >
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,-10,0">
+           
+
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+
+            <Button x:Name="btnAddProduct" Content="Add new Product"  Margin="0,487,31,78" HorizontalAlignment="Right"  Padding="5" Width="169" Grid.Column="1" Click="Button_Click" RenderTransformOrigin="0.508,1.291" BorderBrush="White" Background="White" FontWeight="Bold" FontSize="18" />
+
+
+
+            <ComboBox x:Name="CategorySelector" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" Margin="72,47,32,539" BorderBrush="#FF59C5F9" >
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FF59C5F9" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
+            <Label x:Name="Products" Content="Products:" HorizontalAlignment="Left"  Grid.Column="0"    Margin="26,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.218,-5.841" Height="27" Width="72" Background="White" FontWeight="Bold" FontFamily="Arial Black"/>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Height="54" Margin="302,546,0,0" VerticalAlignment="Top" Width="70" Source="/logo.png"/>
+           
+
+        </Grid>
+    </Grid>
+
+
+</Window>
+
+

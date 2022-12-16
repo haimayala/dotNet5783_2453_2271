@@ -33,6 +33,6 @@ namespace PL
             ShowProductsButton_Click(sender, e);
         }
 
-        private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new Window1().Show();
+        private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
     }
 }
