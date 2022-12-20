@@ -12,7 +12,8 @@ internal class Program
     enum Menu { EXIT, PRODUCT, ORDER, CART };
     static void Main(string[] args)
     {
-        IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         BO.Cart cart = new Cart();
 
 

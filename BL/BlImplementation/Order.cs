@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class Order : IOrder
 {
-    DalApi.IDal dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     ////  A function that show all the orders to the manager
     public IEnumerable<OrderForList?> GetLitedOrders()

@@ -2,7 +2,6 @@
 using DO;
 using static DO.Enums;
 
-using DalApi;
 namespace Dal;
 
 
@@ -16,7 +15,7 @@ partial class Program
   
     static void Main()
     {
-        IDal dal = new DalList();
+        DalApi.IDal? dal = DalApi.Factory.Get();
 
 
         Console.WriteLine(
@@ -156,10 +155,10 @@ for Cultivation enter -4");
                          
                                 break;
                             case 4:
-                            IEnumerable<Product> arr = dal.Product.GetAll();                            
+                            IEnumerable<Product> arr = (IEnumerable<Product>)dal.Product.GetAll();                            
                                 break;
                         case 5:
-                            IEnumerable<Product> pArr = dal.Product.GetAll();
+                            IEnumerable<Product> pArr = (IEnumerable<Product>)dal.Product.GetAll();
                             foreach (Product pro in pArr)
                             {
                                 Console.WriteLine(pro);
@@ -261,11 +260,11 @@ for Cultivation enter -4");
                                 
                                 break;
                             case 4:
-                            IEnumerable<Order> arr = dal.order.GetAll();
+                            IEnumerable<Order> arr = (IEnumerable<Order>)dal.order.GetAll();
                             break;
 
                         case 5:
-                            IEnumerable<Order> Oarr = dal.order.GetAll();
+                            IEnumerable<Order> Oarr = (IEnumerable<Order>)dal.order.GetAll();
                            foreach(Order o in Oarr)
                             {
                                 Console.WriteLine(o);
@@ -366,10 +365,10 @@ for Cultivation enter -4");
                             
                                 break;
                             case 4:
-                            IEnumerable<OrderItem> arr = dal.orderItem.GetAll();                            
+                            IEnumerable<OrderItem> arr = (IEnumerable<OrderItem>)dal.orderItem.GetAll();                            
                             break;
                         case 5:
-                            IEnumerable<OrderItem> orarr = dal.orderItem.GetAll();
+                            IEnumerable<OrderItem> orarr = (IEnumerable<OrderItem>)dal.orderItem.GetAll();
                             foreach (OrderItem item in orarr) 
                             {
                                 Console.WriteLine(item);
