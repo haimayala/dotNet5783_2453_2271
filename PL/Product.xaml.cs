@@ -26,12 +26,15 @@ namespace PL
     {
 
         private IBl bl = new BlImplementation.Bl();
+
+        // ctor for add case
         public Product()
         {
             InitializeComponent();
             CategoryAdd.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
             btnAddOrUpdate.Content = "Add";
         }
+        // ctor for update case
         public Product(int id)
         {
 
@@ -53,47 +56,114 @@ namespace PL
         //private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().ShowDialog();
         private void btnAddOrUpdate_Click(object sender, RoutedEventArgs e)
         {
+            // in case of adding a product
             if (btnAddOrUpdate.Content == "Add")
             {
 
-
-                BO.Product product = new BO.Product()
+                //Checking that the input is correct and appropriate
+                BO.Product product = new BO.Product();
+                
+                if (IDTextBoxAdd.Text.Length == 0)
                 {
-                    ID = int.Parse(IDTextBoxAdd.Text),
-                    Name = NameTextBoxAdd.Text,
-                    Category = (BO.Enums.Category)CategoryAdd.SelectedItem,
-                    Price = int.Parse(PriceTextBoxAdd.Text),
-                    InStock = int.Parse(InStockTextBoxAdd.Text),
-                };             
+                    IDTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    IDTextBoxAdd.BorderBrush= new SolidColorBrush(Colors.Green);    
+                if (CategoryAdd.SelectedValue==null || CategoryAdd.SelectedIndex == 5)
+                {
+                    MessageBox.Show("Please choose a category");
+                    return;
+                }
+                if (NameTextBoxAdd.Text.Length == 0)
+                {
+                    NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                if (PriceTextBoxAdd.Text.Length == 0)
+                {
+                    PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                if (InStockTextBoxAdd.Text.Length == 0)
+                {
+                    InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                //Initialize the product according The text boxes
+                product.ID = int.Parse(IDTextBoxAdd.Text);
+                product.Name= NameTextBoxAdd.Text;
+                product.Price = int.Parse(PriceTextBoxAdd.Text);
+                product.Category = (BO.Enums.Category)CategoryAdd.SelectedItem;
+                product.InStock = int.Parse(InStockTextBoxAdd.Text);
 
+                // try to add the product
                 try
                 {
                     bl.Product.Add(product);
                     Close();                   
                 }
+                // in case the adding faild
                catch (Exception ed)
                 {
                     MessageBox.Show(ed.Message);
                 }
                
             }
+            // in case of updating a product
             else if (btnAddOrUpdate.Content == "Update")
             {
 
-             
-                BO.Product product = new BO.Product()
+                // make the match product
+                BO.Product product = new BO.Product();
+
+                //Checking that the input is correct and appropriate
+
+                if (CategoryAdd.SelectedValue == null || CategoryAdd.SelectedIndex==5)
                 {
-                    ID = int.Parse(IDTextBoxAdd.Text),
-                    Name = NameTextBoxAdd.Text,
-                    Category = (BO.Enums.Category)CategoryAdd.SelectedItem,
-                    Price = int.Parse(PriceTextBoxAdd.Text),
-                    InStock = int.Parse(InStockTextBoxAdd.Text),
-                };
+                    MessageBox.Show("Please choose a category");
+                    return;
+                }
+                if (NameTextBoxAdd.Text.Length == 0)
+                {
+                    NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                if (PriceTextBoxAdd.Text.Length == 0)
+                {
+                    PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                if (InStockTextBoxAdd.Text.Length == 0)
+                {
+                    InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+                else
+                    InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+
+                //Initialize the product according The text boxes
+                product.ID = int.Parse(IDTextBoxAdd.Text);
+                product.Name = NameTextBoxAdd.Text;
+                product.Price = int.Parse(PriceTextBoxAdd.Text);
+                product.Category = (BO.Enums.Category)CategoryAdd.SelectedItem;
+                product.InStock = int.Parse(InStockTextBoxAdd.Text);
                 try
                 {
                     bl.Product.Uppdate(product);
                     Close();
                 }
+                // in case the updatung faild
                 catch (Exception ed)
                 {
                     MessageBox.Show(ed.Message);

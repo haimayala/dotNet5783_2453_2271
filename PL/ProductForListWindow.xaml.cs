@@ -23,6 +23,8 @@ namespace PL
     public partial class ProductForListWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
+
+        //ctor
         public ProductForListWindow()
         {
             InitializeComponent();
@@ -30,30 +32,39 @@ namespace PL
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
         }
 
-        
 
+        // A function that responsible for the combobox event
+        
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Category category = (BO.Enums.Category)CategorySelector.SelectedItem;
-            ProductListView.ItemsSource = bl?.Product.GetListedProducts(x => x?.category == category);
-            if (CategorySelector.SelectedIndex == 5)
+            
+            var choise = CategorySelector.SelectedItem;
+            // in case the user enter the NONE coise- show all the products
+            if(choise.Equals(BO.Enums.Category.None))
                 ProductListView.ItemsSource = bl?.Product.GetListedProducts();
+            else
+                ProductListView.ItemsSource = bl.Product.GetProductForListsByCategory((Category)choise);
+
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //A function that responsible for the add product butten event
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
+            // show the addproduct window
             new Product().ShowDialog();
-            ProductListView.ItemsSource = bl.Product.GetListedProducts().OrderBy(item=>item.Id);
+            ProductListView.ItemsSource = bl.Product.GetListedProducts();
         }
-       
 
+        //A function that responsible for the updateb productby double click
         private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            // get the match id
             int id = ((ProductForList)ProductListView.SelectedItem).Id;
+            // show the matc window
             new Product(id).ShowDialog();
-            ProductListView.ItemsSource=bl.Product.GetListedProducts().OrderBy(item => item.Id); 
+            // get the lisst again for howing the updatung list
+            ProductListView.ItemsSource = bl.Product.GetListedProducts(); 
 
            
         }

@@ -1,6 +1,6 @@
 ﻿  
 using BO;
-
+using static BO.Enums;
 namespace BlApi;
 
 public interface IProduct
@@ -27,4 +27,6 @@ public interface IProduct
     updates the product by the the data layer
     in case of incorrect input an exception will be thrown*/
     public void Uppdate(BO.Product product);
+
+    IEnumerable<ProductForList?> GetProductForListsByCategory(BO.Enums.Category category);
 }

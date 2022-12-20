@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <Button x:Name="btnAddProduct" Content="Add new Product"  Margin="0,487,31,78" HorizontalAlignment="Right"  Padding="5" Width="169" Grid.Column="1" Click="Button_Click" RenderTransformOrigin="0.508,1.291" BorderBrush="White" Background="White" FontWeight="Bold" FontSize="18" />
+            <Button x:Name="btnAddProduct" Content="Add new Product"  Margin="0,487,31,78" HorizontalAlignment="Right"  Padding="5" Width="169" Grid.Column="1" Click="btnAddProduct_Click" RenderTransformOrigin="0.508,1.291" BorderBrush="White" Background="White" FontWeight="Bold" FontSize="18" />
 
 
 

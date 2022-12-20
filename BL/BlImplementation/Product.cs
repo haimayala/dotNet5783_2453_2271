@@ -231,5 +231,8 @@ internal class Product : IProduct
         return true;
     }
 
-    
+    public IEnumerable<ProductForList?> GetProductForListsByCategory(Enums.Category category)
+    {
+       return GetListedProducts(p=>p.category==category);   
+    }
 }

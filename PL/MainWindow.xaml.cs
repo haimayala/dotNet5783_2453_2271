@@ -23,11 +23,15 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
+
+        //ctor
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        
+        // A function for the main butten click
         private void Press_here_Click(object sender, RoutedEventArgs e)
         {
             ShowProductsButton_Click(sender, e);

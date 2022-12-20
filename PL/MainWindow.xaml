@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/tdog.png"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid>
 
 
@@ -19,20 +19,30 @@
 
             <TextBlock HorizontalAlignment="Left" Margin="90,383,0,0" TextWrapping="Wrap" Text="petshop@gmail.com" VerticalAlignment="Top" FontWeight="Bold"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="526,38,0,0" VerticalAlignment="Top" Width="48"/>
-            <Image HorizontalAlignment="Left" Height="52" Margin="273,16,0,0" VerticalAlignment="Top" Width="61" Source="/logo.png" RenderTransformOrigin="-3.713,0.501"/>
+            <Image HorizontalAlignment="Left" Height="63" Margin="232,22,0,0" VerticalAlignment="Top" Width="74" Source="/logo.png" RenderTransformOrigin="-3.713,0.501">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.513"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
             <Image HorizontalAlignment="Left" Height="100" Margin="357,68,0,0" VerticalAlignment="Top" Width="100"/>
-            <TextBlock HorizontalAlignment="Left" Margin="374,52,0,0" TextWrapping="Wrap" Text="~Ramat Gan~" VerticalAlignment="Top" FontSize="20" FontFamily="Monotype Corsiva" FontWeight="Bold" RenderTransformOrigin="0.566,3.145"/>
-            <TextBlock HorizontalAlignment="Left" Margin="353,16,0,0" TextWrapping="Wrap" Text="PET SHOP" VerticalAlignment="Top" FontSize="36" FontFamily="Bodoni MT" FontWeight="Bold" Height="38" Width="168"/>
+            <TextBlock HorizontalAlignment="Left" Margin="335,59,0,0" TextWrapping="Wrap" Text="~Ramat Gan~" VerticalAlignment="Top" FontSize="20" FontFamily="Monotype Corsiva" FontWeight="Bold" RenderTransformOrigin="0.566,3.145"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,16,0,0" TextWrapping="Wrap" Text="PET SHOP" VerticalAlignment="Top" FontSize="36" FontFamily="Bodoni MT" FontWeight="Bold" Height="38" Width="168" Foreground="#FFD0A3EB"/>
             <TextBlock HorizontalAlignment="Left" Margin="90,367,0,0" TextWrapping="Wrap" Text="א'-ה': 08:00-20:00" VerticalAlignment="Top" FontWeight="Bold"/>
-           
+            <Image HorizontalAlignment="Left" Height="100" Margin="419,0,0,0" VerticalAlignment="Center" Width="100"/>
+
 
 
         </Grid>
-        <Button x:Name="btnPres" Content="Admin" Margin="584,349,33,19" Click="Press_here_Click" BorderBrush="#FF3A64D7" FontWeight="Bold" FontFamily="Bookman Old Style" FontSize="22" Cursor="">
+        <Button x:Name="btnPres" Content="Admin" Margin="597,349,33,23" Click="Press_here_Click" BorderBrush="#FF3A64D7" FontWeight="Bold" FontFamily="Bookman Old Style" FontSize="22" Cursor="">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFBCE6F7" Offset="1"/>
+                    <GradientStop Color="#FFCDD3D6" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
