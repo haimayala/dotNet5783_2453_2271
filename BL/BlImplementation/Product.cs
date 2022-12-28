@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class Product : IProduct
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
 
     // A function that shows the manager a list of products
     public IEnumerable<ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? func )

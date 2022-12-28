@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class Cart : ICart
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
 
     // A function that gets a cart and product id and add the match product to the cart 
     public BO.Cart Add(BO.Cart cart, int ProductID)
@@ -16,7 +16,7 @@ internal class Cart : ICart
         {
             DO.Product product = dal.Product.GetByID(ProductID);
 
-            BO.OrderItem orderItem = cart.Items.FirstOrDefault(item => item.ProductId == ProductID);
+            BO.OrderItem orderItem = cart.Items?.FirstOrDefault(item => item?.ProductId == ProductID)!;
             if (orderItem != null)
             {
                 if (product.InStock > 0)

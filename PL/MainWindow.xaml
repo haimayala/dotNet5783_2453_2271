@@ -34,11 +34,12 @@
             <TextBlock HorizontalAlignment="Center" Margin="0,16,0,0" TextWrapping="Wrap" Text="PET SHOP" VerticalAlignment="Top" FontSize="36" FontFamily="Bodoni MT" FontWeight="Bold" Height="38" Width="168" Foreground="#FFD0A3EB"/>
             <TextBlock HorizontalAlignment="Left" Margin="90,367,0,0" TextWrapping="Wrap" Text="א'-ה': 08:00-20:00" VerticalAlignment="Top" FontWeight="Bold"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="419,0,0,0" VerticalAlignment="Center" Width="100"/>
+            <Button x:Name="btnNewOrder" Content="New Order" HorizontalAlignment="Left" Margin="486,367,0,0" VerticalAlignment="Top" Background="#FFE2D7D7" Height="45" Width="124" Click="btnNewOrder_Click"/>
 
 
 
         </Grid>
-        <Button x:Name="btnPres" Content="Admin" Margin="597,349,33,23" Click="Press_here_Click" BorderBrush="#FF3A64D7" FontWeight="Bold" FontFamily="Bookman Old Style" FontSize="22" Cursor="">
+        <Button x:Name="btnPres" Content="Mannager" Margin="637,363,33,23" Click="Press_here_Click" BorderBrush="#FF3A64D7" FontWeight="Bold" FontFamily="Bookman Old Style" FontSize="22" Cursor="">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

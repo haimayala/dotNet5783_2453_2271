@@ -13,6 +13,7 @@ namespace PL;
 /// </summary>
 public partial class Product : Window
 {
+    //private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
     BlApi.IBl? bl = BlApi.Factory.Get();
 
@@ -96,7 +97,7 @@ public partial class Product : Window
             // try to add the product
             try
             {
-                bl.Product.Add(product);
+                bl?.Product.Add(product);
                 Close();                   
             }
             // in case the adding faild
@@ -150,7 +151,7 @@ public partial class Product : Window
             product.InStock = int.Parse(InStockTextBoxAdd.Text);
             try
             {
-                bl.Product.Uppdate(product);
+                bl?.Product.Uppdate(product);
                 Close();
             }
             // in case the updatung faild

@@ -14,7 +14,7 @@
                 <RowDefinition Height="500*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Name="ProductListView" MouseDoubleClick="ProductListView_MouseDoubleClick" FontWeight="Bold" FontFamily="Arial" FontSize="14">
+            <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Name="ProductListView" MouseDoubleClick="ProductListView_MouseDoubleClick" FontWeight="Bold" FontFamily="Arial" FontSize="14" Margin="0,46,543,0" Grid.RowSpan="2">
 
                 <ListView.View >
                     <GridView>
@@ -24,8 +24,8 @@
             </ListView>
 
         </Grid>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,-10,0">
-           
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,-10,0" RenderTransformOrigin="0.432,0.48">
+
 
 
 
@@ -48,7 +48,7 @@
             </ComboBox>
             <Label x:Name="Products" Content="Products:" HorizontalAlignment="Left"  Grid.Column="0"    Margin="26,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.218,-5.841" Height="27" Width="72" Background="White" FontWeight="Bold" FontFamily="Arial Black"/>
             <Image Grid.Column="1" HorizontalAlignment="Left" Height="54" Margin="302,546,0,0" VerticalAlignment="Top" Width="70" Source="/logo.png"/>
-           
+
 
         </Grid>
     </Grid>

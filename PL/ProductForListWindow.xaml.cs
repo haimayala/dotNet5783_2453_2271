@@ -15,7 +15,7 @@ namespace PL;
 /// </summary>
 public partial class ProductForListWindow : Window
 {
-    BlApi.IBl? bl = BlApi.Factory.Get();
+    private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
 
     //ctor
@@ -37,7 +37,7 @@ public partial class ProductForListWindow : Window
         if(choise.Equals(BO.Enums.Category.None))
             ProductListView.ItemsSource = bl?.Product.GetListedProducts();
         else
-            ProductListView.ItemsSource = bl.Product.GetProductForListsByCategory((Category)choise);
+            ProductListView.ItemsSource = bl?.Product.GetProductForListsByCategory((Category)choise);
 
 
     }

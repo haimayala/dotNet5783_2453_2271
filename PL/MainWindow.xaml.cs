@@ -10,8 +10,8 @@ namespace PL;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
   
-    BlApi.IBl? bl = BlApi.Factory.Get();
 
 
     //ctor
@@ -27,5 +27,10 @@ public partial class MainWindow : Window
         ShowProductsButton_Click(sender, e);
     }
 
-    private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
+    private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().ShowDialog();
+
+    private void btnNewOrder_Click(object sender, RoutedEventArgs e)
+    {
+        new ProductItem().ShowDialog();
+    }
 }
