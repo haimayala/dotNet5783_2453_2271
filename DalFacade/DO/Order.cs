@@ -4,7 +4,6 @@ using DalFacade;
 using System.Diagnostics;
 
 namespace DO;
-
 public struct Order
 {
     public Order()
