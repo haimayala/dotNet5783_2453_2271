@@ -1,7 +1,8 @@
 ﻿
 using BO;
 using System;
-
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,52 +16,49 @@ namespace PL;
 /// </summary>
 public partial class ProductForListWindow : Window
 {
-    private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
+    private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
+    public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
     //ctor
     public ProductForListWindow()
     {
         InitializeComponent();
-        ProductListView.ItemsSource = bl.Product.GetListedProducts();
-        CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+        //productForListListView.ItemsSource = bl.Product.GetListedProducts();
+        //CategorySelector.ItemsSource = Enum.GetValues(typeof(Category));
     }
 
-
     // A function that responsible for the combobox event
-    
+
     private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         
         var choise = CategorySelector.SelectedItem;
         // in case the user enter the NONE coise- show all the products
-        if(choise.Equals(BO.Enums.Category.None))
-            ProductListView.ItemsSource = bl?.Product.GetListedProducts();
+        if(choise.Equals(Category.None))
+            productForListListView.ItemsSource = bl?.Product.GetListedProducts();
         else
-            ProductListView.ItemsSource = bl?.Product.GetProductForListsByCategory((Category)choise);
-
-
+            productForListListView.ItemsSource = bl?.Product.GetProductForListsByCategory((Category)choise);
     }
 
     //A function that responsible for the add product butten event
     private void btnAddProduct_Click(object sender, RoutedEventArgs e)
     {
         // show the addproduct window
-        new Product().ShowDialog();
-        ProductListView.ItemsSource = bl.Product.GetListedProducts();
+        new Product(false).ShowDialog();
+        productForListListView.ItemsSource = bl.Product.GetListedProducts();
     }
 
     //A function that responsible for the updateb productby double click
-    private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void productForListListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         // get the match id
-        int id = ((ProductForList)ProductListView.SelectedItem).Id;
+        int id = ((ProductForList)productForListListView.SelectedItem).Id;
         // show the matc window
-        new Product(id).ShowDialog();
+        new Product(id, true).ShowDialog();
         // get the lisst again for howing the updatung list
-        ProductListView.ItemsSource = bl.Product.GetListedProducts(); 
+        productForListListView.ItemsSource = bl.Product.GetListedProducts();
 
-       
     }
 }
 

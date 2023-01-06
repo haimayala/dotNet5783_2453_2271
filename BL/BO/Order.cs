@@ -12,10 +12,10 @@ public class Order
     public string? CustomerEmail { get; set; }
     public string? CustonerAddres { get; set; }  
     public OrderStatus? Status { get; set; }
-    public DateTime? OrderDate { get; set; }    
-    public DateTime? ShipDate { get; set; }  
-    public DateTime? DeliveryDate { get; set; }  
-    
+    public DateTime? OrderDate { get; set; } = null; 
+    public DateTime? ShipDate{ get; set; } = null;
+    public DateTime? DeliveryDate { get; set; } = null;
+
     public IEnumerable<BO.OrderItem?>? Items { get; set; }
     public double TotalPrice    { get; set; }
     

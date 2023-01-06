@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BO;
+using DO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,23 +23,47 @@ namespace PL
     /// </summary>
     public partial class ProductItem : Window
     {
-        private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
+        private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
+
+
+        public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
+
+      
+
+        private static Cart cart = new Cart()
+        {            
+            Items = new List<BO.OrderItem?>(),      
+        };
+
         public ProductItem()
         {
             InitializeComponent();
-            ProItemList.ItemsSource = bl.Product.GetListedProducts();
-            cmbboxCategory.ItemsSource=Enum.GetValues(typeof(BO.Enums.Category));
+            productItemListView.ItemsSource = bl.Product.GetProductItems();
+            //cmbProItem.ItemsSource = Enum.GetValues(typeof(Category));
+
         }
 
-        private void cmbboxCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cmbProItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var choise = cmbProItem.SelectedItem;
+            // in case the user enter the NONE coise- show all the list
+            if (choise.Equals(Category.None))
+                productItemListView.ItemsSource = bl?.Product.GetProductItems();
+            else
+                productItemListView.ItemsSource = bl?.Product.GetProductItemsByCategory((Category)choise);
+
+        }
+       
+        private void btnhowCart_Click(object sender, RoutedEventArgs e)
+        {
+            new ComplateCart(cart).ShowDialog();
+        }
+
+        private void productItemListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            var choise = cmbboxCategory.SelectedItem;
-            // in case the user enter the NONE coise- show all the products
-            if (choise.Equals(BO.Enums.Category.None))
-                ProItemList.ItemsSource = bl?.Product.GetListedProducts();
-            else
-                ProItemList.ItemsSource = bl?.Product.GetProductForListsByCategory((Category)choise);
+            int id = ((BO.ProductItem)productItemListView.SelectedItem).ID;
+            new CustomerProductItemWindow(id, cart).ShowDialog();
         }
     }
 }

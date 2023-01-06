@@ -25,8 +25,8 @@ internal class DalOrder :IOrder
     // A function that gets a order id and delete the match order from the order list
     public void Delete(int id)
     {//The method deletes the order with the received ID
-        if (DataSource.s_orders.Exists(x => x?.ID == id))
-            throw new DalAllredyExsisExeption("orer allredy exsist");
+        if (!DataSource.s_orders.Exists(x => x?.ID == id))
+            throw new DalDoesNotExsistExeption("order not exsist");
         else
         {
             DataSource.s_orders.Remove(DataSource.s_orders.Find(x => x?.ID == id));           

@@ -33,14 +33,14 @@ internal class Cart : ICart
                 {
                     BO.OrderItem newOrderItem = new BO.OrderItem()
                     {
-                        //Id = orderItem.Id,
+                        //Id = orderItem!.Id,
                         ProductName = product.Name,
                         Price = (int)product.Price,
                         Amount = 1,
-                        TotalPrice = product.Price,
                         ProductId = product.ID
                     };
-                    cart.Items.Add(newOrderItem);
+                    newOrderItem.TotalPrice += product.Price;
+                    cart.Items!.Add(newOrderItem);
                 }
             }
 
@@ -48,7 +48,7 @@ internal class Cart : ICart
             cart.TotalPrice += product.Price;
             return cart;
         }
-        catch(DO.DalDoesNotExsistExeption de)
+        catch(DO.DalDoesNotExsistExeption)
         {
             throw new DO.DalDoesNotExsistExeption(" product not exsist");
         }
@@ -65,19 +65,21 @@ internal class Cart : ICart
             DO.Product product = dal.Product.GetByID(ProductId);
             // find the product in the cart
 
-
-            foreach (var item in cart.Items)
+            foreach (var item in cart.Items!)
             {
-                if (item.ProductId == ProductId)
+                if (item?.ProductId == ProductId)
                 {
+
                     // In the case of increasing the quantity
                     if (item.Amount < NewAmount)
                     {
-                        if (product.InStock >= NewAmount - item.Amount)
+                        if (product.InStock >= NewAmount + item.Amount)
                         {
                             product.InStock -= NewAmount - item.Amount;
+                            item.TotalPrice += NewAmount * product.Price;
+                            cart.TotalPrice += NewAmount * product.Price;
                             item.Amount += NewAmount;
-                            cart.TotalPrice += (NewAmount - item.Amount) * product.Price;
+
                             return cart;
                         }
                         else
@@ -85,30 +87,56 @@ internal class Cart : ICart
 
                     }
                     // In the case of reducing the quantity
-                    else if (item.Amount > NewAmount && NewAmount!=0)
+                    else if (item.Amount > NewAmount && NewAmount != 0)
                     {
                         product.InStock += item.Amount - NewAmount;
-                        item.Amount -= NewAmount;
-                        cart.TotalPrice -= (item.Amount - NewAmount) * product.Price;
+
+                        if (NewAmount > 0)
+                        {
+                            item.Amount -= NewAmount;
+                            item.TotalPrice -= NewAmount * product.Price;
+                            cart.TotalPrice -= NewAmount * product.Price;
+                        }
+
+                        else
+                        {
+                            item.Amount += NewAmount;
+                            item.TotalPrice += NewAmount * product.Price;
+                            cart.TotalPrice += NewAmount * product.Price;
+                        }
                         return cart;
                     }
+
+                    else if (NewAmount == item.Amount && NewAmount!=0)
+                    {
+                        if(product.InStock>= NewAmount)
+                        {
+                            item.Amount = NewAmount;
+                            cart.TotalPrice = NewAmount * product.Price;
+                            item.TotalPrice = NewAmount * product.Price;
+                        }
+                        else
+                            throw new BlNotEnoughInStockExeption("Cannot add, Not enough in stock ");
+                    }
+
                     //In case of deletion of the product
                     else if (NewAmount == 0)
                     {
-                        cart.TotalPrice -= item.Price;
+                        cart.TotalPrice -= item.TotalPrice;
                         cart.Items.Remove(item);
                         return cart;
                         //dal.orderItem.Delete(item.Id);
                     }
+                   
                 }
             }
             return cart;
+
         }
-        catch (DO.DalDoesNotExsistExeption de)
+        catch (DO.DalDoesNotExsistExeption)
         {
             throw new DO.DalDoesNotExsistExeption("product not exsist");
         }
-
 
 
     }
@@ -117,15 +145,15 @@ internal class Cart : ICart
     public void OrderConfirmation(BO.Cart cart)
     {
        // check if the customer email is correct
-        string s = cart.CustomerEmail;
-        if (!s.Contains('@') || s.IndexOf('@') ==0|| s.IndexOf('@') == s.Length)
+        string? s = cart.CustomerEmail!;
+        if (!s.Contains('@') || s.IndexOf('@') == 0 || s.IndexOf('@') == s.Length)
             throw new BlUncorrectEmailExeption("uncorrect email");
         // check if the customer name is correct
         if (cart.CustomerName == "")
-            throw new BlUncorrectName("uncorrect name");
+            throw new BlUncorrectName("pleasec enter your name");
         // check if the customer addres is correct
         if (cart.CustonerAddres == "")
-            throw new BlUncorrectAddres("uncorrect addres");
+            throw new BlUncorrectAddres("pleasec enter your addres");
         if (!CheckData(cart))
             throw new BlUncorrectDetailsExeption("uncorrecr details");
         //make a order entity
@@ -141,27 +169,29 @@ internal class Cart : ICart
             try
             {
                 int OrderNumber = dal.order.Add(doOrder);
-                foreach (var item in cart.Items)
+                foreach (var item in cart.Items!)
                 {
                     DO.OrderItem DoOrderItem = new DO.OrderItem()
                     {
-                        ID = item.Id,
+                        ID = item!.Id,
                         ProductID = item.ProductId,
                         OrderID = OrderNumber,
                         Price = item.Price,
-                        Amount = item.Amount,
+                        Amount = item.Amount, 
+                        
                     };
 
                     dal.orderItem.Add(DoOrderItem);
+                cart.TotalPrice += DoOrderItem.Price;
 
                     DO.Product updateProduct = dal.Product.GetByID(item.ProductId);
                     updateProduct.InStock -= item.Amount;
-                    dal.Product.Uppdate(updateProduct);
+                   
 
 
                 }
             }
-            catch (DO.DalDoesNotExsistExeption de)
+            catch (DO.DalDoesNotExsistExeption )
             {
                 throw new DO.DalDoesNotExsistExeption("order item not exsist");
             }
@@ -172,29 +202,18 @@ internal class Cart : ICart
     // A help functioin that ckeck that all the data cart are correct
     private bool CheckData(BO.Cart cart)
     {
-        foreach (var item in cart.Items)
+        foreach (var item in cart.Items!)
         {
 
-            DO.Product doProduct = dal.Product.GetByID(item.ProductId);
+            DO.Product doProduct = dal.Product.GetByID(item!.ProductId);
             if (doProduct.InStock < item.Amount || item.Amount < 0)
                 return false;
 
         }
         return true;
-    }
+    }  // למחוק את הפוראיצ
 
-    //A help function that check if some product exsist in the product list in the order 
-    private bool Exsist(BO.Cart cart, int productId)
-    {
-        if (cart.Items.Count() == 0)
-            return false;
-        foreach (var item in cart.Items)
-        {
-            if (item.ProductId == productId)
-                return true;
-        }
-        return false;
-    }
+    
 
    
 }

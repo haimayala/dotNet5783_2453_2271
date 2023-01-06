@@ -1,4 +1,4 @@
-﻿using DalFacade;
+﻿
 namespace DO;
 using static DO.Enums;
 
@@ -13,6 +13,7 @@ public struct Product
     public double Price { get; set; }
     public Category? Category { get; set; }
     public int InStock { get; set; }
+    public string? Image { get; set; }
 
 
     public override string ToString()

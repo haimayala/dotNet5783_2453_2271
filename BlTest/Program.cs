@@ -125,7 +125,7 @@ for Cultivation enter -4");
                             pId = int.Parse(Console.ReadLine());
                             try
                             {
-                                bl.Product.Delete(pId);
+                                bl?.Product.Delete(pId);
                             }
                            catch(Exception e)
                             {

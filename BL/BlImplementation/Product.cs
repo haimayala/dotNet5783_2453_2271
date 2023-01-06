@@ -1,6 +1,5 @@
 ﻿using BlApi;
 using BO;
-
 using System.Data;
 
 namespace BlImplementation;
@@ -10,17 +9,17 @@ internal class Product : IProduct
     private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
 
     // A function that shows the manager a list of products
-    public IEnumerable<ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? func )
+    public IEnumerable<ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? func)
     {
         // get the list of products from the data layer
-        IEnumerable<BO.ProductForList?> list= from DO.Product? doProduct in dal.Product.GetAll()
-               select new BO.ProductForList
-               {
-                   Id = (int)(doProduct?.ID)!,
-                   Name = doProduct?.Name,
-                   category = (Enums.Category)(doProduct?.Category)!,
-                   Price = (int)(doProduct?.Price)!
-               };
+        IEnumerable<BO.ProductForList?> list = from DO.Product? doProduct in dal.Product.GetAll()
+                                               select new BO.ProductForList
+                                               {
+                                                   Id = (int)(doProduct?.ID)!,
+                                                   Name = doProduct?.Name,
+                                                   category = (Enums.Category)(doProduct?.Category)!,
+                                                   Price = (int)(doProduct?.Price)!
+                                               };
         return func is null ? list : list.Where(func);
     }
 
@@ -45,7 +44,7 @@ internal class Product : IProduct
                 };
                 return product;
             }
-            catch (DO.DalDoesNotExsistExeption de)
+            catch (DO.DalDoesNotExsistExeption)
             {
                 throw new DO.DalDoesNotExsistExeption(" this product not exsist");
             }
@@ -60,7 +59,7 @@ internal class Product : IProduct
     }
 
     // A function that gets a product id and shopping cart, the function show the buyer the product details
-    public BO.ProductItem GetProductDetails(int productId/*, BO.Cart cart*/)
+    public BO.ProductItem GetProductDetails(int productId)
     {
         try
         {
@@ -82,7 +81,7 @@ internal class Product : IProduct
                 else
                     productItem.Availability = false;
 
-                productItem.AmountInCart = product.InStock;
+                productItem.Amount = 0;
                 return productItem;
             }
             else
@@ -90,7 +89,7 @@ internal class Product : IProduct
                 throw new BO.BlUnCorrectIDExeption("uncorrect id");
             }
         }
-        catch (DO.DalDoesNotExsistExeption de)
+        catch (DO.DalDoesNotExsistExeption)
         {
             throw new DO.DalDoesNotExsistExeption("product not exsist");
         }
@@ -103,7 +102,7 @@ internal class Product : IProduct
     public void Add(BO.Product product)//Copy the respective fields
     {
         // Checks that all data is correct
-        if (product.ID > 0 && product.Name != "" && product.InStock > 0 && product.Price>=0)
+        if (product.ID > 0 && product.Name != "" && product.InStock > 0 && product.Price >= 0)
         {
             // Creating an product that belongs to the data layer 
             DO.Product prod = new DO.Product()
@@ -122,19 +121,19 @@ internal class Product : IProduct
             }
             catch (DO.DalAllredyExsisExeption)
             {
-                throw new DO.DalAllredyExsisExeption("cannnot add, product allredy exsit");
+                throw new DO.DalAllredyExsisExeption("cannnot add, product alredy exsit");
             }
 
         }
-        else if(product.ID <=0)
+        else if (product.ID <= 0)
         {
             throw new BlUnCorrectIDExeption("uncorrect id, please enter a correct id");
         }
-        else if(product.Name=="")
+        else if (product.Name == "")
         {
             throw new BlUncorrectName("uncorrect name, please enter a correct name");
         }
-        else if (product.InStock <0)
+        else if (product.InStock < 0)
         {
             throw new BlNotEnoughInStockExeption("uncorrect in stock, please enter a correct number");
         }
@@ -149,8 +148,16 @@ internal class Product : IProduct
 
     public void Delete(int ProductId)
     {
+        try
+        {
+            dal.Product.GetByID(ProductId);
+        }
+        catch (DO.DalDoesNotExsistExeption e)
+        {
+            Console.WriteLine(e);
+        }
         // get all the orders from the data layer
-        IEnumerable<DO.Order> orders = (IEnumerable<DO.Order>)dal.order.GetAll();
+        IEnumerable<DO.Order?> orders = dal.order.GetAll();
         // check if the product not exsist in any order
         if (CheckExsist(orders, ProductId) == true)
         {
@@ -158,14 +165,14 @@ internal class Product : IProduct
             {
                 dal.Product.Delete(ProductId);
             }
-            catch (DO.DalDoesNotExsistExeption de)
+            catch (DO.DalDoesNotExsistExeption)
             {
                 throw new DO.DalDoesNotExsistExeption("cannot delete,product not exist");
             }
         }
         else
         {
-            throw new BlNotExsistExeption("product not exsist");
+            throw new BlNotExsistExeption("product exsist in some order");
         }
     }
 
@@ -191,7 +198,7 @@ internal class Product : IProduct
             {
                 dal.Product.Uppdate(prod);
             }
-            catch (DO.DalDoesNotExsistExeption de)
+            catch (DO.DalDoesNotExsistExeption)
             {
                 throw new DO.DalDoesNotExsistExeption("cannot uppdate, product not exsist");
             }
@@ -217,11 +224,11 @@ internal class Product : IProduct
 
 
     // a help function for checking that the product not exsist in any order for delee
-    private bool CheckExsist(IEnumerable<DO.Order> orders, int productId)
+    private bool CheckExsist(IEnumerable<DO.Order?> orders, int productId)
     {
         foreach (DO.Order order in orders)
         {
-            IEnumerable<DO.OrderItem> orderItems = (IEnumerable<DO.OrderItem>)dal.orderItem.GetByOrderId(order.ID);
+            IEnumerable<DO.OrderItem?> orderItems = dal.orderItem.GetByOrderId(order.ID);
             foreach (DO.OrderItem item in orderItems)
             {
                 if (item.ProductID == productId)
@@ -229,10 +236,41 @@ internal class Product : IProduct
             }
         }
         return true;
-    }
+    } // למחוק את הפור איצ
 
     public IEnumerable<ProductForList?> GetProductForListsByCategory(Enums.Category category)
     {
-       return GetListedProducts(p=>p.category==category);   
+        return GetListedProducts(p => p?.category == category);
+    }
+
+  
+
+    // A function that shows the customer a list of productsItem
+    public IEnumerable<ProductItem?> GetProductItems(Func<ProductItem?, bool>? func = null)
+    {
+
+        IEnumerable<ProductItem?> productItems = from DO.Product? pro in dal.Product.GetAll()
+                                                 select new ProductItem
+                                                 {
+                                                     ID = pro.Value.ID,
+                                                     Name = pro.Value.Name,
+                                                     Price = (int)pro.Value.Price,
+                                                     Category = (Enums.Category?)pro.Value.Category,
+                                                     Amount = 0,
+                                                     Availability = GetAvailability(pro)
+                                                 };
+
+        return func is null ? productItems : productItems.Where(func);
+
+    }
+
+    bool GetAvailability(DO.Product? p)
+    {
+        return p.Value.InStock > 0;
+    }
+
+    IEnumerable<ProductItem?> IProduct.GetProductItemsByCategory(Enums.Category category)
+    {
+        return GetProductItems(p => p?.Category == category);
     }
 }
