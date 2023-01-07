@@ -8,7 +8,7 @@
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProductItem" Height="450" Width="800">
 
-    <Grid>
+    <Grid  Style="{StaticResource  gridSyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="373*"/>
             <ColumnDefinition Width="27*"/>
@@ -70,7 +70,7 @@
         </ListView>
         
         <ComboBox ItemsSource="{Binding Categories}" SelectedItem="5" x:Name="cmbProItem" IsEditable="True" HorizontalAlignment="Left" Margin="638,17,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" SelectionChanged="cmbProItem_SelectionChanged" />
-        <Button x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="615,330,0,0" VerticalAlignment="Top" Height="37" Width="101" Click="btnhowCart_Click"/>
+        <Button Style="{StaticResource buttonStyle}" x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="615,330,0,0" VerticalAlignment="Top" Height="37" Width="101" Click="btnhowCart_Click"/>
 
 
 

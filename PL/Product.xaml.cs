@@ -1,9 +1,7 @@
 ﻿
 using System;
 using System.Windows;
-
 using System.Windows.Media;
-
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Windows.Data;
@@ -41,6 +39,7 @@ public partial class Product : Window
 
     public string? ctc { get; set; }
 
+   
 
     public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
@@ -51,7 +50,7 @@ public partial class Product : Window
         addOrUpdate = flag;
         if (!addOrUpdate)
             ctc = "Add";
-        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+        //categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
     // ctor for update case
     public Product(int id, bool flag)
@@ -61,7 +60,7 @@ public partial class Product : Window
         if (addOrUpdate)
             ctc = "Update";
         product = bl.Product.GetProductById(id);
-        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+        //categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
 
     //ctor for display mode
@@ -115,10 +114,7 @@ public partial class Product : Window
                 product.Price = int.Parse(priceTextBox.Text);
                 product.Category = (BO.Enums.Category)categoryComboBox.SelectedItem;
                 product.InStock = int.Parse(inStockTextBox.Text);
-           
-           
           
-
             // try to add the product
             try
             {

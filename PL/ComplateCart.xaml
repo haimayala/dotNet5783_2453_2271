@@ -7,24 +7,13 @@
         mc:Ignorable="d"
           DataContext="{Binding cart, RelativeSource={RelativeSource self}, Mode=TwoWay}"
         Title="ComplateCart" Height="450" Width="800">
-    <Grid>
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,35,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="175"/>
-            <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice ,Mode=TwoWay}" VerticalAlignment="Center"/>
+    <Grid  Style="{StaticResource  gridSyle}">
 
-        </Grid>
+        <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="598,207,0,0" VerticalAlignment="Top" Width="175"/>
+        <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice ,Mode=TwoWay}" VerticalAlignment="Center"/>
 
-        <ListView x:Name="orderItemListView"  SelectionMode="Single" Margin="22,216,365,43" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding Items, Mode=TwoWay}">
+
+        <ListView x:Name="orderItemListView"  SelectionMode="Single" Margin="367,19,20,240" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding Items, Mode=TwoWay}">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -78,11 +67,75 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                   
+
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnFinishOrder" Content="for payment" HorizontalAlignment="Left" Margin="618,313,0,0" VerticalAlignment="Top" Height="31" Width="98" Click="btnFinishOrder_Click"/>
+
+
+        <Grid x:Name="grid2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,40,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Enter Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Enter name:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"/>
+            <Label Grid.Column="0" Content="Enter Addres:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="custonerAddresTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustonerAddres, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock x:Name="totalPriceTextBlockk" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice}" VerticalAlignment="Center"/>
+
+        </Grid>
+
+        <Button Style="{StaticResource buttonStyle}" x:Name="btnFinishOrder" Content="for payment" HorizontalAlignment="Left" Margin="592,253,0,0" VerticalAlignment="Top" Height="31" Width="120" Click="btnFinishOrder_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.199"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+
+        <Grid x:Name="grid3"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,173,0,0"   >
+
+
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="id:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="num 3 Cart:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="num3CartTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding num3Cart, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="num Card:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="numCardTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding numCard, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="password:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3"  VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Button x:Name="btnFinishAll" Content="completion"  HorizontalAlignment="Left" Margin="66,338,0,0" VerticalAlignment="Top" Height="38" Width="134" FontFamily="Arial" Foreground="White" FontSize="16"  Click="btnFinishAll_Click">
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}"/>
+            </Button.Background>
+        </Button>
+
 
     </Grid>
 </Window>

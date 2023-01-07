@@ -8,7 +8,7 @@
         DataContext="{Binding ProductItem, RelativeSource={RelativeSource self}}"
       
         Title="CustomerProductItemWindow" Height="450" Width="800">
-    <Grid>
+    <Grid  Style="{StaticResource  gridSyle}">
 
         <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,94,0,0" Width="179">
             <Grid.ColumnDefinitions>
@@ -35,7 +35,7 @@
             <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding Price}" VerticalAlignment="Center"/>
         </Grid>
-        <Button x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="60,325,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click"/>
+        <Button Style="{StaticResource buttonStyle}" x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="60,325,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click"/>
 
     </Grid>
 </Window>

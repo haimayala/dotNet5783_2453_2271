@@ -6,15 +6,13 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="adminWindow" Height="450" Width="800">
-    
-    
-    <Grid>
-        <Button x:Name="btnOrders" Content="Product list" HorizontalAlignment="Left" Margin="149,94,0,0" VerticalAlignment="Top" Height="41" Width="136" Click="btnOrders_Click">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
+
+
+    <Grid  Style="{StaticResource  gridSyle}">
+        <Button x:Name="btnOrders" Style="{StaticResource buttonStyle}" Content="Product list" HorizontalAlignment="Left" Margin="585,86,0,0" VerticalAlignment="Top" Height="41" Width="136" Click="btnOrders_Click">
+
         </Button>
-        <Button x:Name="btnProducts" Content="Order list" HorizontalAlignment="Left" Margin="522,94,0,0" VerticalAlignment="Top" Height="41" Width="134" Click="btnProducts_Click"/>
+        <Button x:Name="btnProducts" Style="{StaticResource buttonStyle}" Content="Order list" HorizontalAlignment="Left" Margin="84,86,0,0" VerticalAlignment="Top" Height="41" Width="134" Click="btnProducts_Click"/>
 
     </Grid>
 </Window>

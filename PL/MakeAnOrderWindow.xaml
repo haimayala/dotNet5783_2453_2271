@@ -7,18 +7,19 @@
         mc:Ignorable="d"
          DataContext="{Binding MyCart, RelativeSource={RelativeSource self}}"
         Title="MakeAnOrderWindow" Height="450" Width="800">
-    <Grid>
+    <Grid  Style="{StaticResource  gridSyle}">
 
         <Grid>
             <Grid x:Name="imgrid">
-                <Image x:Name="imgPic" HorizontalAlignment="Left" Height="27" Margin="42,38,0,0" VerticalAlignment="Top" Width="48" Source="/aaaaaaaaa.png"/>
-                <Image x:Name="imgPi" HorizontalAlignment="Left" Height="31" Margin="111,38,0,0" VerticalAlignment="Top" Width="50" Source="/bbbbbb.png" RenderTransformOrigin="-0.771,0.09" />
+               
+                <Image x:Name="imgPi" HorizontalAlignment="Left" Height="31" Margin="131,98,0,0" VerticalAlignment="Top" Width="50" Source="/crcrcr.png" RenderTransformOrigin="-0.771,0.09" />
                 <Image x:Name="imgP" HorizontalAlignment="Left" Height="32" Margin="184,38,0,0" VerticalAlignment="Top" Width="53" Source="/ccccccccc.png" MouseUp="imgP_MouseUp" RenderTransformOrigin="-2.948,-1.057"  />
-                <Image x:Name="imgPicture" HorizontalAlignment="Left" Height="36" Margin="62,88,0,0" VerticalAlignment="Top" Width="64" Source="/crcrcr.png" RenderTransformOrigin="1.045,1.186"/>
-                <Image x:Name="imgPict" HorizontalAlignment="Left" Height="50" Margin="134,81,0,0" VerticalAlignment="Top" Width="112" Source="/ddddddd.png" RenderTransformOrigin="-2.495,-1.481"/>
+                <Image x:Name="imgPicture" HorizontalAlignment="Left" Height="36" Margin="32,36,0,0" VerticalAlignment="Top" Width="51" Source="/aaaaaaaaa.png" RenderTransformOrigin="1.045,1.186"/>
+                <Image x:Name="imgPict" HorizontalAlignment="Left" Height="34" Margin="103,38,0,0" VerticalAlignment="Top" Width="54" Source="/bbbbbb.png" RenderTransformOrigin="-2.495,-1.481"/>
+                <Image HorizontalAlignment="Left" Height="35" Margin="32,95,0,0" VerticalAlignment="Top" Width="65" Source="/ddddddd.png"/>
             </Grid>
 
-            <Button x:Name="btnFinishAll" Content="completion"  HorizontalAlignment="Left" Margin="98,319,0,0" VerticalAlignment="Top" Height="38" Width="134" FontFamily="Arial" Foreground="White" FontSize="16" Visibility="Hidden" Click="btnFinishAll_Click">
+            <Button x:Name="btnFinishAll" Content="completion"  HorizontalAlignment="Left" Margin="98,319,0,0" VerticalAlignment="Top" Height="38" Width="134" FontFamily="Arial" Foreground="White" FontSize="16"  Click="btnFinishAll_Click">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}"/>
                 </Button.Background>
@@ -47,7 +48,7 @@
             <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice}" VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid x:Name="grid2" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="56,0,0,0"   >
+        <Grid x:Name="grid2"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="56,0,0,0"   >
 
 
 

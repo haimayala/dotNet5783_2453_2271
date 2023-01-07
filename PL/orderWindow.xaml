@@ -10,7 +10,7 @@
 
 
 
-    <Grid x:Name="grid0" >
+    <Grid x:Name="grid0"  Style="{StaticResource  gridSyle}" >
        
         <Grid x:Name="grid1"    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,53,0,0">
             <Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
             
         </Grid>
 
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding  Items}" SelectionMode="Single" Margin="307,37,10,197">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding  Items}" SelectionMode="Single" Margin="288,17,19,217">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -127,7 +127,14 @@
                 <Setter Property="Visibility"
                         Value="{Binding visibility , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
                 </Setter>
+                <Setter Property="IsEnabled"
+                        Value="{Binding enable  , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
+                </Setter>
+
             </Style>
+          
+            
+            
         </Grid.Resources>
 
     </Grid>

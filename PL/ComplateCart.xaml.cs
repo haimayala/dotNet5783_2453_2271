@@ -41,14 +41,12 @@ namespace PL
         {
             InitializeComponent();
             cart = Cart;
-            
         }
 
 
         private void btnFinishOrder_Click(object sender, RoutedEventArgs e)
         {
-            new MakeAnOrderWindow(cart).ShowDialog();
-          
+            new MakeAnOrderWindow(cart).ShowDialog();          
         }
 
         private void TextBox_TextChanged(object sender, RoutedEventArgs e)

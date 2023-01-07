@@ -7,7 +7,7 @@
          DataContext="{Binding OrderTrucking, RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="OrderTrackingWindow" Height="450" Width="800">
-    <Grid>
+    <Grid  Style="{StaticResource  gridSyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="149*"/>
             <RowDefinition Height="285*"/>
@@ -27,7 +27,7 @@
             <TextBlock x:Name="statusTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding Status}" VerticalAlignment="Center"/>
 
         </Grid>
-        <Button x:Name="btn" Content="Show Order Items" HorizontalAlignment="Left" Margin="603,169,0,0" VerticalAlignment="Top" Height="41" Width="124"  Grid.Row="1" Click="btn_Click"/>
+        <Button Style="{StaticResource buttonStyle}" x:Name="btn" Content="Show Order Items" HorizontalAlignment="Left" Margin="603,169,0,0" VerticalAlignment="Top" Height="41" Width="124"  Grid.Row="1" Click="btn_Click"/>
 
         <DataGrid x:Name="trackingDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Trecking}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="115,75,456,193" Background="#FFF3E4E4" Foreground="Black" FontWeight="Bold" Grid.RowSpan="2">
             <DataGrid.Columns>

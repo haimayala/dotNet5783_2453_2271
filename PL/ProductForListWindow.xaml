@@ -10,7 +10,7 @@
 
 
 
-    <Grid>
+    <Grid  Style="{StaticResource  gridSyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="329*"/>
             <ColumnDefinition Width="12*"/>
@@ -65,9 +65,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        
 
-        <Button x:Name="btnAddProduct" Content="Add new Product"  Margin="0,487,31,78" HorizontalAlignment="Right"  Padding="5" Width="169" Grid.Column="2" Click="btnAddProduct_Click" RenderTransformOrigin="0.508,1.291" BorderBrush="White" Background="White" FontWeight="Bold" FontSize="18" />
+
+        <Button Style="{StaticResource buttonStyle}" x:Name="btnAddProduct" Content="Add new Product"  Margin="0,487,31,78" HorizontalAlignment="Right"  Padding="5" Width="169" Grid.Column="2" Click="btnAddProduct_Click" RenderTransformOrigin="0.508,1.291" BorderBrush="White"  FontWeight="Bold" FontSize="18" />
 
 
 

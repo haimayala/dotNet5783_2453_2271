@@ -1,4 +1,5 @@
 ﻿using BO;
+using MailChimp.Net.Core;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -57,9 +58,20 @@ namespace PL
         {
             try
             {
+              
                 bl.Cart.OrderConfirmation(MyCart);
                 MessageBox.Show("The order is complete", "complete", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close();  
+                MyCart.Items = new List<OrderItem?>();
+                MyCart.TotalPrice = 0;
+                MyCart.CustomerEmail = null;
+                MyCart.CustonerAddres = null;
+                MyCart.CustomerName = null;
+               
+                Close();
+                
+
+             
+                
 
             }
             catch(BlUncorrectEmailExeption ex)

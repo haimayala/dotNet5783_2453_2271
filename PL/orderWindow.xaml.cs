@@ -45,6 +45,20 @@ namespace PL
     
         public Visibility visibility { get; set; }
 
+
+        public bool isenable
+        {
+            get { return (bool)GetValue(isenableProperty); }
+            set { SetValue(isenableProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for isenable.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isenableProperty =
+            DependencyProperty.Register("isenable", typeof(bool), typeof(Window), new PropertyMetadata(null));
+
+
+
+
         public bool isMannager
         {
             get { return (bool)GetValue(isMannagerProperty); }
@@ -59,6 +73,8 @@ namespace PL
         public orderWindow()
         {
             InitializeComponent();
+            isenable = true;
+           
         }
 
         public orderWindow(int orderId, bool flag)
@@ -84,6 +100,7 @@ namespace PL
             catch (BlOrderAlredyShiped be)
             {
                 MessageBox.Show(be.Message);
+               
             }
         }
 
@@ -96,6 +113,7 @@ namespace PL
             catch (BlOrderAlredyDelivered be)
             {
                 MessageBox.Show(be.Message);
+               
             }
 
         }
