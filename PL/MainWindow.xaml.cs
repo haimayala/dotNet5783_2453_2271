@@ -33,4 +33,9 @@ public partial class MainWindow : Window
     {
         new ProductItem().ShowDialog();
     }
+
+    private void btnNewOrder_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
