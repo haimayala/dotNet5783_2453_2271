@@ -8,73 +8,52 @@
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProductItem" Height="450" Width="800">
 
-    <Grid  Style="{StaticResource  gridSyle}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="373*"/>
-            <ColumnDefinition Width="27*"/>
-        </Grid.ColumnDefinitions>
-        <ListView x:Name="productItemListView"  SelectionMode="Single" Margin="24,28,193,206" MouseDoubleClick="productItemListView_MouseDoubleClick">
-            <ListView.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn x:Name="iDColumn" Header="ID" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding ID}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="amountColumn" Header="Amount" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="6,-1,-6,-1" Text="{Binding Amount}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="availabilityColumn" Header="Availability" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsEnabled="False" IsChecked="{Binding Availability, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="-6,-1,-6,-1"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="categoryColumn" Header="Category" Width="100">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Category}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
 
-                    <GridViewColumn x:Name="nameColumn" Header="Name" Width="100">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="priceColumn" Header="Price" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="-6,-1,-6,-1" Text="{Binding Price}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
+    <Window.Resources>
+        <DataTemplate x:Key="prod">
+            <StackPanel>
+                <Border Width="10" Height="10" CornerRadius="5" Margin="0"  >
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1"/>
+                    </Border.Effect>
+                </Border>
+                <Image x:Name="prodImage" Source="{Binding  Path=ImageRelativeName, Converter={StaticResource imageConverter}}"  HorizontalAlignment="Left" Height="60" Margin="10,20,0,0" VerticalAlignment="Top" Width="191"/>
+                <TextBlock Margin="5" Text="{Binding Name}" FontSize="15"/>
+                <TextBlock Margin="5" Text="{Binding Price,StringFormat={}{0:c}}" FontSize="15"/>
+                <TextBlock Margin="5" Text="{Binding Category}" FontSize="15">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Blue"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="TextDecorations" Value="Underline" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <ScrollViewer x:Name="Catalog" Background="#ffff" Margin="0,-37,0,37"  >
+            <ListView Name="productItemListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}" ItemTemplate="{StaticResource prod}" Height="375" MouseDoubleClick="productItemListView_MouseDoubleClick_1">
+
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+
+            </ListView>
+
+        </ScrollViewer>
+
         <ComboBox ItemsSource="{Binding Categories}" SelectedItem="5" x:Name="cmbProItem" IsEditable="True" HorizontalAlignment="Left" Margin="638,17,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" SelectionChanged="cmbProItem_SelectionChanged" />
-        <Button Style="{StaticResource buttonStyle}" x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="615,330,0,0" VerticalAlignment="Top" Height="37" Width="101" Click="btnhowCart_Click"/>
-
-
-
-
+        <Button Style="{StaticResource buttonStyle}" x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="648,360,0,0" VerticalAlignment="Top" Height="37" Width="100" Click="btnhowCart_Click"/>
 
     </Grid>
 

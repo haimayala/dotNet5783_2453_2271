@@ -10,7 +10,7 @@
     
     
     
-    <Grid  Style="{StaticResource  gridSyle}">
+    <Grid  >
         <ListView x:Name="orderForListListView"  SelectionMode="Single" Margin="32,17,328,120" ItemsSource="{Binding }" MouseDoubleClick="orderForListListView_MouseDoubleClick" >
             <ListView.ItemContainerStyle>
                 <Style> 

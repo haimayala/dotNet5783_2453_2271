@@ -9,7 +9,9 @@ public class ProductItem
     public Category? Category { get; set; }  
     public bool Availability { get; set; }  
     public int Amount { get; set; }
-   
+    public string? ImageRelativeName { get; set; }
+
+
     public override string ToString()
     {
         return this.ToStringProperty();

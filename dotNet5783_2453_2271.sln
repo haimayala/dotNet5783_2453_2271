@@ -22,6 +22,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{49F9CE54-BE6
 		XML\dal-config.xml = XML\dal-config.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "picss", "picss", "{871A3F5B-3EEC-4041-9F18-412050B4F933}"
+	ProjectSection(SolutionItems) = preProject
+		PL\pics\aaaaaaaaa.png = PL\pics\aaaaaaaaa.png
+		PL\pics\bbbbbb.png = PL\pics\bbbbbb.png
+		PL\pics\ccccccccc.png = PL\pics\ccccccccc.png
+		PL\pics\crcrcr.png = PL\pics\crcrcr.png
+		PL\pics\ddddddd.png = PL\pics\ddddddd.png
+		PL\pics\facebook.png = PL\pics\facebook.png
+		picss\IMG1000.jpg = picss\IMG1000.jpg
+		picss\IMG1001.jpg = picss\IMG1001.jpg
+		picss\IMG1002.jpg = picss\IMG1002.jpg
+		picss\IMG1003.jpg = picss\IMG1003.jpg
+		picss\IMG1004.jpg = picss\IMG1004.jpg
+		picss\IMG1005.jpg = picss\IMG1005.jpg
+		picss\IMG1006.jpg = picss\IMG1006.jpg
+		picss\IMG1007.jpg = picss\IMG1007.jpg
+		picss\IMG1008.jpg = picss\IMG1008.jpg
+		picss\IMG1009.jpg = picss\IMG1009.jpg
+		PL\pics\inst.png = PL\pics\inst.png
+		picss\noImg.jpg = picss\noImg.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

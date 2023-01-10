@@ -100,7 +100,8 @@ namespace PL
             catch (BlOrderAlredyShiped be)
             {
                 MessageBox.Show(be.Message);
-               
+                isenable=false;
+
             }
         }
 
@@ -113,7 +114,7 @@ namespace PL
             catch (BlOrderAlredyDelivered be)
             {
                 MessageBox.Show(be.Message);
-               
+                isenable = false;
             }
 
         }

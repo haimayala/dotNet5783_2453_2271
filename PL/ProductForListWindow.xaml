@@ -10,13 +10,13 @@
 
 
 
-    <Grid  Style="{StaticResource  gridSyle}">
+    <Grid  >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="329*"/>
             <ColumnDefinition Width="12*"/>
             <ColumnDefinition Width="459*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="productForListListView"  SelectionMode="Single" Margin="10,32,392,202" Grid.ColumnSpan="3" MouseDoubleClick="productForListListView_MouseDoubleClick" >
+        <ListView x:Name="productForListListView"  SelectionMode="Single" Margin="10,32,382,202" Grid.ColumnSpan="3" MouseDoubleClick="productForListListView_MouseDoubleClick" >
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -57,7 +57,8 @@
                     <GridViewColumn x:Name="image" Header="Image" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Margin="-6,-1,-6,-1" Source="{Binding Image}"/>
+                                <Image Margin="-6,-1,-6,-1" x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}"
+/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

@@ -8,10 +8,10 @@
       DataContext="{Binding product, RelativeSource={RelativeSource self}}"  
         Title="Product" Height="450" Width="400">
 
-   
 
 
-    <Grid  Style="{StaticResource  gridSyle}"  >
+
+    <Grid    >
 
         <Grid x:Name="grid1"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,38,0,0" Height="168" Width="183" >
             <Grid.ColumnDefinitions>
@@ -47,13 +47,16 @@
             <TextBox x:Name="nameTextBox" Grid.Column="1" Height="NaN" Grid.Row="3" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="99" Margin="8,0,0,0"/>
             <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="28" Margin="10,6,0,0" Grid.Row="4" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-         
+
 
 
         </Grid>
 
-        <Button x:Name="btnAddOrUpdate"  Style="{DynamicResource btnadd}"  HorizontalAlignment="Left" Margin="81,360,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104"  FontWeight="Bold" FontSize="16" ></Button>
-        <Image x:Name="imgdog" Margin="299,330,38,24" Source="/logo.png"/>
+        <Button x:Name="btnAddOrUpdate"  Style="{DynamicResource btnadd}"  HorizontalAlignment="Left" Margin="46,359,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104"  FontWeight="Bold" FontSize="16" ></Button>
+        <Image x:Name="imgdog" Margin="327,338,10,15" Source="/logo.png"/>
+        <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}"
+  HorizontalAlignment="Left" Height="119" Margin="98,217,0,0" VerticalAlignment="Top" Width="133"/>
+        <Button x:Name="btndl" Content="Delete" HorizontalAlignment="Left" Margin="224,379,0,0" VerticalAlignment="Top" Width="72" Height="23" Background="#FF393333" Foreground="#FFFF0C0C" BorderBrush="#FFF1F1F1" MouseDoubleClick="btndl_MouseDoubleClick"/>
 
         <Grid.Resources>
             <Style TargetType="Button" x:Key="btnadd">

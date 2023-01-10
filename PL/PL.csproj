@@ -27,6 +27,7 @@
     <None Remove="cc7-1024x685.jpg" />
     <None Remove="ccc.png" />
     <None Remove="ccccccccc.png" />
+    <None Remove="cmpcart.jpg.png" />
     <None Remove="crcrcr.png" />
     <None Remove="cut.png" />
     <None Remove="ddd.png" />
@@ -36,6 +37,8 @@
     <None Remove="inst.png" />
     <None Remove="logo.png" />
     <None Remove="man.png" />
+    <None Remove="wat.jpg" />
+    <None Remove="‏‏צילום מסך %286%29.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,12 +49,15 @@
     <Resource Include="aaaaaaaaa.png" />
     <Resource Include="bbbbbb.png" />
     <Resource Include="ccccccccc.png" />
+    <Resource Include="cmpcart.jpg.png" />
     <Resource Include="crcrcr.png" />
     <Resource Include="ddddddd.png" />
     <Resource Include="facebook.png" />
     <Resource Include="inst.png" />
     <Resource Include="logo.png" />
     <Resource Include="man.png" />
+    <Resource Include="wat.jpg" />
+    <Resource Include="‏‏צילום מסך (6).png" />
   </ItemGroup>
 
 </Project>

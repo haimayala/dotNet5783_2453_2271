@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Windows.Data;
 using static BO.Enums;
+using System.Windows.Input;
 
 namespace PL;
 
@@ -39,13 +40,13 @@ public partial class Product : Window
 
     public string? ctc { get; set; }
 
-   
+
 
     public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
     // ctor for add case
     public Product(bool flag)
-    {       
+    {
         InitializeComponent();
         addOrUpdate = flag;
         if (!addOrUpdate)
@@ -64,10 +65,10 @@ public partial class Product : Window
     }
 
     //ctor for display mode
-   
+
     private void btnAddOrUpdate_Click(object sender, RoutedEventArgs e)
     {
-       //  in case of adding a product
+        //  in case of adding a product
         if (!addOrUpdate/*(string)btnAddOrUpdate.Content == "Add"*/)
         {
 
@@ -108,13 +109,13 @@ public partial class Product : Window
             else
                 inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
             //Initialize the product according The text boxes
-            
-                product.ID = int.Parse(iDTextBox.Text);
-                product.Name = nameTextBox.Text;
-                product.Price = int.Parse(priceTextBox.Text);
-                product.Category = (BO.Enums.Category)categoryComboBox.SelectedItem;
-                product.InStock = int.Parse(inStockTextBox.Text);
-          
+
+            product.ID = int.Parse(iDTextBox.Text);
+            product.Name = nameTextBox.Text;
+            product.Price = int.Parse(priceTextBox.Text);
+            product.Category = (BO.Enums.Category)categoryComboBox.SelectedItem;
+            product.InStock = int.Parse(inStockTextBox.Text);
+
             // try to add the product
             try
             {
@@ -181,6 +182,34 @@ public partial class Product : Window
             }
 
         }
+
+
+    }
+
+    private void btndl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+
+        //try
+        //{
+        //    bl?.Product.Delete(product!.ID);
+
+        //}
+        //catch (BO.BlNotExsistExeption ex)
+        //{
+        //    MessageBoxResult result;
+        //    result = MessageBox.Show("Are you sure you want to delete this product?", "DELETE", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        //    if (result == MessageBoxResult.Yes)
+        //    {
+        //        MessageBox.Show(ex.Message + " " + "deleted succesfuly", "DELETE", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        Close();
+               
+        //    }
+        //    else
+        //    {
+        //        Close();
+        //    }
+
+        //}
 
 
     }
