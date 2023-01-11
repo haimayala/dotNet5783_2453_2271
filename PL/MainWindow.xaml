@@ -6,48 +6,64 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+
+
+
+
+
+
     <Grid>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="/tdog.png"/>
-        </Grid.Background>-->
-        <Grid>
 
+        <Grid Background="#FFE0F4F4"  >
+            <Button x:Name="btnNewOrder"   Style="{StaticResource buttonStyle}" Content="New Order" HorizontalAlignment="Left" Margin="486,363,0,0" VerticalAlignment="Top"  Click="btnNewOrder_Click"/>
+            <Image HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="51" Source="/logo.png" Margin="30,340,0,0"/>
+            <TextBlock x:Name="lblPhone" HorizontalAlignment="Left" Margin="104,340,0,0" TextWrapping="Wrap" Text="052-538-1848" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+            <TextBlock x:Name="lblEmail" HorizontalAlignment="Left" Margin="104,369,0,0" TextWrapping="Wrap" Text="petshop@gmail.vom" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="315,73,0,0" TextWrapping="Wrap" Text="~Ramat Gan~" VerticalAlignment="Top" FontFamily="Blackadder ITC" FontWeight="Bold" FontSize="22" Height="30" Width="144" RenderTransformOrigin="0.71,0.818"/>
+            <TextBlock HorizontalAlignment="Left" Margin="290,28,0,0" TextWrapping="Wrap" Text="PET-SHOP" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" FontFamily="Showcard Gothic" Height="42" Width="194"/>
 
+            <Button x:Name="btnTrucking"  Style="{StaticResource buttonStyle}" Content="Truck" HorizontalAlignment="Left" Margin="655,115,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="btnTrucking_Click" RenderTransformOrigin="0.349,-1.038"></Button>
+            <TextBox x:Name="truckingId" HorizontalAlignment="Left" Margin="655,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="30" RenderTransformOrigin="0.682,4.426"/>
+            <Image HorizontalAlignment="Left" Height="27" Margin="30,15,0,0" VerticalAlignment="Top" Width="41" Source="/inst.png"/>
 
-            <Image HorizontalAlignment="Left" Height="35" Margin="31,362,0,0" VerticalAlignment="Top" Width="118" Source="/logo.png"/>
-
-
-            <TextBlock HorizontalAlignment="Left" Margin="90,383,0,0" TextWrapping="Wrap" Text="petshop@gmail.com" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Image HorizontalAlignment="Left" Height="30" Margin="526,38,0,0" VerticalAlignment="Top" Width="48"/>
-            <Image HorizontalAlignment="Left" Height="63" Margin="232,22,0,0" VerticalAlignment="Top" Width="74" Source="/logo.png" RenderTransformOrigin="-3.713,0.501">
-                <Image.RenderTransform>
+            <Image HorizontalAlignment="Left" Height="27" Margin="73,15,0,0" VerticalAlignment="Top" Width="47" Source="/facebook.png"/>
+            <Ellipse HorizontalAlignment="Left" Height="148" Margin="10,111,0,0" Stroke="Black" VerticalAlignment="Top" Width="126">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/bird.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse HorizontalAlignment="Left" Height="152" Margin="141,115,0,0" Stroke="Black" VerticalAlignment="Top" Width="121">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/sdog.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse HorizontalAlignment="Left" Height="162" Margin="261,106,0,0" Stroke="Black" VerticalAlignment="Top" Width="125" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-0.513"/>
+                        <RotateTransform Angle="-0.469"/>
                         <TranslateTransform/>
                     </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image HorizontalAlignment="Left" Height="100" Margin="357,68,0,0" VerticalAlignment="Top" Width="100"/>
-            <TextBlock HorizontalAlignment="Left" Margin="335,59,0,0" TextWrapping="Wrap" Text="~Ramat Gan~" VerticalAlignment="Top" FontSize="20" FontFamily="Monotype Corsiva" FontWeight="Bold" RenderTransformOrigin="0.566,3.145"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,16,0,0" TextWrapping="Wrap" Text="PET SHOP" VerticalAlignment="Top" FontSize="36" FontFamily="Bodoni MT" FontWeight="Bold" Height="38" Width="168" Foreground="#FFD0A3EB"/>
-            <TextBlock HorizontalAlignment="Left" Margin="90,367,0,0" TextWrapping="Wrap" Text="א'-ה': 08:00-20:00" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="419,0,0,0" VerticalAlignment="Center" Width="100"/>
-            <Button x:Name="btnNewOrder" Content="New Order" HorizontalAlignment="Left" Margin="486,367,0,0" VerticalAlignment="Top" Background="#FFE2D7D7" Height="45" Width="124" Click="btnNewOrder_Click"/>
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/ccc.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
 
 
 
         </Grid>
-        <Button x:Name="btnPres" Content="Mannager" Margin="637,363,33,23" Click="Press_here_Click" BorderBrush="#FF3A64D7" FontWeight="Bold" FontFamily="Bookman Old Style" FontSize="22" Cursor="">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFCDD3D6" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="btnMannager" Content="Mannager" Margin="614,356,51,26"   FontWeight="Bold" FontFamily="Bookman Old Style"  Style="{StaticResource buttonStyle}"  Cursor=""  Click="btnMannager_Click" />
 
+
+        <!--<local:MainWindow xmlns:xlink="http://schemas.microsoft.com/expression/blend/2008"  >
+
+
+            <local:MainWindow xlink:DataContext="https://www.youtube.com/watch?v=D6zKtCYnFMo"> Visit W3Schools</local:MainWindow>
+
+        </local:MainWindow>-->
 
     </Grid>
 

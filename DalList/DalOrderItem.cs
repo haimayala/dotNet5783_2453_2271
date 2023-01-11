@@ -29,7 +29,7 @@ internal class DalOrderItem : IOrderItem
             throw new DalDoesNotExsistExeption("orderItem not exsist");
         else
         {
-            DataSource.s_products.Remove(DataSource.s_products.Find(x => x?.ID == id));
+            DataSource.s_orderItems.Remove(DataSource.s_orderItems. Find(x => x?.ID == id));
         }
     }
 
@@ -88,7 +88,7 @@ internal class DalOrderItem : IOrderItem
 
     public OrderItem GetItem(Func<OrderItem?, bool>? func)
     {
-        return DataSource.s_orderItems.FirstOrDefault(item => func(item)) ?? throw new DalDoesNotExsistExeption("order item not exist");
+        return DataSource.s_orderItems.FirstOrDefault(item => func!(item)) ?? throw new DalDoesNotExsistExeption("order item not exist");
     }
 
 }

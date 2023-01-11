@@ -5,6 +5,9 @@ using System.Windows;
 using System.Windows.Media;
 
 using System.Text.RegularExpressions;
+using System.Globalization;
+using System.Windows.Data;
+using static BO.Enums;
 
 namespace PL;
 
@@ -13,142 +16,163 @@ namespace PL;
 /// </summary>
 public partial class Product : Window
 {
-    //private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
+    private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
 
-    BlApi.IBl? bl = BlApi.Factory.Get();
+    public BO.Product? product
+    {
+        get { return (BO.Product?)GetValue(productProperty); }
+        set { SetValue(productProperty, value); }
+    }
 
+    // Using a DependencyProperty as the backing store for product.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty productProperty =
+        DependencyProperty.Register("product", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
+
+    public bool addOrUpdate
+    {
+        get { return (bool)GetValue(addOrUpdateProperty); }
+        set { SetValue(addOrUpdateProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for addOrUpdate.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty addOrUpdateProperty =
+        DependencyProperty.Register("addOrUpdate", typeof(bool), typeof(Window), new PropertyMetadata(null));
+
+
+    public string? ctc { get; set; }
+
+
+    public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
     // ctor for add case
-    public Product()
-    {
+    public Product(bool flag)
+    {       
         InitializeComponent();
-        CategoryAdd.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-        btnAddOrUpdate.Content = "Add";
+        addOrUpdate = flag;
+        if (!addOrUpdate)
+            ctc = "Add";
+        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
     // ctor for update case
-    public Product(int id)
+    public Product(int id, bool flag)
     {
-
-      
         InitializeComponent();
-        CategoryAdd.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-        CategoryAdd.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-        btnAddOrUpdate.Content = "Update";
-        BO.Product pro=bl.Product.GetProductById(id);           
-        IDTextBoxAdd.Text = pro.ID.ToString();
-        NameTextBoxAdd.Text = pro.Name;
-        PriceTextBoxAdd.Text = pro.Price.ToString();
-        InStockTextBoxAdd.Text = pro.InStock.ToString();
-        CategoryAdd.Text = pro.Category.ToString();
-        IDTextBoxAdd.IsReadOnly = true;
-        Regex regex = new("[0-9]+");
-
+        addOrUpdate = flag;
+        if (addOrUpdate)
+            ctc = "Update";
+        product = bl.Product.GetProductById(id);
+        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
-    //private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().ShowDialog();
+
+    //ctor for display mode
+   
     private void btnAddOrUpdate_Click(object sender, RoutedEventArgs e)
     {
-        // in case of adding a product
-        if (btnAddOrUpdate.Content == "Add")
+       //  in case of adding a product
+        if (!addOrUpdate/*(string)btnAddOrUpdate.Content == "Add"*/)
         {
 
             //Checking that the input is correct and appropriate
             BO.Product product = new BO.Product();
-            
-            if (IDTextBoxAdd.Text.Length == 0)
+
+            if (iDTextBox.Text.Length == 0)
             {
-                IDTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                iDTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                IDTextBoxAdd.BorderBrush= new SolidColorBrush(Colors.Green);    
-            if (CategoryAdd.SelectedValue==null || CategoryAdd.SelectedIndex == 5)
+                iDTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            if (categoryComboBox.SelectedValue == null || categoryComboBox.SelectedIndex == 5)
             {
                 MessageBox.Show("Please choose a category");
                 return;
             }
-            if (NameTextBoxAdd.Text.Length == 0)
+            if (nameTextBox.Text.Length == 0)
             {
-                NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (PriceTextBoxAdd.Text.Length == 0)
+                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            if (priceTextBox.Text.Length == 0)
             {
-                PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (InStockTextBoxAdd.Text.Length == 0)
+                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            if (inStockTextBox.Text.Length == 0)
             {
-                InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
             //Initialize the product according The text boxes
-            product.ID = int.Parse(IDTextBoxAdd.Text);
-            product.Name= NameTextBoxAdd.Text;
-            product.Price = int.Parse(PriceTextBoxAdd.Text);
-            product.Category = (BO.Enums.Category)CategoryAdd.SelectedItem;
-            product.InStock = int.Parse(InStockTextBoxAdd.Text);
+            
+                product.ID = int.Parse(iDTextBox.Text);
+                product.Name = nameTextBox.Text;
+                product.Price = int.Parse(priceTextBox.Text);
+                product.Category = (BO.Enums.Category)categoryComboBox.SelectedItem;
+                product.InStock = int.Parse(inStockTextBox.Text);
+           
+           
+          
 
             // try to add the product
             try
             {
                 bl?.Product.Add(product);
-                Close();                   
+                Close();
             }
             // in case the adding faild
-           catch (Exception ed)
+            catch (Exception ed)
             {
                 MessageBox.Show(ed.Message);
             }
-           
+
         }
         // in case of updating a product
-        else if (btnAddOrUpdate.Content == "Update")
+        else /*if ((string)btnAddOrUpdate.Content == "Update")*/
         {
-
             // make the match product
             BO.Product product = new BO.Product();
 
             //Checking that the input is correct and appropriate
 
-            if (CategoryAdd.SelectedValue == null || CategoryAdd.SelectedIndex==5)
+            if (categoryComboBox.SelectedValue == null || categoryComboBox.SelectedIndex == 5)
             {
                 MessageBox.Show("Please choose a category");
                 return;
             }
-            if (NameTextBoxAdd.Text.Length == 0)
+            if (nameTextBox.Text.Length == 0)
             {
-                NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                NameTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (PriceTextBoxAdd.Text.Length == 0)
+                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            if (priceTextBox.Text.Length == 0)
             {
-                PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                PriceTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (InStockTextBoxAdd.Text.Length == 0)
+                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            if (inStockTextBox.Text.Length == 0)
             {
-                InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Red);
+                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;
             }
             else
-                InStockTextBoxAdd.BorderBrush = new SolidColorBrush(Colors.Green);
+                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
 
             //Initialize the product according The text boxes
-            product.ID = int.Parse(IDTextBoxAdd.Text);
-            product.Name = NameTextBoxAdd.Text;
-            product.Price = int.Parse(PriceTextBoxAdd.Text);
-            product.Category = (BO.Enums.Category)CategoryAdd.SelectedItem;
-            product.InStock = int.Parse(InStockTextBoxAdd.Text);
+            product.ID = int.Parse(iDTextBox.Text);
+            product.Name = nameTextBox.Text;
+            product.Price = int.Parse(priceTextBox.Text);
+            product.Category = (BO.Enums.Category)categoryComboBox.SelectedItem;
+            product.InStock = int.Parse(inStockTextBox.Text);
             try
             {
                 bl?.Product.Uppdate(product);
@@ -159,9 +183,9 @@ public partial class Product : Window
             {
                 MessageBox.Show(ed.Message);
             }
- 
+
         }
 
-        
+
     }
 }

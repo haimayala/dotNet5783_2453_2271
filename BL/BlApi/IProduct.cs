@@ -13,7 +13,7 @@ public interface IProduct
     public BO.Product GetProductById(int productId);
 
     // A function that gets a product id and shopping cart , the function show the buyer the product details
-    public BO.ProductItem GetProductDetails(int productId/*, Cart cart*/);    
+    public BO.ProductItem GetProductDetails(int productId);    
 
     /*A function that gets a product and try to add this product to the product
       list by the the data layer , in case of incorrect input an exception will be thrown*/
@@ -28,5 +28,9 @@ public interface IProduct
     in case of incorrect input an exception will be thrown*/
     public void Uppdate(BO.Product product);
 
-    IEnumerable<ProductForList?> GetProductForListsByCategory(BO.Enums.Category category);
+    // A function that shows the customer a list of productsItem
+    public IEnumerable<BO.ProductItem?> GetProductItems(Func<BO.ProductItem?, bool>? func = null);
+
+    IEnumerable<ProductForList?> GetProductForListsByCategory(Category category);
+    IEnumerable<ProductItem?> GetProductItemsByCategory(Category category);
 }

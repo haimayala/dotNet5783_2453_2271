@@ -1,0 +1,78 @@
+﻿<Window x:Class="PL.MakeAnOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+         DataContext="{Binding MyCart, RelativeSource={RelativeSource self}}"
+        Title="MakeAnOrderWindow" Height="450" Width="800">
+    <Grid>
+
+        <Grid>
+            <Grid x:Name="imgrid">
+                <Image x:Name="imgPic" HorizontalAlignment="Left" Height="27" Margin="42,38,0,0" VerticalAlignment="Top" Width="48" Source="/aaaaaaaaa.png"/>
+                <Image x:Name="imgPi" HorizontalAlignment="Left" Height="31" Margin="111,38,0,0" VerticalAlignment="Top" Width="50" Source="/bbbbbb.png" RenderTransformOrigin="-0.771,0.09" />
+                <Image x:Name="imgP" HorizontalAlignment="Left" Height="32" Margin="184,38,0,0" VerticalAlignment="Top" Width="53" Source="/ccccccccc.png" MouseUp="imgP_MouseUp" RenderTransformOrigin="-2.948,-1.057"  />
+                <Image x:Name="imgPicture" HorizontalAlignment="Left" Height="36" Margin="62,88,0,0" VerticalAlignment="Top" Width="64" Source="/crcrcr.png" RenderTransformOrigin="1.045,1.186"/>
+                <Image x:Name="imgPict" HorizontalAlignment="Left" Height="50" Margin="134,81,0,0" VerticalAlignment="Top" Width="112" Source="/ddddddd.png" RenderTransformOrigin="-2.495,-1.481"/>
+            </Grid>
+
+            <Button x:Name="btnFinishAll" Content="completion"  HorizontalAlignment="Left" Margin="98,319,0,0" VerticalAlignment="Top" Height="38" Width="134" FontFamily="Arial" Foreground="White" FontSize="16" Visibility="Hidden" Click="btnFinishAll_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}"/>
+                </Button.Background>
+            </Button>
+
+
+        </Grid>
+        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="532,46,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Enter Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Enter name:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"/>
+            <Label Grid.Column="0" Content="Enter Addres:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="custonerAddresTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustonerAddres, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice}" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid x:Name="grid2" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="56,0,0,0"   >
+
+
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="id:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="num 3 Cart:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="num3CartTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding num3Cart, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="num Card:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="numCardTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding numCard, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="password:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3"  VerticalAlignment="Center" Width="120"/>
+        </Grid>
+
+    </Grid>
+
+
+</Window>

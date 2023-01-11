@@ -43,3 +43,14 @@ public class BlUncorrectPrice : Exception
 
 }
 
+public class BlOrderAlredyShiped : Exception
+{
+    public BlOrderAlredyShiped(string? massage) : base(massage) { }
+
+}
+
+public class BlOrderAlredyDelivered : Exception
+{
+    public BlOrderAlredyDelivered(string? massage) : base(massage) { }
+
+}

@@ -3,44 +3,76 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
-        Title="Product" Height="450" Width="800">
-
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/tttdog.png"/>
-        </Grid.Background>
-        <Label x:Name="IDAddLabel" Content="ID:" HorizontalAlignment="Left" Margin="56,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.003,0.51" FontWeight="Bold" FontFamily="Aharoni"/>
-        <Label x:Name="CategortyAddLabel" Content="Categorty:" HorizontalAlignment="Left" Margin="51,79,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Segoe UI Black"/>
-        <Label x:Name="NameAddLabel" Content="Name:" HorizontalAlignment="Left" Margin="53,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.098,0.574" FontWeight="Bold" FontFamily="Segoe UI Black"/>
-        <Label x:Name="PriceAddLabel" Content="Price:" HorizontalAlignment="Left" Margin="56,131,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Segoe UI Black"/>
-        <Label x:Name="InStockAddLabel" Content="In Stock:" HorizontalAlignment="Left" Margin="56,157,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontWeight="Bold">
-            <Label.Background>
-                <ImageBrush/>
-            </Label.Background>
-        </Label>
-        <TextBox x:Name="IDTextBoxAdd" HorizontalAlignment="Left" Margin="128,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="CategoryAdd" HorizontalAlignment="Left" Margin="128,86,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="NameTextBoxAdd" HorizontalAlignment="Left" Margin="128,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="PriceTextBoxAdd" HorizontalAlignment="Left" Margin="128,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="InStockTextBoxAdd" HorizontalAlignment="Left" Margin="128,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnAddOrUpdate" Content=" " HorizontalAlignment="Left" Margin="41,387,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click" Height="25" Width="72" Background="White" FontWeight="Bold" FontSize="16"/>
-        <Image HorizontalAlignment="Left" Height="52" Margin="716,348,0,0" VerticalAlignment="Top" Width="65" Source="/logo.png"/>
        
-        <TextBlock HorizontalAlignment="Left" Margin="664,400,0,0" TextWrapping="Wrap" Text="petshop@gmail.com" VerticalAlignment="Top" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="359.513"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
+        xmlns:local="clr-namespace:BO;assembly=BL"
+        mc:Ignorable="d"
+      DataContext="{Binding product, RelativeSource={RelativeSource self}}"
+      
+        Title="Product" Height="450" Width="800">
+    
+   
+   
+   
+    <Grid >
+        
+        <Grid x:Name="grid1"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,38,0,0" Height="168" Width="183" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+           
+            <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Grid >
+                
+            </Grid>
+            <TextBox  x:Name="iDTextBox"  Style="{DynamicResource txt}"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="102"  />
+            <ComboBox IsEditable="True"  x:Name="categoryComboBox"  Grid.Row="1" Grid.Column="1"  Height="NaN"  Margin="3,0,3,0" VerticalAlignment="Center">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+           
+
+            <Label Grid.Column="0" Content="In Stock:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="inStockTextBox" Grid.Column="1" Height="NaN" Margin="15,0,0,0" Grid.Row="2" Text="{Binding InStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90"/>
+            <Label Grid.Column="0" Content="Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="nameTextBox" Grid.Column="1" Height="NaN" Grid.Row="3" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="99" Margin="8,0,0,0"/>
+            <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="28" Margin="10,6,0,0" Grid.Row="4" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
 
 
 
+        </Grid>
 
+        <Button x:Name="btnAddOrUpdate"  Style="{DynamicResource btnadd}"  HorizontalAlignment="Left" Margin="81,360,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104" Background="White" FontWeight="Bold" FontSize="16" ></Button>
+        <Image HorizontalAlignment="Left"  Height="52" Margin="700,354,0,0" VerticalAlignment="Top" Width="65" Source="/logo.png"/>
+        <Grid.Resources>
+            <Style TargetType="Button" x:Key="btnadd">
+                <Setter Property="Content"
+                        Value="{Binding ctc , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
+                </Setter>
+            </Style>
+            <Style TargetType="TextBox" x:Key="txt">
+                <Setter Property="IsReadOnly"
+                        Value="{Binding addOrUpdate , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
+                </Setter>
+            </Style>
+        </Grid.Resources>
     </Grid>
+   
+    
 </Window>
+
+
+
+

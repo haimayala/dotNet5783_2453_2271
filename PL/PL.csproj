@@ -15,16 +15,27 @@
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  
     <BaseOutputPath> $(SolutionDir)\bin\</BaseOutputPath>
+	  
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="aaaaaaaaa.png" />
     <None Remove="ani.png" />
+    <None Remove="bbbbbb.png" />
+    <None Remove="bird.png" />
     <None Remove="cc7-1024x685.jpg" />
+    <None Remove="ccc.png" />
+    <None Remove="ccccccccc.png" />
+    <None Remove="crcrcr.png" />
+    <None Remove="cut.png" />
+    <None Remove="ddd.png" />
+    <None Remove="ddddddd.png" />
+    <None Remove="facebook.png" />
+    <None Remove="ikon.png" />
+    <None Remove="inst.png" />
     <None Remove="logo.png" />
     <None Remove="sdog.png" />
-    <None Remove="tdog.png" />
-    <None Remove="trylogo.png" />
-    <None Remove="tttdog.png" />
     <None Remove="הורדה.png" />
   </ItemGroup>
 
@@ -33,11 +44,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="aaaaaaaaa.png" />
     <Resource Include="ani.png" />
+    <Resource Include="bbbbbb.png" />
+    <Resource Include="bird.png" />
+    <Resource Include="ccc.png" />
+    <Resource Include="ccccccccc.png" />
+    <Resource Include="crcrcr.png" />
+    <Resource Include="cut.png" />
+    <Resource Include="ddd.png" />
+    <Resource Include="ddddddd.png" />
+    <Resource Include="facebook.png" />
+    <Resource Include="ikon.png" />
+    <Resource Include="inst.png" />
     <Resource Include="logo.png" />
-    <Resource Include="tdog.png" />
-    <Resource Include="trylogo.png" />
-    <Resource Include="tttdog.png" />
+    <Resource Include="sdog.png" />
     <Resource Include="הורדה.png" />
   </ItemGroup>
 
