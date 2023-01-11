@@ -18,7 +18,8 @@ internal class Product : IProduct
                                                    Id = (int)(doProduct?.ID)!,
                                                    Name = doProduct?.Name,
                                                    category = (Enums.Category)(doProduct?.Category)!,
-                                                   Price = (int)(doProduct?.Price)!
+                                                   Price = (int)(doProduct?.Price)!,
+                                                  ImageRelativeName=@"\picss\IMG"+doProduct.Value.ID+".jpg"
                                                };
         return func is null ? list : list.Where(func);
     }
@@ -40,7 +41,9 @@ internal class Product : IProduct
                     Name = prod.Name,
                     InStock = prod.InStock,
                     Category = (Enums.Category)prod.Category!,
-                    Price = prod.Price
+                    Price = prod.Price,
+                     ImageRelativeName = @"\picss\IMG" + prod.ID + ".jpg"
+
                 };
                 return product;
             }
@@ -75,6 +78,8 @@ internal class Product : IProduct
                     Name = product.Name,
                     Category = (Enums.Category)product.Category!,
                     Price = (int)product.Price,
+                    ImageRelativeName = @"\picss\IMG" + product.ID + ".jpg"
+
                 };
                 if (product.InStock > 0)
                     productItem.Availability = true;
@@ -257,7 +262,8 @@ internal class Product : IProduct
                                                      Price = (int)pro.Value.Price,
                                                      Category = (Enums.Category?)pro.Value.Category,
                                                      Amount = 0,
-                                                     Availability = GetAvailability(pro)
+                                                     Availability = GetAvailability(pro),
+                                                     ImageRelativeName = @"\picss\IMG" + pro.Value.ID + ".jpg"
                                                  };
 
         return func is null ? productItems : productItems.Where(func);

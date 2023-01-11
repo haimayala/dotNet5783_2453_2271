@@ -39,7 +39,8 @@ namespace PL
         {
             InitializeComponent();
             productItemListView.ItemsSource = bl.Product.GetProductItems();
-            //cmbProItem.ItemsSource = Enum.GetValues(typeof(Category));
+
+            ////cmbProItem.ItemsSource = Enum.GetValues(typeof(Category));
 
         }
 
@@ -53,15 +54,16 @@ namespace PL
                 productItemListView.ItemsSource = bl?.Product.GetProductItemsByCategory((Category)choise);
 
         }
-       
+
         private void btnhowCart_Click(object sender, RoutedEventArgs e)
         {
             new ComplateCart(cart).ShowDialog();
         }
 
-        private void productItemListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+      
 
+        private void productItemListView_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
             int id = ((BO.ProductItem)productItemListView.SelectedItem).ID;
             new CustomerProductItemWindow(id, cart).ShowDialog();
         }

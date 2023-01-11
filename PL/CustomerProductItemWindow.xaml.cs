@@ -48,16 +48,31 @@ namespace PL
 
 
 
+        public bool canAdd
+        {
+            get { return (bool)GetValue(canAddProperty); }
+            set { SetValue(canAddProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for canAdd.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty canAddProperty =
+            DependencyProperty.Register("canAdd", typeof(bool), typeof(Window), new PropertyMetadata(null));
+
+
+
         public CustomerProductItemWindow(int id, BO.Cart cart)
         {
             InitializeComponent();
             ProductItem=bl.Product.GetProductDetails(id);
             Cart=cart;
+            canAdd = ProductItem.Availability;
         }
 
         private void btnAddToTheCart_Click(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(iDTextBlock.Text);
+            if(!canAdd)
+                MessageBox.Show("not avalable!");
             try
             {
                 bl.Cart.Add(Cart, id);

@@ -37,7 +37,8 @@ internal class Cart : ICart
                         ProductName = product.Name,
                         Price = (int)product.Price,
                         Amount = 1,
-                        ProductId = product.ID
+                        ProductId = product.ID,
+                        ImageRelativeName = @"\picss\IMG" + product.ID + ".jpg"
                     };
                     newOrderItem.TotalPrice += product.Price;
                     cart.Items!.Add(newOrderItem);

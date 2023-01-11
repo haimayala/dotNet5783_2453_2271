@@ -41,15 +41,8 @@ namespace PL
         {
             InitializeComponent();
             cart = Cart;
-            
         }
 
-
-        private void btnFinishOrder_Click(object sender, RoutedEventArgs e)
-        {
-            new MakeAnOrderWindow(cart).ShowDialog();
-          
-        }
 
         private void TextBox_TextChanged(object sender, RoutedEventArgs e)
         {
@@ -68,6 +61,40 @@ namespace PL
 
         }
 
-      
+        private void btnFinishAll_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                bl.Cart.OrderConfirmation(cart);
+                MessageBox.Show("The order is complete", "complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                cart.Items = new List<BO.OrderItem?>();
+                cart.TotalPrice = 0;
+                cart.CustomerEmail = null;
+                cart.CustonerAddres = null;
+                cart.CustomerName = null;
+                orderItemListView.ItemsSource = null;
+                Close();
+
+
+            }
+            catch (BlUncorrectEmailExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            catch (BlUncorrectAddres ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            catch (BlUncorrectName ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+
+        }
     }
 }

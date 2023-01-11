@@ -6,15 +6,23 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="adminWindow" Height="450" Width="800">
-    
-    
-    <Grid>
-        <Button x:Name="btnOrders" Content="Product list" HorizontalAlignment="Left" Margin="149,94,0,0" VerticalAlignment="Top" Height="41" Width="136" Click="btnOrders_Click">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
+
+
+    <Grid  >
+        <Button x:Name="btnOrders" Style="{StaticResource buttonStyle}" Content="Product list" HorizontalAlignment="Left" Margin="472,313,0,0" VerticalAlignment="Top" Height="63" Width="186" Click="btnOrders_Click">
+
         </Button>
-        <Button x:Name="btnProducts" Content="Order list" HorizontalAlignment="Left" Margin="522,94,0,0" VerticalAlignment="Top" Height="41" Width="134" Click="btnProducts_Click"/>
+        <Button x:Name="btnProducts" Style="{StaticResource buttonStyle}" Content="Order list" HorizontalAlignment="Left" Margin="166,320,0,0" VerticalAlignment="Top" Height="56" Width="196" Click="btnProducts_Click"/>
+        <Label Content="Mannager" HorizontalAlignment="Left" Margin="570,121,0,0" VerticalAlignment="Top" Width="339" Height="109" FontSize="72" FontFamily="Blackadder ITC" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.256"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
 
     </Grid>
 </Window>

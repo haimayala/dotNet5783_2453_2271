@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         DataContext="{Binding ProductItem, RelativeSource={RelativeSource self}}"
       
-        Title="CustomerProductItemWindow" Height="450" Width="800">
-    <Grid>
+        Title="CustomerProductItemWindow" Height="450" Width="600">
+    <Grid  >
 
         <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,94,0,0" Width="179">
             <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-    
+
             <Label Content="Availability:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
             <CheckBox x:Name="availabilityCheckBox" IsEnabled="False" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding Availability, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="10" Grid.Row="2" VerticalAlignment="Center" RenderTransformOrigin="2.304,0.467"/>
             <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
@@ -35,7 +35,21 @@
             <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding Price}" VerticalAlignment="Center"/>
         </Grid>
-        <Button x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="60,325,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click"/>
+        <Button Style="{DynamicResource btnStyle}"   x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="42,361,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click" Height="38"/>
+        <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}" HorizontalAlignment="Left" Height="258" Margin="284,38,0,0" VerticalAlignment="Top" Width="276"/>
 
+
+
+
+        <Grid.Resources>
+            <Style TargetType="Button" x:Key="btnStyle">
+                <Setter Property="IsEnabled"
+                        Value="{Binding canAdd  , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }"/>
+            </Style>
+        </Grid.Resources>
     </Grid>
+
+
+
+
 </Window>

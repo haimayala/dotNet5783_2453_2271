@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding Order, RelativeSource={RelativeSource self}}"
-        Title="orderWindow" Height="450" Width="800">
+        Title="orderWindow" Height="450" Width="850">
 
 
 
-    <Grid x:Name="grid0" >
+    <Grid x:Name="grid0"  >
        
         <Grid x:Name="grid1"    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,53,0,0">
             <Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
             
         </Grid>
 
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding  Items}" SelectionMode="Single" Margin="307,37,10,197">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding  Items}" SelectionMode="Single" Margin="257,17,10,217">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -110,6 +110,14 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn x:Name="image" Header="Image" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Margin="-6,-1,-6,-1" x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}"
+/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -127,7 +135,14 @@
                 <Setter Property="Visibility"
                         Value="{Binding visibility , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
                 </Setter>
+                <Setter Property="IsEnabled"
+                        Value="{Binding enable  , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
+                </Setter>
+
             </Style>
+          
+            
+            
         </Grid.Resources>
 
     </Grid>

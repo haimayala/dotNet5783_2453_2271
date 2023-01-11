@@ -23,7 +23,8 @@ internal class Order : IOrder
                    CustomerName = item.CustomerName,
                    Status = GetStatus(item),
                    ProductAmount = orderItems.Count(),
-                   TotalPrice =orderItems.Sum(items => (int)items?.Price!)
+                   TotalPrice =orderItems.Sum(items => (int)items?.Price!),
+                    
                };
     }
 
@@ -160,6 +161,7 @@ internal class Order : IOrder
                    Amount = items.Amount,
                    ProductId = dal.Product.GetByID(items.ProductID).ID,
                    TotalPrice = items.Price,
+                   ImageRelativeName = @"\picss\IMG" + items.ProductID + ".jpg"
                };
 }
 

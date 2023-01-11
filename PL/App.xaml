@@ -1,18 +1,19 @@
 ﻿<Application x:Class="PL.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PL"
+           xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <local:ConvertImagePathToBitmap x:Key="imageConverter"/>           
         <Style x:Key="buttonStyle" TargetType="Button">
             <Setter Property="Background"
-                    Value="#FFA5FCFF"/>
+                    Value="#FFF00A76"/>
             <Setter Property="FontSize"
                     Value="20"/>
         </Style>
 
-      
+      
+  
     </Application.Resources>
-   
-    
+
 </Application>

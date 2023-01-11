@@ -8,6 +8,8 @@ public class OrderForList
     public OrderStatus? Status { get; set; }
     public int ProductAmount { get; set; }  
     public double TotalPrice { get; set; }
+    public string? ImageRelativeName { get; set; }
+
 
     public override string ToString()
     {

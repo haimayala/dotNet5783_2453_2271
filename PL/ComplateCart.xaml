@@ -7,24 +7,13 @@
         mc:Ignorable="d"
           DataContext="{Binding cart, RelativeSource={RelativeSource self}, Mode=TwoWay}"
         Title="ComplateCart" Height="450" Width="800">
-    <Grid>
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,35,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="175"/>
-            <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice ,Mode=TwoWay}" VerticalAlignment="Center"/>
+    <Grid    >
 
-        </Grid>
+        <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="577,212,0,0" VerticalAlignment="Top" Width="175"/>
+        <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice ,Mode=TwoWay}" VerticalAlignment="Center"/>
 
-        <ListView x:Name="orderItemListView"  SelectionMode="Single" Margin="22,216,365,43" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding Items, Mode=TwoWay}">
+
+        <ListView x:Name="orderItemListView"  SelectionMode="Single" Margin="276,21,34,227" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding Items, Mode=TwoWay}">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -78,11 +67,66 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                   
+
+
+                    <GridViewColumn x:Name="image" Header="Image" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Margin="-6,-1,-6,-1" x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}"
+/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnFinishOrder" Content="for payment" HorizontalAlignment="Left" Margin="618,313,0,0" VerticalAlignment="Top" Height="31" Width="98" Click="btnFinishOrder_Click"/>
+
+
+        <Grid x:Name="grid2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Enter Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Enter name:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"/>
+            <Label Grid.Column="0" Content="Enter Addres:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="custonerAddresTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustonerAddres, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock x:Name="totalPriceTextBlockk" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice}" VerticalAlignment="Center"/>
+
+        </Grid>
+
+
+
+
+        <Button x:Name="btnFinishAll" Content="completion"  HorizontalAlignment="Left" Margin="52,205,0,0" VerticalAlignment="Top" Height="38" Width="134" FontFamily="Arial" Foreground="White" FontSize="16" Click="btnFinishAll_Click" >
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}"/>
+            </Button.Background>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="35" Margin="26,340,0,0" VerticalAlignment="Top" Width="58" RenderTransformOrigin="0.64,0.749" Source="/bbbbbb.png"/>
+        <Image HorizontalAlignment="Left" Height="32" Margin="99,336,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="-0.254,0.716" Source="/ccccccccc.png"/>
+        <Image HorizontalAlignment="Left" Margin="174,338,0,59" Width="80" RenderTransformOrigin="0.49,-0.004" Source="/aaaaaaaaa.png"/>
+        <Image HorizontalAlignment="Left" Height="40" Margin="29,378,0,0" VerticalAlignment="Top" Width="61" Source="/crcrcr.png" RenderTransformOrigin="0.328,0.52"/>
+        <Image HorizontalAlignment="Left" Height="38" Margin="118,380,0,0" VerticalAlignment="Top" Width="73" Source="/ddddddd.png"/>
+        <Label Content="Credit Card:" HorizontalAlignment="Left" Margin="13,143,0,0" VerticalAlignment="Top" Width="79"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="99,147,0,0" VerticalAlignment="Top" Width="131" Height="22"/>
+        <Label Content="------------------------------------------------------------------------------------------------------------------------------------------------------------------" HorizontalAlignment="Left" Margin="3,291,0,0" VerticalAlignment="Top" Width="787"/>
+        <Image HorizontalAlignment="Left" Height="44" Margin="732,377,0,0" VerticalAlignment="Top" Width="54" Source="/facebook.png"/>
+        <Image HorizontalAlignment="Left" Height="41" Margin="676,377,0,0" VerticalAlignment="Top" Width="50" Source="/inst.png"/>
+        <Image HorizontalAlignment="Left" Height="63" Margin="604,364,0,0" VerticalAlignment="Top" Width="60" Source="/wat.jpg" RenderTransformOrigin="0.567,0.71"/>
+
 
     </Grid>
 </Window>

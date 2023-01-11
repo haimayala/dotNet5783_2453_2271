@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,19 @@ public partial class orderForListWindow : Window
 {
 
     private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
+
+
     
+
+         
+
+
+
     public orderForListWindow()
     {
         InitializeComponent();
-        orderForListListView.ItemsSource= bl.Order.GetLitedOrders();
+
+        orderForListListView.ItemsSource = bl.Order.GetLitedOrders();
 
     }
 
