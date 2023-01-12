@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"      
         xmlns:local="clr-namespace:BO;assembly=BL"
         mc:Ignorable="d"
-      DataContext="{Binding product, RelativeSource={RelativeSource self}}"  
+      DataContext="{Binding  RelativeSource={RelativeSource self}}"  
         Title="Product" Height="450" Width="400">
 
 
@@ -31,8 +31,8 @@
             <Grid >
 
             </Grid >
-            <TextBox  x:Name="iDTextBox"  Style="{DynamicResource txt}"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="102"  />
-            <ComboBox   IsEditable="True" Style="{DynamicResource cmb}" x:Name="categoryComboBox"  Grid.Row="1" Grid.Column="1"  Height="NaN"  Margin="3,0,3,0" VerticalAlignment="Center">
+            <TextBox  x:Name="iDTextBox"  IsReadOnly="{Binding addOrUpdate}"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="0" Text="{Binding product.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="102"  />
+            <ComboBox   IsEditable="True"  x:Name="categoryComboBox" ItemsSource="{Binding Categories}" Grid.Row="1" Grid.Column="1"  Height="NaN"  Margin="3,0,3,0" VerticalAlignment="Center">
                 <ComboBox.ItemsPanel >
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
@@ -42,41 +42,21 @@
 
 
             <Label Grid.Column="0" Content="In Stock:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="inStockTextBox" Grid.Column="1" Height="NaN" Margin="15,0,0,0" Grid.Row="2" Text="{Binding InStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90"/>
+            <TextBox x:Name="inStockTextBox" Grid.Column="1" Height="NaN" Margin="15,0,0,0" Grid.Row="2" Text="{Binding product.InStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90"/>
             <Label Grid.Column="0" Content="Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Column="1" Height="NaN" Grid.Row="3" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="99" Margin="8,0,0,0"/>
+            <TextBox x:Name="nameTextBox" Grid.Column="1" Height="NaN" Grid.Row="3" Text="{Binding product.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="99" Margin="8,0,0,0"/>
             <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="28" Margin="10,6,0,0" Grid.Row="4" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+            <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="28" Margin="10,6,0,0" Grid.Row="4" Text="{Binding product.Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
 
 
 
         </Grid>
 
-        <Button x:Name="btnAddOrUpdate"  Style="{DynamicResource btnadd}"  HorizontalAlignment="Left" Margin="46,359,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104"  FontWeight="Bold" FontSize="16" ></Button>
+        <Button x:Name="btnAddOrUpdate" Content="{Binding addupdate, Mode=OneWay}"  HorizontalAlignment="Left" Margin="46,359,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104"  FontWeight="Bold" FontSize="16" ></Button>
         <Image x:Name="imgdog" Margin="327,338,10,15" Source="/logo.png"/>
         <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}"
   HorizontalAlignment="Left" Height="119" Margin="98,217,0,0" VerticalAlignment="Top" Width="133"/>
         <Button x:Name="btndl" Content="Delete" HorizontalAlignment="Left" Margin="224,379,0,0" VerticalAlignment="Top" Width="72" Height="23" Background="#FF393333" Foreground="#FFFF0C0C" BorderBrush="#FFF1F1F1" MouseDoubleClick="btndl_MouseDoubleClick"/>
-
-        <Grid.Resources>
-            <Style TargetType="Button" x:Key="btnadd">
-                <Setter Property="Content"
-                        Value="{Binding ctc , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
-                </Setter>
-                <Setter Property="Background"
-                    Value="#FF3B9CCA"/>
-            </Style>
-            <Style TargetType="TextBox" x:Key="txt">
-                <Setter Property="IsReadOnly"
-                        Value="{Binding addOrUpdate , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
-                </Setter>
-            </Style>
-            <Style TargetType="ComboBox" x:Key="cmb">
-                <Setter Property="ItemsSource"
-                        Value="{Binding Categories , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }">
-                </Setter>
-            </Style>
-        </Grid.Resources>
     </Grid>
 
 

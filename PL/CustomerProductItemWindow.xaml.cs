@@ -82,6 +82,11 @@ namespace PL
             {
                 MessageBox.Show(es.Message); 
             }
+            catch(BO.BlNotEnoughInStockExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
             
         }
     }

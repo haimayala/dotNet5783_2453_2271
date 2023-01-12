@@ -272,7 +272,7 @@ internal class Product : IProduct
 
     bool GetAvailability(DO.Product? p)
     {
-        return p.Value.InStock > 0;
+        return p!.Value.InStock > 0;
     }
 
     IEnumerable<ProductItem?> IProduct.GetProductItemsByCategory(Enums.Category category)

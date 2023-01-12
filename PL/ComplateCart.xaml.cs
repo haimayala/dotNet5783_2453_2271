@@ -57,6 +57,10 @@ namespace PL
             {
                 MessageBox.Show(es.Message);
             }
+            catch (BO.BlUncorrectDetailsExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
 
         }
@@ -89,6 +93,11 @@ namespace PL
 
             }
             catch (BlUncorrectName ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            catch (BlNullPropertyException ex)
             {
                 MessageBox.Show(ex.Message);
 

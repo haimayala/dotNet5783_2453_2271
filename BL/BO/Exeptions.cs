@@ -54,3 +54,10 @@ public class BlOrderAlredyDelivered : Exception
     public BlOrderAlredyDelivered(string? massage) : base(massage) { }
 
 }
+
+
+public class BlNullPropertyException : Exception
+{
+    public BlNullPropertyException(string? massage) : base(massage) { }
+
+}
