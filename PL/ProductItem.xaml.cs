@@ -28,8 +28,7 @@ namespace PL
 
         public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
-      
-
+       
         private static Cart cart = new Cart()
         {            
             Items = new List<BO.OrderItem?>(),      

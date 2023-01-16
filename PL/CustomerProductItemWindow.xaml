@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        DataContext="{Binding ProductItem, RelativeSource={RelativeSource self}}"
+        DataContext="{Binding  RelativeSource={RelativeSource self}}"
       
         Title="CustomerProductItemWindow" Height="450" Width="600">
     <Grid  >
@@ -25,31 +25,18 @@
             </Grid.RowDefinitions>
 
             <Label Content="Availability:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
-            <CheckBox x:Name="availabilityCheckBox" IsEnabled="False" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding Availability, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="10" Grid.Row="2" VerticalAlignment="Center" RenderTransformOrigin="2.304,0.467"/>
+            <CheckBox x:Name="availabilityCheckBox" IsEnabled="False" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding ProductItem.Availability, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="10" Grid.Row="2" VerticalAlignment="Center" RenderTransformOrigin="2.304,0.467"/>
             <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBlock x:Name="categoryTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding Category}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="categoryTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding ProductItem.Category}" VerticalAlignment="Center"/>
             <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding ID}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding ProductItem.ID}" VerticalAlignment="Center"/>
             <Label Grid.Column="0" Content="Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBlock x:Name="nameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding Name}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="nameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ProductItem.Name}" VerticalAlignment="Center"/>
             <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding Price}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding ProductItem.Price}" VerticalAlignment="Center"/>
         </Grid>
-        <Button Style="{DynamicResource btnStyle}"   x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="42,361,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click" Height="38"/>
+        <Button IsEnabled="{Binding canAdd}"   x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="42,361,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click" Height="38"/>
         <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}" HorizontalAlignment="Left" Height="258" Margin="284,38,0,0" VerticalAlignment="Top" Width="276"/>
-
-
-
-
-        <Grid.Resources>
-            <Style TargetType="Button" x:Key="btnStyle">
-                <Setter Property="IsEnabled"
-                        Value="{Binding canAdd  , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window} } }"/>
-            </Style>
-        </Grid.Resources>
     </Grid>
-
-
-
 
 </Window>

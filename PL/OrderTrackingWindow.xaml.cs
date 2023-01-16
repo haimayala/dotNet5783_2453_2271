@@ -35,14 +35,13 @@ namespace PL
         public OrderTrackingWindow(int id)
         {
             InitializeComponent();
-          
             OrderTrucking = bl.Order.OrderTracking(id);  
 
         }
 
         private void btn_Click(object sender, RoutedEventArgs e)
         {
-            new orderWindow(OrderTrucking.Id, false).ShowDialog();
+            new orderWindow(OrderTrucking.Id,true).ShowDialog();
         }
     }
 }

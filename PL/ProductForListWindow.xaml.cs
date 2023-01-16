@@ -3,6 +3,7 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,10 +21,13 @@ public partial class ProductForListWindow : Window
     private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
+   
+
     //ctor
     public ProductForListWindow()
     {
         InitializeComponent();
+        
         //productForListListView.ItemsSource = bl.Product.GetListedProducts();
         //CategorySelector.ItemsSource = Enum.GetValues(typeof(Category));
     }

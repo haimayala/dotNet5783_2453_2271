@@ -70,8 +70,9 @@ namespace PL
 
         private void btnAddToTheCart_Click(object sender, RoutedEventArgs e)
         {
+            //   int id= (int)((TextBlock)sender).DataContext;
             int id = int.Parse(iDTextBlock.Text);
-            if(!canAdd)
+            if (!canAdd)
                 MessageBox.Show("not avalable!");
             try
             {

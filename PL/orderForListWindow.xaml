@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-    
+     DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="orderForListWindow" Height="450" Width="800">
     
     
     
     <Grid  >
-        <ListView x:Name="orderForListListView"  SelectionMode="Single" Margin="32,17,328,120" ItemsSource="{Binding }" MouseDoubleClick="orderForListListView_MouseDoubleClick" >
+        <ListView x:Name="orderForListListView"  SelectionMode="Single" Margin="32,17,328,120" ItemsSource="{Binding orders }" MouseDoubleClick="orderForListListView_MouseDoubleClick" >
             <ListView.ItemContainerStyle>
                 <Style> 
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
