@@ -37,10 +37,26 @@ namespace PL
             DependencyProperty.Register("cart", typeof(BO.Cart), typeof(Window), new PropertyMetadata(null));
 
 
+
+        public int tPrice
+        {
+            get { return (int)GetValue(tPriceProperty); }
+            set { SetValue(tPriceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for tPrice.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty tPriceProperty =
+            DependencyProperty.Register("tPrice", typeof(int), typeof(Window), new PropertyMetadata(0));
+
+
+
+
+
         public ComplateCart(BO.Cart Cart)
         {
             InitializeComponent();
             cart = Cart;
+            tPrice = (int)cart.TotalPrice;
         }
 
 
@@ -51,7 +67,7 @@ namespace PL
                 BO.OrderItem orderItem = (BO.OrderItem)((TextBox)sender).DataContext;
                 cart = bl.Cart.Uppdate(cart, orderItem.ProductId, orderItem.Amount);
                 orderItemListView.Items.Refresh();
-                totalPriceTextBlock.Text = cart.TotalPrice.ToString();
+                tPrice = (int)cart.TotalPrice;
             }
             catch (BlNotEnoughInStockExeption es)
             {

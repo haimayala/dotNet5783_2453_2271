@@ -37,7 +37,7 @@ internal class Cart : ICart
                 {
                     BO.OrderItem newOrderItem = new BO.OrderItem()
                     {
-                        //Id = orderItem!.Id,
+                        Id=product.ID,
                         ProductName = product.Name,
                         Price = (int)product.Price,
                         Amount = 1,

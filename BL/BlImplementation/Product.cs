@@ -279,4 +279,70 @@ internal class Product : IProduct
     {
         return GetProductItems(p => p?.Category == category);
     }
+
+
+    public IEnumerable<ProductItem?> MostPopular(BO.Cart cart)
+    {
+        //Grouping all ordered products by product ID
+        var productList = from item in dal.orderItem.GetAll()
+                          group item by item?.ProductID into groupPopular
+                          select new { id = groupPopular.Key, Items = groupPopular };
+
+        //Sort the products in descending order according to the quantity ordered
+        //Take the first 10
+        productList = productList.OrderByDescending(x => x.Items.Count()).Take(5);
+
+        return from item in productList
+               let p = dal.Product.GetByID(item?.id ?? throw new BlNotExsistExeption("product doe not exist"))
+               select new BO.ProductItem
+               {
+                   ID = p.ID,
+                   Name = p.Name,
+                   Price =(int) p.Price,
+                   Category = (BO.Enums.Category)p.Category!,
+                   Availability = GetAvailability(p),
+                   ImageRelativeName = @"\picss\IMG" +p.ID + ".jpg",
+               };
+    }
+
+
+    public IEnumerable<ProductItem?> MostExpensive(BO.Cart cart)
+    {
+        //Sort the products in descending order by price
+        //Take the first 10
+        var productList = dal.Product.GetAll().OrderByDescending(x => x?.Price).Take(3);
+
+        return from DO.Product item in productList
+               select new BO.ProductItem
+               {
+                   ID = item.ID,
+                   Name = item.Name,
+                   Price = (int)item.Price,
+                   Category = (BO.Enums.Category)item.Category!,
+                   ImageRelativeName = @"\picss\IMG" + item.ID + ".jpg",
+                   Amount = item.InStock,
+                   Availability = GetAvailability(item),
+               };
+    }
+
+
+    public IEnumerable<ProductItem?> MostCheap(BO.Cart cart)
+    {
+
+        //Sort the products in descending order by price
+        //Take the last 10
+        var productList =dal.Product.GetAll().OrderByDescending(x => x?.Price).TakeLast(4);
+
+        return from DO.Product item in productList
+               select new BO.ProductItem
+               {
+                   ID = item.ID,
+                   Name = item.Name,
+                   Price = (int)item.Price,
+                   Category = (BO.Enums.Category)item.Category!,
+                   ImageRelativeName = @"\picss\IMG" + item.ID + ".jpg",
+                   Amount = item.InStock,
+                   Availability = GetAvailability(item),
+               };
+    }
 }

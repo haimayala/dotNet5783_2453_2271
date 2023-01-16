@@ -54,6 +54,43 @@
 
         <ComboBox ItemsSource="{Binding Categories}" SelectedItem="5" x:Name="cmbProItem" IsEditable="True" HorizontalAlignment="Left" Margin="638,17,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" SelectionChanged="cmbProItem_SelectionChanged" />
         <Button Style="{StaticResource buttonStyle}" x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="648,360,0,0" VerticalAlignment="Top" Height="37" Width="100" Click="btnhowCart_Click"/>
+        <Menu HorizontalAlignment="Left" Height="19" Margin="663,54,0,0" VerticalAlignment="Top" Width="95" Background="Transparent" RenderTransformOrigin="0.585,2.04">
+        <MenuItem
+                Header="Group by"
+                FontSize="12"
+                FontFamily="Arial Black"
+                Foreground="Gray"
+                FontWeight="Bold"
+                FlowDirection="LeftToRight">
+            <MenuItem
+                x:Name="popularGroup"
+                Header="most popular"
+                FontSize="12"
+                FontFamily="Arial Black"
+                Foreground="Gray"
+                FontWeight="Bold"
+                Icon="." Click="popularGroup_Click"
+               />
+            <MenuItem
+                x:Name="expensiveGroup"
+                Header="most expensive"
+                FontSize="12"
+                FontFamily="Arial Black"
+                Foreground="Gray"
+                FontWeight="Bold"
+                Icon="." Click="expensiveGroup_Click"
+               />
+            <MenuItem
+                x:Name="cheapGroup"
+                Header="cheapiest"
+                FontSize="12"
+                FontFamily="Arial Black"
+                Foreground="Gray"
+                FontWeight="Bold"
+                Icon="." Click="cheapGroup_Click"
+                />
+        </MenuItem>
+        </Menu>
 
     </Grid>
 

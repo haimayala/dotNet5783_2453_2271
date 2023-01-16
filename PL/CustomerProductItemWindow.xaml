@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+    xmlns:local="clr-namespace:BO;assembly=BL"
         mc:Ignorable="d"
         DataContext="{Binding  RelativeSource={RelativeSource self}}"
       
@@ -38,5 +38,5 @@
         <Button IsEnabled="{Binding canAdd}"   x:Name="btnAddToTheCart" Content="Add To Cart" HorizontalAlignment="Left" Margin="42,361,0,0" VerticalAlignment="Top" Click="btnAddToTheCart_Click" Height="38"/>
         <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}" HorizontalAlignment="Left" Height="258" Margin="284,38,0,0" VerticalAlignment="Top" Width="276"/>
     </Grid>
-
+   
 </Window>
