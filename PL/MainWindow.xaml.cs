@@ -12,7 +12,7 @@ namespace PL;
 /// </summary>
 public partial class MainWindow : Window
 {
-
+    
     private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     //ctor
     public MainWindow()
@@ -33,6 +33,7 @@ public partial class MainWindow : Window
     private void btnMannager_Click(object sender, RoutedEventArgs e)
     {
         new adminWindow().ShowDialog();
+
     }
 
     private void btnTrucking_Click(object sender, RoutedEventArgs e)
