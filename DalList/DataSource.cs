@@ -111,7 +111,7 @@ static internal class DataSource
     private static void createAndInitProduct()
     {
         string[] nameOfAnimals = new string[5] { "dog", "rabbit", "parrot", "fish","cat"  };
-        string[] nameOfFoods = new string[5] { "Snacks", "natural food", "Dry food", "vitamins", "GealthyFood" };
+        string[] nameOfFoods = new string[5] { "Snacks", "natural food", "fish food", "vitamins", "GealthyFood" };
         string[] nameOfEquipment = new string[5] { "cage","collar" , "Food facility", "Aquarium", "strip" };
         string[] nameOfGames = new string[5] { "Training games", "Cage games", "ball", "dol", "swings" };
         string[] nameOfCultivation = new string[4] { "shampoo","fur brush" , "perfume", "mouth cleaning" };
@@ -119,7 +119,7 @@ static internal class DataSource
         for (int i = 0; i < 5; i++)
         {
             
-            for(int j=0;j<2;j++)
+            for(int j=0;j<4;j++)
             {
                 Product myProduct = new Product()
                 {

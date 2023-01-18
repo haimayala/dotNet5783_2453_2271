@@ -26,23 +26,28 @@ public partial class orderForListWindow : Window
     private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
 
 
-    
 
-         
+    public List<BO.OrderForList?> orders
+    {
+        get { return (List<BO.OrderForList?>)GetValue(ordersProperty); }
+        set { SetValue(ordersProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for orders.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ordersProperty =
+        DependencyProperty.Register("orders", typeof(List<BO.OrderForList>), typeof(Window), new PropertyMetadata(null));
 
 
 
     public orderForListWindow()
     {
         InitializeComponent();
-
-        orderForListListView.ItemsSource = bl.Order.GetLitedOrders();
-
+        orders = bl.Order.GetLitedOrders().ToList();
     }
 
     private void orderForListListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         int id = ((OrderForList)orderForListListView.SelectedItem).ID;
-        new orderWindow(id,true).ShowDialog();
+        new orderWindow(id,false).ShowDialog();
     }
 }

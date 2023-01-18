@@ -38,7 +38,17 @@ public partial class Product : Window
         DependencyProperty.Register("addOrUpdate", typeof(bool), typeof(Window), new PropertyMetadata(null));
 
 
-    public string? ctc { get; set; }
+
+
+    public string addupdate
+    {
+        get { return (string)GetValue(addupdateProperty); }
+        set { SetValue(addupdateProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for addupdate.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty addupdateProperty =
+        DependencyProperty.Register("addupdate", typeof(string), typeof(Window), new PropertyMetadata(null));
 
 
 
@@ -50,7 +60,7 @@ public partial class Product : Window
         InitializeComponent();
         addOrUpdate = flag;
         if (!addOrUpdate)
-            ctc = "Add";
+            addupdate = "Add";
         //categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
     // ctor for update case
@@ -59,7 +69,7 @@ public partial class Product : Window
         InitializeComponent();
         addOrUpdate = flag;
         if (addOrUpdate)
-            ctc = "Update";
+            addupdate = "Update";
         product = bl.Product.GetProductById(id);
         //categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }

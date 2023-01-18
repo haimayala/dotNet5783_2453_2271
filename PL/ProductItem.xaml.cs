@@ -28,8 +28,7 @@ namespace PL
 
         public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
-      
-
+       
         private static Cart cart = new Cart()
         {            
             Items = new List<BO.OrderItem?>(),      
@@ -66,6 +65,21 @@ namespace PL
         {
             int id = ((BO.ProductItem)productItemListView.SelectedItem).ID;
             new CustomerProductItemWindow(id, cart).ShowDialog();
+        }
+
+        private void popularGroup_Click(object sender, RoutedEventArgs e)
+        {
+            productItemListView.ItemsSource = bl.Product.MostPopular(cart);
+        }
+
+        private void expensiveGroup_Click(object sender, RoutedEventArgs e)
+        {
+            productItemListView.ItemsSource = bl.Product.MostExpensive(cart);
+        }
+
+        private void cheapGroup_Click(object sender, RoutedEventArgs e)
+        {
+            productItemListView.ItemsSource = bl.Product.MostCheap(cart);
         }
     }
 }

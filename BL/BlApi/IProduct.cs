@@ -33,4 +33,10 @@ public interface IProduct
 
     IEnumerable<ProductForList?> GetProductForListsByCategory(Category category);
     IEnumerable<ProductItem?> GetProductItemsByCategory(Category category);
+
+    public IEnumerable<ProductItem?> MostCheap(BO.Cart cart);
+
+    public IEnumerable<ProductItem?> MostExpensive(BO.Cart cart);
+
+    public IEnumerable<ProductItem?> MostPopular(BO.Cart cart);
 }

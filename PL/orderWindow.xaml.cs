@@ -42,8 +42,17 @@ namespace PL
         public static readonly DependencyProperty OrderProperty =
             DependencyProperty.Register("Order", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
 
-    
-        public Visibility visibility { get; set; }
+
+        public Visibility visibility
+        {
+            get { return (Visibility)GetValue(visibilityProperty); }
+            set { SetValue(visibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for visibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty visibilityProperty =
+            DependencyProperty.Register("visibility", typeof(Visibility), typeof(Window), new PropertyMetadata(null));
+
 
 
         public bool isenable
@@ -54,54 +63,75 @@ namespace PL
 
         // Using a DependencyProperty as the backing store for isenable.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty isenableProperty =
-            DependencyProperty.Register("isenable", typeof(bool), typeof(Window), new PropertyMetadata(null));
+            DependencyProperty.Register("isenable", typeof(bool), typeof(Window), new PropertyMetadata(true));
 
 
 
 
-        public bool isMannager
+        public bool isenable_2
         {
-            get { return (bool)GetValue(isMannagerProperty); }
-            set { SetValue(isMannagerProperty, value); }
+            get { return (bool)GetValue(isenable_2Property); }
+            set { SetValue(isenable_2Property, value); }
         }
 
-        // Using a DependencyProperty as the backing store for isMannager.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty isMannagerProperty =
-            DependencyProperty.Register("isMannager", typeof(bool), typeof(Window), new PropertyMetadata(null));
+        // Using a DependencyProperty as the backing store for isenable_2.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isenable_2Property =
+            DependencyProperty.Register("isenable_2", typeof(bool), typeof(Window), new PropertyMetadata(true));
+
+
+
+        public bool isChecked
+        {
+            get { return (bool)GetValue(isCheckedProperty); }
+            set { SetValue(isCheckedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for isChecked.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isCheckedProperty =
+            DependencyProperty.Register("isChecked", typeof(bool), typeof(Window), new PropertyMetadata(null));
+
+
+
+        public bool isCheck_2
+        {
+            get { return (bool)GetValue(isCheck_2Property); }
+            set { SetValue(isCheck_2Property, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for isCheck_2.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isCheck_2Property =
+            DependencyProperty.Register("isCheck_2", typeof(bool), typeof(Window), new PropertyMetadata(null));
+
 
 
         public orderWindow()
         {
             InitializeComponent();
-            isenable = true;
-           
+            visibility = Visibility.Visible;
         }
 
         public orderWindow(int orderId, bool flag)
         {
             InitializeComponent();
             Order = bl.Order.GetOrderDetails(orderId);
-            if(!flag)
-            {
+            if (flag)
                 visibility = Visibility.Hidden;
-                shipDateDatePicker.IsEnabled = false;
-                deliveryDateDatePicker.IsEnabled=false;
-            }
-            
+            else
+                visibility = Visibility.Visible;
         }
 
         private void checkbox_ship_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
-
+                BO.Order order = (BO.Order)((TextBox)sender).DataContext;
                 bl.Order.UppdateShipDate(int.Parse(IDTextBlock.Text));
             }
             catch (BlOrderAlredyShiped be)
             {
                 MessageBox.Show(be.Message);
-                isenable=false;
-
+                isenable = false;
+                isChecked = false;
             }
         }
 
@@ -114,7 +144,8 @@ namespace PL
             catch (BlOrderAlredyDelivered be)
             {
                 MessageBox.Show(be.Message);
-                isenable = false;
+                isenable_2 = false;
+                isCheck_2 = false;
             }
 
         }

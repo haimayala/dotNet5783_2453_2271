@@ -70,18 +70,24 @@ namespace PL
 
         private void btnAddToTheCart_Click(object sender, RoutedEventArgs e)
         {
-            int id = int.Parse(iDTextBlock.Text);
-            if(!canAdd)
+            int ID = ProductItem.ID;
+            //int id = int.Parse(iDTextBlock.Text);
+            if (!canAdd)
                 MessageBox.Show("not avalable!");
             try
             {
-                bl.Cart.Add(Cart, id);
+                bl.Cart.Add(Cart, ID);
                 Close();
             }
             catch (BO.BlNotExsistExeption es)
             {
                 MessageBox.Show(es.Message); 
             }
+            catch(BO.BlNotEnoughInStockExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
             
         }
     }
