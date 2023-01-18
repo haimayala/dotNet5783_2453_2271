@@ -9,5 +9,5 @@ namespace DO;
 public struct Enums
 {
     public enum Category { Animals , Food , Equipment, Games, Cultivation };
-    
+    public enum Status { Cutomer, Mannager };
 }

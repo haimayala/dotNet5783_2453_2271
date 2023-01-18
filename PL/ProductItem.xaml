@@ -53,7 +53,7 @@
         </ScrollViewer>
 
         <ComboBox ItemsSource="{Binding Categories}" SelectedItem="5" x:Name="cmbProItem" IsEditable="True" HorizontalAlignment="Left" Margin="638,17,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" SelectionChanged="cmbProItem_SelectionChanged" />
-        <Button Style="{StaticResource buttonStyle}" x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="648,360,0,0" VerticalAlignment="Top" Height="37" Width="100" Click="btnhowCart_Click"/>
+        <Button Style="{StaticResource buttonStyle}" x:Name="btnhowCart" Content="Show cart" HorizontalAlignment="Left" Margin="648,370,0,0" VerticalAlignment="Top" Height="37" Width="100" Click="btnhowCart_Click"/>
         <Menu HorizontalAlignment="Left" Height="19" Margin="663,54,0,0" VerticalAlignment="Top" Width="95" Background="Transparent" RenderTransformOrigin="0.585,2.04">
         <MenuItem
                 Header="Group by"

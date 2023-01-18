@@ -22,6 +22,7 @@ namespace PL
         private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
 
 
+        // depentency property for the cart
         public BO.Cart  Cart
         {
             get { return (BO.Cart )GetValue(CartProperty); }
@@ -33,8 +34,8 @@ namespace PL
             DependencyProperty.Register("Cart", typeof(BO.Cart ), typeof(Window), new PropertyMetadata(null));
 
 
-        
 
+        //depentency property for the product item
         public BO.ProductItem ProductItem
         {
             get { return (BO.ProductItem)GetValue(ProductItemProperty); }
@@ -48,6 +49,7 @@ namespace PL
 
 
 
+        // depentency property for the button availablity
         public bool canAdd
         {
             get { return (bool)GetValue(canAddProperty); }
@@ -59,7 +61,7 @@ namespace PL
             DependencyProperty.Register("canAdd", typeof(bool), typeof(Window), new PropertyMetadata(null));
 
 
-
+        //ctor
         public CustomerProductItemWindow(int id, BO.Cart cart)
         {
             InitializeComponent();
@@ -68,17 +70,20 @@ namespace PL
             canAdd = ProductItem.Availability;
         }
 
+        //Response function for the event of clicking the add to cart button
         private void btnAddToTheCart_Click(object sender, RoutedEventArgs e)
         {
+            // get the match id
             int ID = ProductItem.ID;
-            //int id = int.Parse(iDTextBlock.Text);
             if (!canAdd)
                 MessageBox.Show("not avalable!");
             try
             {
+                // add to the cart 
                 bl.Cart.Add(Cart, ID);
                 Close();
             }
+            // in cae the adding not secceeded
             catch (BO.BlNotExsistExeption es)
             {
                 MessageBox.Show(es.Message); 

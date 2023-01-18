@@ -24,8 +24,7 @@ namespace PL
 
         private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
 
-
-
+        // depentency property for the cart
         public BO.Cart cart
         {
             get { return (BO.Cart)GetValue(cartProperty); }
@@ -37,7 +36,7 @@ namespace PL
             DependencyProperty.Register("cart", typeof(BO.Cart), typeof(Window), new PropertyMetadata(null));
 
 
-
+        // depentency property for the total price
         public int tPrice
         {
             get { return (int)GetValue(tPriceProperty); }
@@ -51,7 +50,7 @@ namespace PL
 
 
 
-
+        //ctor 
         public ComplateCart(BO.Cart Cart)
         {
             InitializeComponent();
@@ -60,15 +59,21 @@ namespace PL
         }
 
 
+        // The response to the text change event when the customer changes the quantity of a product in his shopping cart
         private void TextBox_TextChanged(object sender, RoutedEventArgs e)
         {
             try
             {
+                // get the details from the cart
                 BO.OrderItem orderItem = (BO.OrderItem)((TextBox)sender).DataContext;
+                // update the new amount
                 cart = bl.Cart.Uppdate(cart, orderItem.ProductId, orderItem.Amount);
+                //refresh the new cart
                 orderItemListView.Items.Refresh();
+                // update the total price
                 tPrice = (int)cart.TotalPrice;
             }
+            // in case the update not ceceeded
             catch (BlNotEnoughInStockExeption es)
             {
                 MessageBox.Show(es.Message);
@@ -81,13 +86,16 @@ namespace PL
 
         }
 
+        //Function as a response to clicking to finish shopping
         private void btnFinishAll_Click(object sender, RoutedEventArgs e)
         {
             try
             {
 
+                // make the order
                 bl.Cart.OrderConfirmation(cart);
                 MessageBox.Show("The order is complete", "complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                //Emptying the cart
                 cart.Items = new List<BO.OrderItem?>();
                 cart.TotalPrice = 0;
                 cart.CustomerEmail = null;
@@ -95,9 +103,8 @@ namespace PL
                 cart.CustomerName = null;
                 orderItemListView.ItemsSource = null;
                 Close();
-
-
             }
+            //In case the order was not successful
             catch (BlUncorrectEmailExeption ex)
             {
                 MessageBox.Show(ex.Message);

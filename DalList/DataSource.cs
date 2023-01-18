@@ -19,6 +19,7 @@ static internal class DataSource
     static internal List<Product?> s_products = new List<Product?>();
     static internal List<Order?> s_orders = new List<Order?>();
     static internal List<OrderItem?> s_orderItems = new List<OrderItem?>();
+    static internal List<User?> s_users = new List<User?>();
 
     // run number for order class
 
@@ -38,75 +39,25 @@ static internal class DataSource
         createAndInitProduct();
         createAndInitOrder();
         createAndInitOrderItem();
+        createAndInitUsers();
     }
 
-    //private static void createAndInitProduct()
-    //{
-    //    string[] nameOfAnimals = new string[5] { "dog", "cat", "parrot", "fish", "rabbit" };
-    //    string[] nameOfFoods = new string[5] { "Snacks", "natural food", "Dry food", "vitamins", "GealthyFood" };
-    //    string[] nameOfEquipment = new string[5] { "cage", "strip", "Food facility", "Aquarium", "collar" };
-    //    string[] nameOfGames = new string[5] { "Training games", "Cage games", "ball", "dol", "swings" };
-    //    string[] nameOfCultivation = new string[4] { "shampoo", "fur brush", "perfume", "mouth cleaning" };
-    //    string[] imageSourceFood = new string[5] { "PL/dogfood.png", "PL/cutfood.png", "PL/snackfood.png", "PL/birdfood.png", "PL/parrotfood.png" };
-    //    for (int i = 0; i < 10; i++)
-    //    {
-    //        Product myProduct = new Product();
-    //        myProduct.ID = s_rand.Next(100000, 999999);
-    //        bool flag = false;
-    //        int counter = 0;
-    //        while (!flag)
-    //        {
-    //            for (int j = 0; j < s_products.Count; j++)
-    //            {
-    //                if (s_products[j]?.ID == myProduct.ID)
-    //                    myProduct.ID = s_rand.Next(100000, 999999);
-    //                else
-    //                    counter++;
-    //            }
-    //            if (counter == s_products.Count)
-    //                flag = true;
-    //        }
+    private static void createAndInitUsers()
+    {
+        s_users.Add(new User
+        {
+            userName = "AyalaHaim",
+            password = 123456,
+            Status = Status.Mannager
+        });
+        s_users.Add(new User
+        {
+            userName = "customer",
+            password = 1111,
+            Status = Status.Cutomer
 
-    //        myProduct.Category = (Category)s_rand.Next(5);
-    //        if (myProduct.Category==Enums.Category.Animals/*=Equals(Enums.Category.Animals)**/)
-    //        {
-    //            myProduct.Name = nameOfAnimals[s_rand.Next(5)];
-    //            myProduct.Price = s_rand.Next(1000, 3500);
-    //            myProduct.InStock = s_rand.Next(15, 30);
-    //        }
-
-    //        if (myProduct.Category == Enums.Category.Food)
-    //        {
-    //            myProduct.Name = nameOfFoods[s_rand.Next(5)];
-    //            myProduct.Price = s_rand.Next(150, 250);
-    //            myProduct.InStock = s_rand.Next(70, 100);
-    //            myProduct.Image=imageSourceFood[s_rand.Next(5)];
-    //        }
-
-    //        if (myProduct.Category == Enums.Category.Equipment)
-    //        {
-    //            myProduct.Name = nameOfEquipment[s_rand.Next(5)];
-    //            myProduct.Price = s_rand.Next(100, 200);
-    //            myProduct.InStock = s_rand.Next(50);
-    //        }
-
-    //        if (myProduct.Category == Enums.Category.Games)
-    //        {
-    //            myProduct.Name = nameOfGames[s_rand.Next(5)];
-    //            myProduct.Price = s_rand.Next(30, 70);
-    //            myProduct.InStock = s_rand.Next(35);
-    //        }
-
-    //        if (myProduct.Category == Enums.Category.Cultivation)
-    //        {
-    //            myProduct.Name = nameOfCultivation[s_rand.Next(4)];
-    //            myProduct.Price = s_rand.Next(50, 150);
-    //            myProduct.InStock = s_rand.Next(90);
-    //        }
-
-    //        s_products.Add(myProduct);
-    //    }
-    //}
+        });
+    }
 
     private static void createAndInitProduct()
     {
@@ -125,19 +76,38 @@ static internal class DataSource
                 {
                     ID = 1000 + counter,
                     Category = (Category)i,
-                    Price = s_rand.Next(1000, 3500),
                    InStock = s_rand.Next(10),
                 };
                 if (i == 0)
+                {
                     myProduct.Name = nameOfAnimals[j];
+                    myProduct.Price = s_rand.Next(1000, 3000);
+                }
+
                 else if (i == 1)
+                {
                     myProduct.Name = nameOfFoods[j];
-                else if (i ==2)
+                    myProduct.Price = s_rand.Next(30, 90);
+                }
+
+                else if (i == 2)
+                {
                     myProduct.Name = nameOfEquipment[j];
+                    myProduct.Price = s_rand.Next(50, 220);
+                }
+
                 else if (i == 3)
+                {
                     myProduct.Name = nameOfGames[j];
+                    myProduct.Price = s_rand.Next(70,150);
+                }
+                  
                 else if (i == 4)
+                {
                     myProduct.Name = nameOfCultivation[j];
+                    myProduct.Price = s_rand.Next(70, 250);
+                }
+                  
                 s_products.Add(myProduct);
                 counter++;
             }

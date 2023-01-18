@@ -34,15 +34,14 @@ namespace PL
             Items = new List<BO.OrderItem?>(),      
         };
 
+        // ctor
         public ProductItem()
         {
             InitializeComponent();
             productItemListView.ItemsSource = bl.Product.GetProductItems();
-
-            ////cmbProItem.ItemsSource = Enum.GetValues(typeof(Category));
-
         }
 
+        //event response function select of איק בםצנםנםס
         private void cmbProItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var choise = cmbProItem.SelectedItem;
@@ -50,33 +49,38 @@ namespace PL
             if (choise.Equals(Category.None))
                 productItemListView.ItemsSource = bl?.Product.GetProductItems();
             else
+                // another choise
                 productItemListView.ItemsSource = bl?.Product.GetProductItemsByCategory((Category)choise);
 
         }
 
+        //Click event response function for the cart window
         private void btnhowCart_Click(object sender, RoutedEventArgs e)
         {
             new ComplateCart(cart).ShowDialog();
         }
 
-      
 
+
+        //Response to a double-click event on a product in the list
         private void productItemListView_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
+            // gets the match id from the list
             int id = ((BO.ProductItem)productItemListView.SelectedItem).ID;
             new CustomerProductItemWindow(id, cart).ShowDialog();
         }
 
+        //Response to a grouping by popular product selection event
         private void popularGroup_Click(object sender, RoutedEventArgs e)
         {
             productItemListView.ItemsSource = bl.Product.MostPopular(cart);
         }
-
+        //Response to a grouping by expensive product selection event
         private void expensiveGroup_Click(object sender, RoutedEventArgs e)
         {
             productItemListView.ItemsSource = bl.Product.MostExpensive(cart);
         }
-
+        //Response to a grouping by cheap product selection event
         private void cheapGroup_Click(object sender, RoutedEventArgs e)
         {
             productItemListView.ItemsSource = bl.Product.MostCheap(cart);

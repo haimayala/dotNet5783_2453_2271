@@ -64,6 +64,23 @@ public partial class ProductForListWindow : Window
         productForListListView.ItemsSource = bl.Product.GetListedProducts();
 
     }
+
+    // function that vdelete a product from the product list
+    private void prod_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            BO.ProductForList p = (BO.ProductForList)((Button)sender).DataContext;
+            bl.Product.Delete(p.Id);
+            productForListListView.ItemsSource = bl.Product.GetListedProducts();
+        }
+
+        catch (BlNotExsistExeption ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+        
 }
 
 

@@ -21,6 +21,9 @@ namespace PL
     {
 
         private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
+
+
+        //depepntency property for order trucking
         public BO.OrderTracking OrderTrucking
         {
             get { return (BO.OrderTracking)GetValue(OrderTruckingProperty); }
@@ -32,6 +35,7 @@ namespace PL
             DependencyProperty.Register("OrderTrucking", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
 
 
+        //ctor
         public OrderTrackingWindow(int id)
         {
             InitializeComponent();
@@ -39,6 +43,7 @@ namespace PL
 
         }
 
+        // Click event response function for the order window
         private void btn_Click(object sender, RoutedEventArgs e)
         {
             new orderWindow(OrderTrucking.Id,true).ShowDialog();

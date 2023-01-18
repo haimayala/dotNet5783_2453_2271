@@ -26,7 +26,7 @@ public partial class orderForListWindow : Window
     private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
 
 
-
+    //depentency property for the orders
     public List<BO.OrderForList?> orders
     {
         get { return (List<BO.OrderForList?>)GetValue(ordersProperty); }
@@ -39,12 +39,14 @@ public partial class orderForListWindow : Window
 
 
 
+    //ctor
     public orderForListWindow()
     {
         InitializeComponent();
         orders = bl.Order.GetLitedOrders().ToList();
     }
 
+    // Response to a double-click event on a product in the list
     private void orderForListListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         int id = ((OrderForList)orderForListListView.SelectedItem).ID;

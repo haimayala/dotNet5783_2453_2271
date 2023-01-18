@@ -31,7 +31,7 @@
             <Grid >
 
             </Grid >
-            <TextBox  x:Name="iDTextBox"  IsReadOnly="{Binding addOrUpdate}"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="0" Text="{Binding product.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="102"  />
+            <TextBox  x:Name="iDTextBox"  IsReadOnly="{Binding addOrUpdate}"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN"   Margin="3,0,0,0" Grid.Row="0" Text="{Binding product.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="102"   />
             <ComboBox   IsEditable="True"  x:Name="categoryComboBox" ItemsSource="{Binding Categories}" Grid.Row="1" Grid.Column="1"  Height="NaN"  Margin="3,0,3,0" VerticalAlignment="Center">
                 <ComboBox.ItemsPanel >
                     <ItemsPanelTemplate>
@@ -52,11 +52,25 @@
 
         </Grid>
 
-        <Button x:Name="btnAddOrUpdate" Content="{Binding addupdate, Mode=OneWay}"  HorizontalAlignment="Left" Margin="46,359,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104"  FontWeight="Bold" FontSize="16" ></Button>
+
+
+
+        <Button  x:Name="btnAddOrUpdate" Content="{Binding addupdate, Mode=OneWay}"  HorizontalAlignment="Left" Margin="46,359,0,0" VerticalAlignment="Top" Click="btnAddOrUpdate_Click"  Height="40" Width="104"  FontWeight="Bold" FontSize="16" 
+                 >
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource textToBoolian}">
+                    <Binding Path="Text" ElementName="iDTextBox"/>
+                    <Binding Path="Text" ElementName="inStockTextBox"/>
+                    <Binding Path="Text" ElementName="nameTextBox"/>
+                    <Binding Path="Text" ElementName="priceTextBox"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+
+        </Button>
         <Image x:Name="imgdog" Margin="327,338,10,15" Source="/logo.png"/>
         <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName,Converter={StaticResource imageConverter}}"
   HorizontalAlignment="Left" Height="119" Margin="98,217,0,0" VerticalAlignment="Top" Width="133"/>
-        <Button x:Name="btndl" Content="Delete" HorizontalAlignment="Left" Margin="224,379,0,0" VerticalAlignment="Top" Width="72" Height="23" Background="#FF393333" Foreground="#FFFF0C0C" BorderBrush="#FFF1F1F1" MouseDoubleClick="btndl_MouseDoubleClick"/>
+        
     </Grid>
 
 

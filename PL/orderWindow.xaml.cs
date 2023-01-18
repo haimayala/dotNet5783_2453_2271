@@ -32,6 +32,7 @@ namespace PL
     {
         private static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
 
+        // depentency property for the ordeer window
         public BO.Order? Order
         {
             get { return (BO.Order?)GetValue(OrderProperty); }
@@ -43,6 +44,7 @@ namespace PL
             DependencyProperty.Register("Order", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
 
 
+        // depentency property for visability
         public Visibility visibility
         {
             get { return (Visibility)GetValue(visibilityProperty); }
@@ -54,7 +56,7 @@ namespace PL
             DependencyProperty.Register("visibility", typeof(Visibility), typeof(Window), new PropertyMetadata(null));
 
 
-
+        //a boolian depentency property for the unable button
         public bool isenable
         {
             get { return (bool)GetValue(isenableProperty); }
@@ -104,12 +106,14 @@ namespace PL
 
 
 
+        //ctor
         public orderWindow()
         {
             InitializeComponent();
             visibility = Visibility.Visible;
         }
 
+        //ctor
         public orderWindow(int orderId, bool flag)
         {
             InitializeComponent();
@@ -120,6 +124,7 @@ namespace PL
                 visibility = Visibility.Visible;
         }
 
+        //Response to an order shipping update confirmation event
         private void checkbox_ship_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -135,6 +140,7 @@ namespace PL
             }
         }
 
+        //Response to an order delivering update confirmation event
         private void checkbox_delivery_Checked(object sender, RoutedEventArgs e)
         {
             try

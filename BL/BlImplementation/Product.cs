@@ -172,7 +172,7 @@ internal class Product : IProduct
             }
             catch (DO.DalDoesNotExsistExeption)
             {
-                throw new DO.DalDoesNotExsistExeption("cannot delete,product not exist");
+                throw new BO.BlNotExsistExeption("cannot delete,product not exist");
             }
         }
         else

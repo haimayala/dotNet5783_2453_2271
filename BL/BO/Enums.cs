@@ -26,4 +26,5 @@ public class Enums
         None,
     }
 
+    public enum Status { Cutomer, Mannager };
 }

@@ -7,6 +7,9 @@ using System.Globalization;
 using System.Windows.Data;
 using static BO.Enums;
 using System.Windows.Input;
+using System.Windows.Controls;
+using DO;
+using BO;
 
 namespace PL;
 
@@ -38,8 +41,7 @@ public partial class Product : Window
         DependencyProperty.Register("addOrUpdate", typeof(bool), typeof(Window), new PropertyMetadata(null));
 
 
-
-
+    
     public string addupdate
     {
         get { return (string)GetValue(addupdateProperty); }
@@ -52,6 +54,7 @@ public partial class Product : Window
 
 
 
+
     public Array Categories { get { return Enum.GetValues(typeof(Category)); } }
 
     // ctor for add case
@@ -61,7 +64,7 @@ public partial class Product : Window
         addOrUpdate = flag;
         if (!addOrUpdate)
             addupdate = "Add";
-        //categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
     // ctor for update case
     public Product(int id, bool flag)
@@ -71,7 +74,7 @@ public partial class Product : Window
         if (addOrUpdate)
             addupdate = "Update";
         product = bl.Product.GetProductById(id);
-        //categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
     }
 
     //ctor for display mode
@@ -79,46 +82,12 @@ public partial class Product : Window
     private void btnAddOrUpdate_Click(object sender, RoutedEventArgs e)
     {
         //  in case of adding a product
-        if (!addOrUpdate/*(string)btnAddOrUpdate.Content == "Add"*/)
+        if (!addOrUpdate)
         {
-
             //Checking that the input is correct and appropriate
             BO.Product product = new BO.Product();
-
-            if (iDTextBox.Text.Length == 0)
-            {
-                iDTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                iDTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (categoryComboBox.SelectedValue == null || categoryComboBox.SelectedIndex == 5)
-            {
-                MessageBox.Show("Please choose a category");
-                return;
-            }
-            if (nameTextBox.Text.Length == 0)
-            {
-                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (priceTextBox.Text.Length == 0)
-            {
-                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (inStockTextBox.Text.Length == 0)
-            {
-                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            //Initialize the product according The text boxes
+       
+           //Initialize the product according The text boxes
 
             product.ID = int.Parse(iDTextBox.Text);
             product.Name = nameTextBox.Text;
@@ -137,43 +106,12 @@ public partial class Product : Window
             {
                 MessageBox.Show(ed.Message);
             }
-
         }
         // in case of updating a product
-        else /*if ((string)btnAddOrUpdate.Content == "Update")*/
+        else
         {
             // make the match product
             BO.Product product = new BO.Product();
-
-            //Checking that the input is correct and appropriate
-
-            if (categoryComboBox.SelectedValue == null || categoryComboBox.SelectedIndex == 5)
-            {
-                MessageBox.Show("Please choose a category");
-                return;
-            }
-            if (nameTextBox.Text.Length == 0)
-            {
-                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                nameTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (priceTextBox.Text.Length == 0)
-            {
-                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                priceTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            if (inStockTextBox.Text.Length == 0)
-            {
-                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-            else
-                inStockTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-
             //Initialize the product according The text boxes
             product.ID = int.Parse(iDTextBox.Text);
             product.Name = nameTextBox.Text;
@@ -189,38 +127,23 @@ public partial class Product : Window
             catch (Exception ed)
             {
                 MessageBox.Show(ed.Message);
-            }
-
+           }
         }
-
-
     }
 
-    private void btndl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    
+   
+
+    private void btndl_Click(object sender, RoutedEventArgs e)
     {
-
-        //try
-        //{
-        //    bl?.Product.Delete(product!.ID);
-
-        //}
-        //catch (BO.BlNotExsistExeption ex)
-        //{
-        //    MessageBoxResult result;
-        //    result = MessageBox.Show("Are you sure you want to delete this product?", "DELETE", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-        //    if (result == MessageBoxResult.Yes)
-        //    {
-        //        MessageBox.Show(ex.Message + " " + "deleted succesfuly", "DELETE", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        Close();
-               
-        //    }
-        //    else
-        //    {
-        //        Close();
-        //    }
-
-        //}
-
-
+        try
+        {
+            bl.Product.Delete(product!.ID);  
+            Close();
+        }
+        catch(BlNotExsistExeption ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 }

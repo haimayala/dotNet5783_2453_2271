@@ -19,16 +19,19 @@ namespace PL
     /// </summary>
     public partial class adminWindow : Window
     {
+        //ctor 
         public adminWindow()
         {
             InitializeComponent();
         }
 
+        // function for the orders click event
         private void btnOrders_Click(object sender, RoutedEventArgs e)
         {
             new ProductForListWindow().ShowDialog();
         }
 
+        // function for the products click event
         private void btnProducts_Click(object sender, RoutedEventArgs e)
         {
             new orderForListWindow().ShowDialog();

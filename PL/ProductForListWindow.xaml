@@ -16,7 +16,7 @@
             <ColumnDefinition Width="12*"/>
             <ColumnDefinition Width="459*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="productForListListView"  SelectionMode="Single" Margin="10,32,382,202" Grid.ColumnSpan="3" MouseDoubleClick="productForListListView_MouseDoubleClick" >
+        <ListView x:Name="productForListListView"  SelectionMode="Single" Margin="10,32,282,202" Grid.ColumnSpan="3" MouseDoubleClick="productForListListView_MouseDoubleClick" >
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -62,7 +62,15 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+                    <GridViewColumn x:Name="button" Header="Delete" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Margin="-6,-1,-6,-1" x:Name="prod" Content="Delete" Click="prod_Click" />
+                               
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>
@@ -72,7 +80,7 @@
 
 
 
-        <ComboBox x:Name="CategorySelector" ItemsSource="{Binding Categories}" SelectedIndex="5" IsEditable="True" SelectionChanged="CategorySelector_SelectionChanged" Margin="100,32,31,543" BorderBrush="#FF59C5F9" Grid.Column="2"  >
+        <ComboBox x:Name="CategorySelector" ItemsSource="{Binding Categories}" SelectedIndex="5" IsEditable="True" SelectionChanged="CategorySelector_SelectionChanged" Margin="229,32,31,543" BorderBrush="#FF59C5F9" Grid.Column="2"  >
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
