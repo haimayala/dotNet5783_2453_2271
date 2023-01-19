@@ -1,6 +1,6 @@
 ﻿
 using BO;
-using MailChimp.Net.Core;
+
 using static BO.Enums;
 using IOrder = BlApi.IOrder;
 

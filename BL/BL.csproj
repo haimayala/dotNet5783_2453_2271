@@ -13,12 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailChimp.Net.V3" Version="5.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
+	  <ProjectReference Include="..\DalFacade\DalFacade.csproj">
+	  <privateAssents>All</privateAssents>
+	  </ProjectReference>
     <ProjectReference Include="..\DalList\DalList.csproj" />
+    <ProjectReference Include="..\DalXml\DalXml.csproj" />
   </ItemGroup>
 
 </Project>
+
+

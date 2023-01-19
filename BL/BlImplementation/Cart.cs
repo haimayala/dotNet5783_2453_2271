@@ -2,7 +2,7 @@
 using BlApi;
 using BO;
 using DO;
-using MailChimp.Net.Models;
+
 using System.ComponentModel.DataAnnotations;
 
 namespace BlImplementation;
@@ -194,58 +194,7 @@ internal class Cart : ICart
         //A function that places the order that is in the customer's shopping cart
         public void OrderConfirmation(BO.Cart cart)
     {
-        // check if the customer email is correct
-        //string? s = cart.CustomerEmail!;
-        //if (!s.Contains('@') || s.IndexOf('@') == 0 || s.IndexOf('@') == s.Length)
-        //    throw new BlUncorrectEmailExeption("uncorrect email");
-        //// check if the customer name is correct
-        //if (cart.CustomerName == "")
-        //    throw new BlUncorrectName("pleasec enter your name");
-        //// check if the customer addres is correct
-        //if (cart.CustonerAddres == "")
-        //    throw new BlUncorrectAddres("pleasec enter your addres");
-        //if (!CheckData(cart))
-        //    throw new BlUncorrectDetailsExeption("uncorrecr details");
-        ////make a order entity
-        //DO.Order doOrder = new DO.Order()
-        //    {
-        //        CustomerName = cart.CustomerName,
-        //        CustomerAdress = cart.CustomerEmail,
-        //        CustomerEmail =cart.CustonerAddres,
-        //        OrderDate = DateTime.Now,
-        //        ShipDate = DateTime.MinValue,
-        //        DeliveryDate = DateTime.MinValue,
-        //    };
-        //    try
-        //    {
-        //        int OrderNumber = dal.order.Add(doOrder);
-        //        foreach (var item in cart.Items!)
-        //        {
-        //            DO.OrderItem DoOrderItem = new DO.OrderItem()
-        //            {
-        //                ID = item!.Id,
-        //                ProductID = item.ProductId,
-        //                OrderID = OrderNumber,
-        //                Price = item.Price,
-        //                Amount = item.Amount, 
-
-        //            };
-
-        //            dal.orderItem.Add(DoOrderItem);
-        //        cart.TotalPrice += DoOrderItem.Price;
-
-        //            DO.Product updateProduct = dal.Product.GetByID(item.ProductId);
-        //            updateProduct.InStock -= item.Amount;
-
-
-
-        //        }
-        //    }
-        //    catch (DO.DalDoesNotExsistExeption )
-        //    {
-        //        throw new DO.DalDoesNotExsistExeption("order item not exsist");
-        //    }
-
+       
 
         if (cart.CustomerName == null)
             throw new BO.BlUncorrectName(" uncorrect name");

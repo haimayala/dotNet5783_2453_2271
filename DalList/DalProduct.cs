@@ -58,6 +58,6 @@ internal class DalProduct :IProduct
 
     public Product GetItem(Func<Product?, bool>? func)
     {
-        return DataSource.s_products.FirstOrDefault(item => func(item)) ?? throw new DalDoesNotExsistExeption("order not exist");
+        return DataSource.s_products.FirstOrDefault(item => func!(item)) ?? throw new DalDoesNotExsistExeption("order not exist");
     }
 }

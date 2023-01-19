@@ -37,9 +37,13 @@ static internal class DataSource
     private static void s_Initialize()
     {
         createAndInitProduct();
+        //XmlTools.SaveListToXMLSerializer(s_products, "products");
         createAndInitOrder();
+        //XmlTools.SaveListToXMLSerializer(s_orders, "orders");
         createAndInitOrderItem();
+        //XmlTools.SaveListToXMLSerializer(s_orderItems, "orderItems");
         createAndInitUsers();
+        
     }
 
     private static void createAndInitUsers()

@@ -62,6 +62,6 @@ internal class DalOrder :IOrder
 
     public Order GetItem(Func<Order?, bool>? func)
     {
-        return DataSource.s_orders.FirstOrDefault(item => func(item)) ?? throw new DalDoesNotExsistExeption("order not exist");
+        return DataSource.s_orders.FirstOrDefault(item => func!(item)) ?? throw new DalDoesNotExsistExeption("order not exist");
     }
 }
