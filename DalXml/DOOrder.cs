@@ -8,26 +8,30 @@ internal class DOOrder : IOrder
 {
     string s_orders = "orders";
 
-    public int Add(Order obj)
-    {
-        throw new NotImplementedException();
-    }
-
-    //public int Add(Order o)
+    //public int Add(Order obj)
     //{
-    //    //List<DO.Order?> orders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-    //    //o.ID = nextOrder;
-    //    //if (orders.Exists(x => x?.ID == o.ID))
-    //    //    throw new DalAllredyExsisExeption("orer allredy exsist");
-    //    //else
-    //    //{
-    //    //    o.ID = DataSource.nextOrder;
-
-    //    //    orders.Add(o);
-    //    //    XMLTools.SaveListToXMLElement(orders, s_orders);
-    //    //    return newOrder.ID;
-    //    //}
+    //    throw new NotImplementedException();
     //}
+
+    public int Add(Order o)
+    {
+        List<DO.Order?> orders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
+       
+        if (orders.Exists(x => x?.ID == o.ID))
+            throw new DalAllredyExsisExeption("order allredy exsist");
+       
+
+        else
+        {
+            o.ID = DalConfig.GetNextOrderId();
+            orders.Add(o);
+           
+
+            XMLTools.SaveListToXMLSerializer(orders, s_orders);
+          
+            return o.ID;
+        }
+    }
 
     public void Delete(int id)
     {
@@ -37,7 +41,8 @@ internal class DOOrder : IOrder
         else
         {
             orders.Remove(orders.Find(x => x?.ID == id));
-            XMLTools.SaveListToXMLElement(orders, s_orders);
+            DalConfig.SaveNextOrderID(id - 1);
+            XMLTools.SaveListToXMLSerializer(orders, s_orders);
         }
     }
 

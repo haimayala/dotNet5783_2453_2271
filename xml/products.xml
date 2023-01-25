@@ -1,143 +1,153 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Product>
     <ID>1000</ID>
     <Name>dog</Name>
-    <Price>1746</Price>
+    <Price>2684</Price>
     <Category>Animals</Category>
-    <InStock>0</InStock>
-  </Product>
-  <Product>
-    <ID>1001</ID>
-    <Name>rabbit</Name>
-    <Price>1827</Price>
-    <Category>Animals</Category>
-    <InStock>7</InStock>
+    <InStock>3</InStock>
   </Product>
   <Product>
     <ID>1002</ID>
     <Name>parrot</Name>
-    <Price>2632</Price>
+    <Price>2102</Price>
     <Category>Animals</Category>
-    <InStock>5</InStock>
+    <InStock>9</InStock>
   </Product>
   <Product>
     <ID>1003</ID>
     <Name>fish</Name>
-    <Price>2914</Price>
+    <Price>1957</Price>
     <Category>Animals</Category>
-    <InStock>4</InStock>
+    <InStock>5</InStock>
   </Product>
   <Product>
     <ID>1004</ID>
     <Name>Snacks</Name>
-    <Price>85</Price>
+    <Price>58</Price>
     <Category>Food</Category>
-    <InStock>4</InStock>
-  </Product>
-  <Product>
-    <ID>1005</ID>
-    <Name>natural food</Name>
-    <Price>42</Price>
-    <Category>Food</Category>
-    <InStock>0</InStock>
+    <InStock>8</InStock>
   </Product>
   <Product>
     <ID>1006</ID>
     <Name>fish food</Name>
-    <Price>41</Price>
+    <Price>78</Price>
     <Category>Food</Category>
-    <InStock>6</InStock>
+    <InStock>4</InStock>
   </Product>
   <Product>
     <ID>1007</ID>
     <Name>vitamins</Name>
-    <Price>58</Price>
+    <Price>42</Price>
     <Category>Food</Category>
-    <InStock>5</InStock>
+    <InStock>3</InStock>
   </Product>
   <Product>
     <ID>1008</ID>
     <Name>cage</Name>
-    <Price>120</Price>
+    <Price>166</Price>
     <Category>Equipment</Category>
-    <InStock>4</InStock>
+    <InStock>9</InStock>
   </Product>
   <Product>
     <ID>1009</ID>
     <Name>collar</Name>
-    <Price>198</Price>
+    <Price>94</Price>
     <Category>Equipment</Category>
-    <InStock>6</InStock>
+    <InStock>8</InStock>
   </Product>
   <Product>
     <ID>1010</ID>
     <Name>Food facility</Name>
-    <Price>79</Price>
+    <Price>153</Price>
     <Category>Equipment</Category>
-    <InStock>7</InStock>
+    <InStock>5</InStock>
   </Product>
   <Product>
     <ID>1011</ID>
     <Name>Aquarium</Name>
-    <Price>181</Price>
+    <Price>52</Price>
     <Category>Equipment</Category>
-    <InStock>0</InStock>
+    <InStock>1</InStock>
   </Product>
   <Product>
     <ID>1012</ID>
     <Name>Training games</Name>
+    <Price>87</Price>
+    <Category>Games</Category>
+    <InStock>3</InStock>
+  </Product>
+  <Product>
+    <ID>1013</ID>
+    <Name>Cage games</Name>
     <Price>141</Price>
     <Category>Games</Category>
     <InStock>8</InStock>
   </Product>
   <Product>
-    <ID>1013</ID>
-    <Name>Cage games</Name>
-    <Price>125</Price>
-    <Category>Games</Category>
-    <InStock>6</InStock>
-  </Product>
-  <Product>
     <ID>1014</ID>
     <Name>ball</Name>
-    <Price>79</Price>
+    <Price>77</Price>
     <Category>Games</Category>
-    <InStock>5</InStock>
+    <InStock>1</InStock>
   </Product>
   <Product>
     <ID>1015</ID>
     <Name>dol</Name>
-    <Price>103</Price>
+    <Price>117</Price>
     <Category>Games</Category>
-    <InStock>7</InStock>
+    <InStock>2</InStock>
   </Product>
   <Product>
     <ID>1016</ID>
     <Name>shampoo</Name>
-    <Price>175</Price>
+    <Price>200</Price>
     <Category>Cultivation</Category>
-    <InStock>1</InStock>
+    <InStock>2</InStock>
   </Product>
   <Product>
     <ID>1017</ID>
     <Name>fur brush</Name>
-    <Price>218</Price>
+    <Price>144</Price>
     <Category>Cultivation</Category>
-    <InStock>4</InStock>
+    <InStock>0</InStock>
   </Product>
   <Product>
     <ID>1018</ID>
     <Name>perfume</Name>
-    <Price>196</Price>
+    <Price>117</Price>
     <Category>Cultivation</Category>
-    <InStock>7</InStock>
+    <InStock>9</InStock>
   </Product>
   <Product>
     <ID>1019</ID>
     <Name>mouth cleaning</Name>
-    <Price>185</Price>
+    <Price>126</Price>
     <Category>Cultivation</Category>
-    <InStock>0</InStock>
+    <InStock>3</InStock>
+  </Product>
+  <Product>
+    <ID>1019</ID>
+    <Name>dog</Name>
+    <Price>1200</Price>
+    <InStock>10</InStock>
+    <Image />
+    <Category>Animals</Category>
+  </Product>
+  <Product>
+    <ID>1004</ID>
+    <Name>natural food</Name>
+    <Price>81</Price>
+    <InStock>2</InStock>
+    <Image />
+    <Category>Food</Category>
+  </Product>
+  <Product>
+    <ID>1000</ID>
+    <Name>rabbit</Name>
+    <Price>2552</Price>
+    <InStock>4</InStock>
+    <Image />
+    <Category>Animals</Category>
   </Product>
 </ArrayOfProduct>

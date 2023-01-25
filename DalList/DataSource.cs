@@ -21,27 +21,42 @@ static internal class DataSource
     static internal List<OrderItem?> s_orderItems = new List<OrderItem?>();
     static internal List<User?> s_users = new List<User?>();
 
-    // run number for order class
 
-    internal const int s_startOrderNumber = 1000;
-    private static int s_nextOrderNumber = s_startOrderNumber;
-    internal static int nextOrder { get { return s_nextOrderNumber++; } }
 
-    // run number for orderitem class
+    internal static class Config
+    {
+        // run number for products
 
-    internal const int s_startOrderItemNumber = 1000;
-    private static int s_nextOrderItemNumber = s_startOrderItemNumber;
-    internal static int nextOrderItem { get { return s_nextOrderItemNumber++; } }
+        internal const int s_startProductNumber = 1000;
+        private static int s_nextProductNumber = s_startProductNumber;
+        internal static int nextProduct { get { return s_nextProductNumber++; } }
+
+
+
+        // run number for order class
+
+        internal const int s_startOrderNumber = 1000;
+        private static int s_nextOrderNumber = s_startOrderNumber;
+        internal static int nextOrder { get { return s_nextOrderNumber++; } }
+
+        // run number for orderitem class
+
+        internal const int s_startOrderItemNumber = 1000;
+        private static int s_nextOrderItemNumber = s_startOrderItemNumber;
+        internal static int nextOrderItem { get { return s_nextOrderItemNumber++; } }
+
+    }
 
 
     private static void s_Initialize()
     {
         createAndInitProduct();
-        //XmlTools.SaveListToXMLSerializer(s_products, "products");
+
+        XmlTools.SaveListToXMLSerializer(s_products, "products");
         createAndInitOrder();
-        //XmlTools.SaveListToXMLSerializer(s_orders, "orders");
+        XmlTools.SaveListToXMLSerializer(s_orders, "orders");
         createAndInitOrderItem();
-        //XmlTools.SaveListToXMLSerializer(s_orderItems, "orderItems");
+        XmlTools.SaveListToXMLSerializer(s_orderItems, "orderItems");
         createAndInitUsers();
         
     }
@@ -70,7 +85,7 @@ static internal class DataSource
         string[] nameOfEquipment = new string[5] { "cage","collar" , "Food facility", "Aquarium", "strip" };
         string[] nameOfGames = new string[5] { "Training games", "Cage games", "ball", "dol", "swings" };
         string[] nameOfCultivation = new string[4] { "shampoo","fur brush" , "perfume", "mouth cleaning" };
-        int counter = 0;
+        
         for (int i = 0; i < 5; i++)
         {
             
@@ -78,7 +93,7 @@ static internal class DataSource
             {
                 Product myProduct = new Product()
                 {
-                    ID = 1000 + counter,
+                    ID = Config.nextProduct,
                     Category = (Category)i,
                    InStock = s_rand.Next(10),
                 };
@@ -113,7 +128,7 @@ static internal class DataSource
                 }
                   
                 s_products.Add(myProduct);
-                counter++;
+                
             }
             
         }
@@ -124,7 +139,7 @@ static internal class DataSource
         for (int i = 0; i < 20; i++)
         {
             Order myOrder = new Order();
-            myOrder.ID =nextOrder;
+            myOrder.ID =Config.nextOrder;
             myOrder.CustomerName = names[s_rand.Next(6)];
             if (myOrder.CustomerName == "ayala")
             {
@@ -205,7 +220,7 @@ static internal class DataSource
                 {
                     Amount = amount,
                     Price = (double)p?.Price!* amount,
-                    ID = nextOrderItem,
+                    ID = Config.nextOrderItem,
                     OrderID = (int)s_orders[counter]?.ID!,
                     ProductID =(int) p?.ID!,
                 };

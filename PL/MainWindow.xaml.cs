@@ -57,5 +57,8 @@ public partial class MainWindow : Window
        
     }
 
-   
+    private void btnsimulation_Click(object sender, RoutedEventArgs e)
+    {
+        new Simulator().Show();
+    }
 }

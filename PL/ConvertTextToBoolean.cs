@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PL;
 
@@ -27,3 +28,62 @@ class ConvertTextToBoolean : IMultiValueConverter //As long as one of the produc
     }
 }
 
+
+//class ConvertEnumToText1 : IValueConverter //the status of the order at the simulator
+//{
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+
+//        BO.OrderStatus Value = (BO.OrderStatus)value;
+//        if (Value == BO.OrderStatus.Ordered)
+//        {
+//            return "Ordered";
+//        }
+//        return "Shipped";
+//    }
+
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
+//class ConvertEnumToTextAfter1 : IValueConverter //the status of the order at the simulator
+//{
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+
+//        BO.Enums.OrderStatus Value = (BO.OrderStatus)value;
+//        if (Value == BO.OrderStatus.Ordered)
+//        {
+//            return "Shipped";
+//        }
+//        return "Delivered";
+//    }
+
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
+class BooleanToColorConverter : IValueConverter //If the product isn't in stock, you will not be given the option of collecting a product into a shopping basket
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        bool boolValue = (bool)value;
+        if (boolValue)
+        {
+            return Colors.Pink;
+        }
+        else
+        {
+            return Colors.LightPink;
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

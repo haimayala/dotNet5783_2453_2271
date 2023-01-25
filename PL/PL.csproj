@@ -17,6 +17,8 @@
     <BaseOutputPath> $(SolutionDir)\bin\</BaseOutputPath>
 	  
     <UseWindowsForms>true</UseWindowsForms>
+	  
+    <ApplicationIcon>image.jpj (1).ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,7 +44,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="image.jpj (1).ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\simulator\simulator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -24,4 +24,9 @@ public interface IOrder
     /* A function that gets a order id nand return the match order tracking ,
     in case of incorrect input an exception will be thrown*/
     public OrderTracking OrderTracking(int OrderId);
+
+
+    public int  OrderOldest();
+
+
 }

@@ -9,12 +9,12 @@ internal class DalOrder :IOrder
     // A function that gets a new order and in case its allredy not exsist add the order to the order list
     public int Add(Order newOrder)
     {//the method adds an order to the order's arry 
-        newOrder.ID = DataSource.nextOrder;
+        newOrder.ID = DataSource.Config.nextOrder;
         if (DataSource.s_orders.Exists(x => x?.ID == newOrder.ID))
             throw new DalAllredyExsisExeption("orer allredy exsist");
         else
         {
-            newOrder.ID = DataSource.nextOrder;
+            newOrder.ID = DataSource.Config.nextOrder;
 
             DataSource.s_orders.Add(newOrder);
             return newOrder.ID;

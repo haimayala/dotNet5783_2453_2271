@@ -25,13 +25,14 @@ internal class DOProduct : IProduct
     }
     public int Add(Product pro)
     {
-
+       
         XElement? rootProducts = XMLTools.LoadListFromXMLElement(s_products);
         XElement? myp=(from p in rootProducts.Elements()
                        where p.ToIntNullable("ID") ==pro.ID
                        select p).FirstOrDefault();
         if (myp != null)
             throw new Exception("is alredy exsist");
+        pro.ID = DalConfig.GetNextProductId();
         XElement product = new XElement("Product",
             new XElement("ID", pro.ID),
             new XElement("Name", pro.Name),
@@ -42,6 +43,7 @@ internal class DOProduct : IProduct
             );
 
         rootProducts.Add(product);
+        DalConfig.SaveNextProductID(pro.ID+1);
         XMLTools.SaveListToXMLElement(rootProducts, s_products);
         return pro.ID;
 
@@ -63,6 +65,7 @@ internal class DOProduct : IProduct
                          where p.ToIntNullable("ID") ==id
                          select p).FirstOrDefault() ?? throw new Exception("missing id");
         myp.Remove();
+        DalConfig.SaveNextProductID(id-1);
         XMLTools.SaveListToXMLElement(rootProducts, s_products);
 
 

@@ -9,7 +9,8 @@ internal class DalProduct :IProduct
     // A function that gets a new product and in case its allredy not exsist add the product to the product list
     public int Add(Product newProduct)
     {//the method adds a product to the products arry
-       if(DataSource.s_products.Exists(x=>x?.ID==newProduct.ID))
+        newProduct.ID = DataSource.Config.nextProduct;
+        if (DataSource.s_products.Exists(x=>x?.ID==newProduct.ID))
             throw new DalDoesNotExsistExeption("product allredy exsist");
        else
         {

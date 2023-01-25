@@ -14,7 +14,7 @@ internal class DalOrderItem : IOrderItem
         else
         {
            //still not exsist
-            newOrderItem.ID = DataSource.nextOrderItem;
+            newOrderItem.ID = DataSource.Config.nextOrderItem;
             DataSource.s_orderItems.Add(newOrderItem);
             return newOrderItem.ID;
         }

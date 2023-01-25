@@ -115,81 +115,7 @@ internal class Cart : ICart
         }
         return cart;
     }
-    // find the product in the cart
-
-    //    foreach (var item in cart.Items!)
-    //    {
-    //        if (item?.ProductId == ProductId)
-    //        {
-
-    //            // In the case of increasing the quantity
-    //            if (item.Amount < NewAmount)
-    //            {
-    //                if (product.InStock >= NewAmount + item.Amount)
-    //                {
-    //                    product.InStock -= NewAmount - item.Amount;
-    //                    item.TotalPrice += NewAmount * product.Price;
-    //                    cart.TotalPrice += NewAmount * product.Price;
-    //                    item.Amount += NewAmount;
-
-    //                    return cart;
-    //                }
-    //                else
-    //                    throw new BlNotEnoughInStockExeption("Cannot add, Not enough in stock ");
-
-    //            }
-    //            // In the case of reducing the quantity
-    //            else if (item.Amount > NewAmount && NewAmount != 0)
-    //            {
-    //                product.InStock += item.Amount - NewAmount;
-
-    //                if (NewAmount > 0)
-    //                {
-    //                    item.Amount -= NewAmount;
-    //                    item.TotalPrice -= NewAmount * product.Price;
-    //                    cart.TotalPrice -= NewAmount * product.Price;
-    //                }
-
-    //                else
-    //                {
-    //                    item.Amount += NewAmount;
-    //                    item.TotalPrice += NewAmount * product.Price;
-    //                    cart.TotalPrice += NewAmount * product.Price;
-    //                }
-    //                return cart;
-    //            }
-
-    //            else if (NewAmount == item.Amount && NewAmount!=0)
-    //            {
-    //                if(product.InStock>= NewAmount)
-    //                {
-    //                    item.Amount = NewAmount;
-    //                    cart.TotalPrice = NewAmount * product.Price;
-    //                    item.TotalPrice = NewAmount * product.Price;
-    //                }
-    //                else
-    //                    throw new BlNotEnoughInStockExeption("Cannot add, Not enough in stock ");
-    //            }
-
-    //            //In case of deletion of the product
-    //            else if (NewAmount == 0)
-    //            {
-    //                cart.TotalPrice -= item.TotalPrice;
-    //                cart.Items.Remove(item);
-    //                return cart;
-    //                //dal.orderItem.Delete(item.Id);
-    //            }
-
-    //        }
-    //    }
-    //    return cart;
-
-    //}
-    //catch (DO.DalDoesNotExsistExeption)
-    //{
-    //    throw new DO.DalDoesNotExsistExeption("product not exsist");
-    //}
-
+   
 
         //A function that places the order that is in the customer's shopping cart
         public void OrderConfirmation(BO.Cart cart)
@@ -218,29 +144,29 @@ internal class Cart : ICart
         {
             int orderID = dal.order.Add(order);
 
-            IEnumerable<int> orderItemsID = from item in cart?.Items
-                                            select dal.orderItem.Add(
-                                                new DO.OrderItem
-                                                {
-                                                    OrderID = orderID,
-                                                    Price = item.Price,
-                                                    ProductID = item.ProductId,
-                                                    Amount = item.Amount,
-                                                    ID = item.Id,
-                                                });
+            cart?.Items?.ForEach(item => dal.orderItem.Add(new DO.OrderItem
+            {
+                OrderID = orderID,
+                ProductID = item.ProductId,
+                Amount = item.Amount,
+                Price = item.Price,
+            }));
 
-            IEnumerable<DO.Product> productUpdate = from item in cart?.Items
-                                                    select new DO.Product
-                                                    {
-                                                        ID = item.ProductId,
-                                                        Name = item.ProductName,
-                                                        Price = item.Price,
-                                                        Category = dal.Product.GetByID(item.ProductId).Category,
-                                                        InStock = dal.Product.GetByID(item.ProductId).InStock - item.Amount,
-                                                    };
-
-
-            productUpdate.ToList().ForEach(x => dal.Product.Uppdate(x));
+            var products = from BO.OrderItem item in cart?.Items!
+                           let upProduct = dal.Product.GetByID(item.ProductId)
+                           select new DO.Product
+                           {
+                               ID = upProduct.ID,
+                               Name = upProduct.Name,
+                               Category = upProduct.Category,
+                               Price = upProduct.Price,
+                               InStock = upProduct.InStock,
+                               Image = upProduct.Image,
+                           };
+            products.ToList().ForEach(item=>dal.Product.Uppdate(item));
+           
+         
+        
         }
         catch (DO.DalDoesNotExsistExeption ex)
         {
