@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -27,18 +29,18 @@ namespace PL
     {
 
         BackgroundWorker bw = new BackgroundWorker();
-        Stopwatch sw = new();     
-        private bool isRunTime=true;
+        Stopwatch sw = new();
+        private bool isRunTime = true;
 
-        public int  orderId
+        public int orderId
         {
-            get { return (int )GetValue(orderIdProperty); }
+            get { return (int)GetValue(orderIdProperty); }
             set { SetValue(orderIdProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for orderId.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty orderIdProperty =
-            DependencyProperty.Register("orderId", typeof(int ), typeof(Window), new PropertyMetadata(null));
+            DependencyProperty.Register("orderId", typeof(int), typeof(Window), new PropertyMetadata(null));
 
 
         public DateTime? timeNow
@@ -83,6 +85,86 @@ namespace PL
         public static readonly DependencyProperty treatedProperty =
             DependencyProperty.Register("treated", typeof(bool), typeof(Window), new PropertyMetadata(false));
 
+
+
+
+        public string timetxt
+        {
+            get { return (string)GetValue(timetxtProperty); }
+            set { SetValue(timetxtProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for timetxt.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty timetxtProperty =
+            DependencyProperty.Register("timetxt", typeof(string), typeof(Window), new PropertyMetadata(null));
+
+
+
+        public string  statusAfter
+        {
+            get { return (string )GetValue(statusAfterProperty); }
+            set { SetValue(statusAfterProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for statusAfter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty statusAfterProperty =
+            DependencyProperty.Register("statusAfter", typeof(string ), typeof(Window), new PropertyMetadata(null));
+
+
+
+        public string statusBefore
+        {
+            get { return (string)GetValue(statusBeforeProperty); }
+            set { SetValue(statusBeforeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for statusBefore.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty statusBeforeProperty =
+            DependencyProperty.Register("statusBefore", typeof(string), typeof(Window), new PropertyMetadata(null));
+
+
+
+
+        public string  progResult
+        {
+            get { return (string )GetValue(progResultProperty); }
+            set { SetValue(progResultProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for progResult.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty progResultProperty =
+            DependencyProperty.Register("progResult", typeof(string ), typeof(Window), new PropertyMetadata(null));
+
+
+
+        public int progbar
+        {
+            get { return (int)GetValue(progbarProperty); }
+            set { SetValue(progbarProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for progbar.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty progbarProperty =
+            DependencyProperty.Register("progbar", typeof(int), typeof(Window), new PropertyMetadata(null));
+
+
+
+        private void updateStatus(BO.Enums.OrderStatus s)
+        {
+            if(s==BO.Enums.OrderStatus.Ordered)
+            {
+                statusBefore = "Ordered";
+                statusAfter = "shiped";
+            }
+            if (s == BO.Enums.OrderStatus.Shipped)
+            {
+                statusBefore = "shiped";
+                statusAfter = "deliverd";
+            }
+        }
+         
+
+
         public Simulator()
         {
             InitializeComponent();
@@ -91,8 +173,15 @@ namespace PL
             bw.DoWork += bw_DoWork;
             bw.ProgressChanged += bw_ProgressChanged;
             bw.RunWorkerCompleted += bw_runWorker;
+            bw.WorkerSupportsCancellation = true;
             bw.WorkerReportsProgress = true;
             bw.RunWorkerAsync();
+            timetxt = "00:00";
+            orderId = 0;
+            timeAfter = DateTime.Now;
+            timeNow = DateTime.Now;
+            treated = false;
+            oStatus = BO.Enums.OrderStatus.Ordered;
         }
 
         private void bw_runWorker(object? sender, RunWorkerCompletedEventArgs e)
@@ -105,31 +194,67 @@ namespace PL
 
         private void bw_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            if(e.ProgressPercentage==0)
+            switch (e.ProgressPercentage)
             {
-                string txtTimer = sw.Elapsed.ToString();
-                txtTimer = txtTimer.Substring(0, 8);
-                txtSimulation.Text = txtTimer;
-            }                   
+                case 0:
+                    string txtTimer = sw.Elapsed.ToString();
+                    timetxt = txtTimer.Substring(0, 8);
+                    break;
+                case 1:
+                    orderId = currId;
+                    timeNow = cuurTimeNow;
+                    timeAfter = cuurTimeAfter;
+                    oStatus = status;
+                    break;
+                case 2:
+                    treated = currTreated;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    int progress = int.Parse(e.UserState.ToString());
+                    progResult = (progress + "%");
+                    progbar = progress;
+                    break;
+            }
         }
 
         private void bw_DoWork(object? sender, DoWorkEventArgs e)
         {
-           
+
             simulator.Simulator.registerReaport1(doReaport1);
             simulator.Simulator.registerReaport2(doReaport2);
             simulator.Simulator.registerReaport3(doReaport3);
+            simulator.Simulator.activate();
             while (isRunTime)
             {
-                bw.ReportProgress(1);
-                Thread.Sleep(1000);
+                e.Cancel = true;
+                break;
             }
-            simulator.Simulator.activate();
+
             while (bw.CancellationPending == false)
             {
-                Thread.Sleep(1000);
+                
                 bw.ReportProgress(0);
+                Thread.Sleep(1000);
             }
+            int length = 10;
+            for (int i = 1; i <= length; i++)
+            {
+                if (bw.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    e.Result = sw.ElapsedMilliseconds; // Unnecessary
+                    break;
+                }
+                else
+                {
+                    // Perform a time consuming operation and report progress.
+                    System.Threading.Thread.Sleep(500);
+                    bw.ReportProgress(4,i * 100 / length);
+                }
+            }
+            e.Result = sw.ElapsedMilliseconds;
 
         }
 
@@ -140,28 +265,43 @@ namespace PL
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            sw.Stop();  
+            sw.Stop();
             isRunTime = false;
-            Close();
+            Closing -= Window_Closing;
+      
         }
 
+        int currId;
+        DateTime? cuurTimeNow;
+        DateTime? cuurTimeAfter;
+        BO.Enums.OrderStatus status;
         private void doReaport1(int id, DateTime? d, DateTime? l, BO.Enums.OrderStatus s)
         {
-            orderId = id;
-            timeNow = d;
-            timeAfter = l;
-            oStatus = s;
+            currId = id;
+            cuurTimeNow = d;
+            cuurTimeAfter = l;
+            status = s;
+            bw.ReportProgress(1);
+         
+
+
         }
+        bool currTreated;
         private void doReaport2()
         {
-            treated = true;
+            currTreated = true;
+            bw.ReportProgress(2);
         }
         private void doReaport3(string str)
         {
             MessageBox.Show(str);
+            bw.ReportProgress(3);
         }
-
-
 
     }
 }
+
+
+   
+
+

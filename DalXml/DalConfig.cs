@@ -15,6 +15,7 @@ internal static class DalConfig
 
     internal static int GetNextProductId()
     {
+       
         return (int)XMLTools.LoadListFromXMLElement(s_config).Element("s_nextProductNumber")!;
     }
     internal static void SaveNextProductID(int productNumber)
@@ -45,4 +46,6 @@ internal static class DalConfig
         XMLTools.SaveListToXMLElement(root, s_config);
     }
 }
+
+
 

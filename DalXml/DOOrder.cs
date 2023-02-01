@@ -16,19 +16,19 @@ internal class DOOrder : IOrder
     public int Add(Order o)
     {
         List<DO.Order?> orders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-       
+
         if (orders.Exists(x => x?.ID == o.ID))
             throw new DalAllredyExsisExeption("order allredy exsist");
-       
+
 
         else
         {
             o.ID = DalConfig.GetNextOrderId();
             orders.Add(o);
-           
 
+            DalConfig.SaveNextOrderItemId(o.ID + 1);
             XMLTools.SaveListToXMLSerializer(orders, s_orders);
-          
+
             return o.ID;
         }
     }

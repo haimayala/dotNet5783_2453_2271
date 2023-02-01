@@ -11,12 +11,17 @@
 
     <Grid>
         <Button x:Name="btnStop" Content="stop" HorizontalAlignment="Left" Margin="651,131,0,0" VerticalAlignment="Top" Height="42" Width="118" Click="btnStop_Click"/>
-        <TextBlock x:Name="txtSimulation" HorizontalAlignment="Left" Margin="668,85,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Height="30" Width="84" FontSize="22"/>
+        <TextBlock x:Name="txtSimulation" HorizontalAlignment="Left" Margin="668,85,0,0" TextWrapping="Wrap" Text="{Binding timetxt}"  VerticalAlignment="Top" Height="30" Width="84" FontSize="22"/>
         <TextBlock x:Name="idOrder" HorizontalAlignment="Left" Margin="31,31,0,0" TextWrapping="Wrap" Text="{Binding orderId}" VerticalAlignment="Top" Height="31" Width="114"/>
-        <Label  Content="{Binding timeNow , Converter={StaticResource enumToTexeBefore }}" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Height="32" Width="80"/>
-        <Label  Content="{Binding timeAfter, Converter={StaticResource enumToTexeAfter}}" HorizontalAlignment="Left" Margin="201,0,0,0" VerticalAlignment="Center" Height="32" Width="80"/>
+        <Label  Content="{Binding oStatus , Converter={StaticResource enumToTexeBefore }}" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Height="32" Width="80"/>
+        <Label  Content="{Binding oStatus, Converter={StaticResource enumToTexeAfter}}" HorizontalAlignment="Left" Margin="201,0,0,0" VerticalAlignment="Center" Height="32" Width="80"/>
         <Image  HorizontalAlignment="Left" Height="100" Margin="105,85,0,0" VerticalAlignment="Top" Width="100"/>
+        <ProgressBar Value="{Binding progbar}" HorizontalAlignment="Left" Height="41" Margin="359,338,0,0" VerticalAlignment="Top" Minimum="0" Maximum="100" Width="230"/>
+        <Label Content="{Binding progResult }" HorizontalAlignment="Left" Margin="377,288,0,0" VerticalAlignment="Top" Height="29" Width="96"/>
 
 
     </Grid>
 </Window>
+
+
+   

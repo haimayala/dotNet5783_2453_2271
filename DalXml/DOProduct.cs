@@ -38,7 +38,7 @@ internal class DOProduct : IProduct
             new XElement("Name", pro.Name),
             new XElement("Price", pro.Price),
             new XElement("InStock", pro.InStock),
-            new XElement("Image", pro.Image),
+            //new XElement("Image", pro.Image),
             new XElement("Category", pro.Category)
             );
 
@@ -47,15 +47,21 @@ internal class DOProduct : IProduct
         XMLTools.SaveListToXMLElement(rootProducts, s_products);
         return pro.ID;
 
-                       //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
-                       //if (products.Exists(x => x?.ID == p.ID))
-                       //    throw new DalDoesNotExsistExeption("product allredy exsist");
-                       //else
-                       //{
-                       //    products.Add(p);
-                       //    XMLTools.SaveListToXMLElement(products, s_products);
-                       //    return p.ID;
-                       //}
+        //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
+        //if (products.Exists(x => x?.ID == p.ID))
+        //    throw new DalDoesNotExsistExeption("product allredy exsist");
+        //else
+        //{
+        //    products.Add(p);
+        //    XMLTools.SaveListToXMLElement(products, s_products);
+        //    return p.ID;
+        //}
+
+        
+        
+     
+          
+
     }
 
     public void Delete(int id)
@@ -65,9 +71,9 @@ internal class DOProduct : IProduct
                          where p.ToIntNullable("ID") ==id
                          select p).FirstOrDefault() ?? throw new Exception("missing id");
         myp.Remove();
-        DalConfig.SaveNextProductID(id-1);
+        //DalConfig.SaveNextProductID(id-1);
         XMLTools.SaveListToXMLElement(rootProducts, s_products);
-
+       
 
         //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         //if (!products.Exists(x => x?.ID == id))

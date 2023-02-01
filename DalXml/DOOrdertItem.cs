@@ -20,7 +20,7 @@ internal class DOOrdertItem : IOrderItem
             //still not exsist
             i.ID = DalConfig.GetOrderItemId();
             items.Add(i);
-            DalConfig.SaveNextOrderItemId(i.ID);
+            DalConfig.SaveNextOrderItemId(i.ID+1);
             XMLTools.SaveListToXMLSerializer(items, s_orderItems);
             return i.ID;
         }

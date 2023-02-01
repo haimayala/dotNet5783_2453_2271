@@ -172,16 +172,34 @@ internal class Order : IOrder
         try
         {
             var orders = GetLitedOrders().Where(x => x?.Status == BO.Enums.OrderStatus.Ordered).Select(x => dal.order.GetByID(x!.ID));
-            var firstOrder = orders.OrderByDescending(x => x.OrderDate).Last();
-
-            // get all the orders of shiped status 
             var ships = GetLitedOrders().Where(x => x?.Status == BO.Enums.OrderStatus.Shipped).Select(x => dal.order.GetByID(x!.ID));
-            var firstShip = orders.OrderByDescending(x => x.ShipDate).Last();
 
-            // return the last treated order
-            if (firstOrder.OrderDate < firstShip.ShipDate)
-                return firstOrder.ID;
-            return firstShip.ID;
+
+            if (orders.Count() != 0 && ships.Count() != 0)
+            {
+                var firstOrder = orders.OrderByDescending(x => x.OrderDate).First();
+
+                // get all the orders of shiped status 
+
+
+                var firstShip = ships.OrderByDescending(x => x.ShipDate).First();
+
+                // return the last treated order
+                if (firstOrder.OrderDate < firstShip.ShipDate)
+                    return firstOrder.ID;
+                return firstShip.ID;
+            }
+            else if (orders.Count() == 0 && ships.Count() != 0)
+            {
+                return ships.OrderByDescending(x => x.ShipDate).Last().ID;
+
+            }
+            else if (ships.Count() == 0 && orders.Count() != 0)
+            {
+                return orders.OrderByDescending(x => x.ShipDate).Last().ID;
+            }
+            else
+                return -1;
         }
         catch(DO.DalDoesNotExsistExeption e)
         {
