@@ -31,12 +31,18 @@ public interface IProduct
     // A function that shows the customer a list of productsItem
     public IEnumerable<BO.ProductItem?> GetProductItems(Func<BO.ProductItem?, bool>? func = null);
 
+    // function to get list of product list bt category
     IEnumerable<ProductForList?> GetProductForListsByCategory(Category category);
+
+    // function to get list of product item bt category
     IEnumerable<ProductItem?> GetProductItemsByCategory(Category category);
 
+    // function to get the most cheap product item for grouping
     public IEnumerable<ProductItem?> MostCheap(BO.Cart cart);
 
+    // function to get the most expensive product item for grouping
     public IEnumerable<ProductItem?> MostExpensive(BO.Cart cart);
 
+    // function to get the most popular product itme for grouping
     public IEnumerable<ProductItem?> MostPopular(BO.Cart cart);
 }

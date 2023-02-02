@@ -8,10 +8,6 @@ internal class DOOrder : IOrder
 {
     string s_orders = "orders";
 
-    //public int Add(Order obj)
-    //{
-    //    throw new NotImplementedException();
-    //}
 
     public int Add(Order o)
     {

@@ -209,13 +209,7 @@ internal class Order : IOrder
     }
 }
 
-//    var ordered = GetListedOrders().Where(x => x.Status == BO.OrderStatus.Ordered).Select(x => Dal.Order.GetById(x.ID));
-//    var firstOrdered = ordered.OrderByDescending(x => x.OrderDate).Last(); //the oldest orderd
-//                                                                           //all the orders that are only shipped
-//    var shipped = GetListedOrders().Where(x => x.Status == BO.OrderStatus.Shipped).Select(x => Dal.Order.GetById(x.ID));
-//    var firstshipped = ordered.OrderByDescending(x => x.ShipDate).Last(); //the oldest shipped
 
-//}
 
 
 

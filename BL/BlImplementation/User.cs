@@ -15,27 +15,7 @@ internal class User : IUser
     public BO.User LogIn(string userName, int password)
     {
         throw new NotImplementedException();
-        //DO.User user;
-        //try
-        //{
-        //    user = dal.User. GetByUserName(username);
-        //    if (user.password != password)
-        //        throw new BO.BlIncorrectDateException("Worng Password");
-
-        //}
-        //catch (DO.DalIdDoNotExistException ex)
-        //{
-        //    throw new BO.BlIdDoNotExistException(ex.Message);
-        //}
-        //return new BO.User
-        //{
-        //    userName = username,
-        //    password = password,
-        //    status = (BO.Status)user.Status
-        //};
-
     }
-
     public void sighUp(BO.User user)
     {
         throw new NotImplementedException();

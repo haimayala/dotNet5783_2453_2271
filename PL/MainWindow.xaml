@@ -21,14 +21,14 @@
             <TextBlock HorizontalAlignment="Left" Margin="315,257,0,0" TextWrapping="Wrap" Text="~Ramat Gan~" VerticalAlignment="Top" FontFamily="Blackadder ITC" FontWeight="Bold" FontSize="22" Height="30" Width="144" RenderTransformOrigin="0.71,0.818"/>
             <TextBlock HorizontalAlignment="Left" Margin="315,207,0,0" TextWrapping="Wrap" Text="PET-SHOP" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" FontFamily="Showcard Gothic" Height="42" Width="194"/>
 
-            <Button x:Name="btnTrucking"  Style="{StaticResource buttonStyle}" Content="Truck" HorizontalAlignment="Left" Margin="655,193,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="btnTrucking_Click" RenderTransformOrigin="0.349,-1.038"></Button>
+            <Button x:Name="btnTrucking" Style="{StaticResource buttonStyle}"  Content="Truck" HorizontalAlignment="Left" Margin="655,193,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="btnTrucking_Click" RenderTransformOrigin="0.349,-1.038"></Button>
             <TextBox x:Name="truckingId" HorizontalAlignment="Left" Margin="655,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="30" RenderTransformOrigin="0.682,4.426"/>
 
 
 
             <Image HorizontalAlignment="Left" Height="157" VerticalAlignment="Top" Width="790" Source="/‏‏צילום מסך (6).png"/>
             <Label Content="PET-SHOP" HorizontalAlignment="Left" Margin="367,72,0,0" VerticalAlignment="Top" Width="92" Height="33" Background="Black" Foreground="#FFF9F0F0" FontSize="16" FontFamily="Showcard Gothic"/>
-            <Button x:Name="btnsimulation" Content="simulator" HorizontalAlignment="Left" Margin="26,364,0,0" VerticalAlignment="Top" Height="31" Width="141" Click="btnsimulation_Click"/>
+            <Button x:Name="btnsimulation" Style="{StaticResource buttonStyle}" Content="simulator" HorizontalAlignment="Left" Margin="26,364,0,0" VerticalAlignment="Top" Height="31" Width="141" Click="btnsimulation_Click"/>
 
 
 

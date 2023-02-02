@@ -74,16 +74,6 @@ internal class DOProduct : IProduct
         //DalConfig.SaveNextProductID(id-1);
         XMLTools.SaveListToXMLElement(rootProducts, s_products);
        
-
-        //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
-        //if (!products.Exists(x => x?.ID == id))
-        //    throw new DO.DalDoesNotExsistExeption("product not exsist");
-        //else
-        //{
-        //    products.Remove(products.Find(x => x?.ID == id));
-        //    XMLTools.SaveListToXMLElement(products, s_products);
-        //}
-
     }
 
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? func = null)
@@ -101,10 +91,7 @@ internal class DOProduct : IProduct
             return from p in rootProducts.Elements()
                    select createProductFromElement(p);
         }
-        //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
-        //if (func != null)
-        //    return products.Where(item => func(item)).Select(item => item);
-        //return products.Select(item => item);
+       
     }
 
     public Product GetByID(int id)
@@ -114,33 +101,14 @@ internal class DOProduct : IProduct
                 where p.ToIntNullable("ID") == id
                 select (DO.Product?)createProductFromElement(p)).FirstOrDefault()
                 ?? throw new Exception("missing id");
-                
-        //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
-        //return products.Find(x => x?.ID == id) ?? throw new DO.DalDoesNotExsistExeption("product not exsist");
+        
     }
 
     public Product GetItem(Func<Product?, bool>? func)
     {
-        // XElement product = XMLTools.LoadListFromXMLElement(s_products);
-        //if(func!=null)
-        // {
-        //     return (from p in product.Elements()
-        //             let doPro = createProductFromElement(p)
-        //             where func(doPro)
-        //             select (DO.Product?)createProductFromElement(p)).FirstOrDefault()
-        //             ?? throw new Exception("missing id");                   
-        // }
-        //else
-        // {
-        //     return (from p in product.Elements()
-        //             where p.ToIntNullable("ID") == id
-        //             select (DO.Product?)createProductFromElement(p)).FirstOrDefault()
-        //        ?? throw new Exception("missing id");
-        // }
         List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         return products.FirstOrDefault(item => func!(item)) ?? throw new DalDoesNotExsistExeption("order not exist");
     }
-
     public void Uppdate(Product p)
     {
         Delete(p.ID);

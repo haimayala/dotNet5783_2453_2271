@@ -1,13 +1,9 @@
-﻿
-using BO;
-using System.ComponentModel;
-
+﻿using BO;
 namespace BlApi;
 
 public interface ICart
 {
     // A function that gets a cart and product id and add the match product to the cart 
-
     public BO.Cart Add(BO.Cart Cart, int productId);
 
     /* A function that gets a cart , product id and  new amount for uppdating

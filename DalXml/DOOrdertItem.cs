@@ -8,7 +8,6 @@ internal class DOOrdertItem : IOrderItem
 {
     string s_orderItems = "orderItems";
 
-   
 
     public int Add(OrderItem i)
     {

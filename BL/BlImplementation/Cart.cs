@@ -1,8 +1,6 @@
-﻿
-using BlApi;
+﻿using BlApi;
 using BO;
 using DO;
-
 using System.ComponentModel.DataAnnotations;
 
 namespace BlImplementation;
@@ -28,7 +26,7 @@ internal class Cart : ICart
                 }
                 else
                     throw new BlNotEnoughInStockExeption("cannot add, not enoght in stock");
-                
+
             }
             else
             {
@@ -37,7 +35,7 @@ internal class Cart : ICart
                 {
                     BO.OrderItem newOrderItem = new BO.OrderItem()
                     {
-                        Id=product.ID,
+                        Id = product.ID,
                         ProductName = product.Name,
                         Price = (int)product.Price,
                         Amount = 1,
@@ -53,12 +51,14 @@ internal class Cart : ICart
             cart.TotalPrice += product.Price;
             return cart;
         }
-        catch(DO.DalDoesNotExsistExeption)
+        catch (DO.DalDoesNotExsistExeption)
         {
             throw new DO.DalDoesNotExsistExeption(" product not exsist");
         }
-        
+
     }
+
+
     /* A function that gets a cart, product id and  new amount for uppdating
        and uppdate the amount od te match product inr the cart
        and return the updated cart*/
@@ -115,12 +115,12 @@ internal class Cart : ICart
         }
         return cart;
     }
-   
 
-        //A function that places the order that is in the customer's shopping cart
-        public void OrderConfirmation(BO.Cart cart)
+
+    //A function that places the order that is in the customer's shopping cart
+    public void OrderConfirmation(BO.Cart cart)
     {
-       
+
 
         if (cart.CustomerName == null)
             throw new BO.BlUncorrectName(" uncorrect name");
@@ -163,10 +163,10 @@ internal class Cart : ICart
                                InStock = upProduct.InStock,
                                Image = upProduct.Image,
                            };
-            products.ToList().ForEach(item=>dal.Product.Uppdate(item));
-           
-         
-        
+            products.ToList().ForEach(item => dal.Product.Uppdate(item));
+
+
+
         }
         catch (DO.DalDoesNotExsistExeption ex)
         {
