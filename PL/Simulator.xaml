@@ -22,9 +22,9 @@
             </TextBlock.RenderTransform>
         </TextBlock>
         <TextBlock x:Name="idOrder" HorizontalAlignment="Left" Margin="31,31,0,0" TextWrapping="Wrap" Text="{Binding orderId}" VerticalAlignment="Top" Height="31" Width="114"/>
-        <Label  Content="{Binding oStatus , Converter={StaticResource enumToTexeBefore }}" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Height="32" Width="80"/>
-        <Label  Content="{Binding oStatus, Converter={StaticResource enumToTexeAfter}}" HorizontalAlignment="Left" Margin="201,0,0,0" VerticalAlignment="Center" Height="32" Width="80"/>
-        <Image  HorizontalAlignment="Left" Height="100" Margin="105,85,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label  Content="{Binding oStatus , Converter={StaticResource enumToTexeBefore }}" HorizontalAlignment="Left" Margin="39,84,0,0" VerticalAlignment="Top" Height="40" Width="106"/>
+        <Label  Content="{Binding oStatus, Converter={StaticResource enumToTexeAfter}}" HorizontalAlignment="Left" Margin="248,84,0,0" VerticalAlignment="Top" Height="40" Width="116"/>
+
         <ProgressBar Value="{Binding progbar}" HorizontalAlignment="Left" Height="41" Margin="201,338,0,0" VerticalAlignment="Top" Minimum="0" Maximum="100" Width="388"/>
         <Label Content="{Binding progResult }" HorizontalAlignment="Left" Margin="377,288,0,0" VerticalAlignment="Top" Height="29" Width="96"/>
 

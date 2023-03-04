@@ -69,9 +69,6 @@ public partial class Simulator : Window
     public static readonly DependencyProperty treatedProperty =
         DependencyProperty.Register("treated", typeof(bool), typeof(Window), new PropertyMetadata(false));
 
-
-
-
     public string timetxt
     {
         get { return (string)GetValue(timetxtProperty); }
@@ -81,8 +78,6 @@ public partial class Simulator : Window
     // Using a DependencyProperty as the backing store for timetxt.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty timetxtProperty =
         DependencyProperty.Register("timetxt", typeof(string), typeof(Window), new PropertyMetadata(null));
-
-
 
     public string statusAfter
     {
@@ -95,7 +90,6 @@ public partial class Simulator : Window
         DependencyProperty.Register("statusAfter", typeof(string), typeof(Window), new PropertyMetadata(null));
 
 
-
     public string statusBefore
     {
         get { return (string)GetValue(statusBeforeProperty); }
@@ -106,9 +100,6 @@ public partial class Simulator : Window
     public static readonly DependencyProperty statusBeforeProperty =
         DependencyProperty.Register("statusBefore", typeof(string), typeof(Window), new PropertyMetadata(null));
 
-
-
-
     public string progResult
     {
         get { return (string)GetValue(progResultProperty); }
@@ -118,8 +109,6 @@ public partial class Simulator : Window
     // Using a DependencyProperty as the backing store for progResult.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty progResultProperty =
         DependencyProperty.Register("progResult", typeof(string), typeof(Window), new PropertyMetadata(null));
-
-
 
     public int progbar
     {

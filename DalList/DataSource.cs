@@ -60,7 +60,6 @@ static internal class DataSource
         createAndInitUsers();
         
     }
-  
     private static void createAndInitUsers()
     {
         s_users.Add(new User
@@ -77,7 +76,6 @@ static internal class DataSource
 
         });
     }
-
     private static void createAndInitProduct()
     {
         string[] nameOfAnimals = new string[5] { "dog", "rabbit", "parrot", "fish","cat"  };

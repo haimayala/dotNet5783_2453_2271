@@ -18,4 +18,6 @@ sealed internal class DalXml : IDal
     public IOrder order { get; } = new Dal.DOOrder();
 
     public IOrderItem orderItem { get; } = new Dal.DOOrdertItem();
+
+    public IUder uder => throw new NotImplementedException();
 }

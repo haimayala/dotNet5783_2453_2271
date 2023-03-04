@@ -38,7 +38,6 @@ internal class DOProduct : IProduct
             new XElement("Name", pro.Name),
             new XElement("Price", pro.Price),
             new XElement("InStock", pro.InStock),
-            //new XElement("Image", pro.Image),
             new XElement("Category", pro.Category)
             );
 
@@ -46,22 +45,6 @@ internal class DOProduct : IProduct
         DalConfig.SaveNextProductID(pro.ID+1);
         XMLTools.SaveListToXMLElement(rootProducts, s_products);
         return pro.ID;
-
-        //List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
-        //if (products.Exists(x => x?.ID == p.ID))
-        //    throw new DalDoesNotExsistExeption("product allredy exsist");
-        //else
-        //{
-        //    products.Add(p);
-        //    XMLTools.SaveListToXMLElement(products, s_products);
-        //    return p.ID;
-        //}
-
-        
-        
-     
-          
-
     }
 
     public void Delete(int id)
@@ -84,7 +67,7 @@ internal class DOProduct : IProduct
             return from p in rootProducts.Elements()
                    let doPro= createProductFromElement(p)
                    where func(doPro)
-                   select (DO.Product?)doPro;
+                   select doPro;
         }
         else
         {
@@ -106,6 +89,7 @@ internal class DOProduct : IProduct
 
     public Product GetItem(Func<Product?, bool>? func)
     {
+       
         List<DO.Product?> products = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         return products.FirstOrDefault(item => func!(item)) ?? throw new DalDoesNotExsistExeption("order not exist");
     }

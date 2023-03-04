@@ -2,8 +2,8 @@
 
 public interface IBl
 {
-    public IOrder Order { get; internal set; }   
-    public IProduct Product { get; internal set; }
-    public ICart  Cart { get;internal set; }
-    public IUser User { get; internal set; }
+    public IOrder Order { get;  }   
+    public IProduct Product { get;  }
+    public ICart  Cart { get; }
+    public IUser User { get; }
 }

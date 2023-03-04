@@ -129,7 +129,7 @@ namespace PL
         {
             try
             {
-                BO.Order order = (BO.Order)((TextBox)sender).DataContext;
+                BO.Order order = (BO.Order)((CheckBox)sender).DataContext;
                 bl.Order.UppdateShipDate(int.Parse(IDTextBlock.Text));
             }
             catch (BlOrderAlredyShiped be)

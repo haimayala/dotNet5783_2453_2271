@@ -14,7 +14,6 @@ public interface ICrud<T> where T : struct
     public void Delete(int id);
     public T GetByID(int id);
     public void Uppdate(T obj);
-    public IEnumerable <T?> GetAll(Func<T?, bool>? func=null);
-
-    public T GetItem(Func<T?, bool>? func);
+    public IEnumerable <T?> GetAll(Func<T?, bool>? filter=null);
+    public T GetItem(Func<T?, bool>? filter);
 }
